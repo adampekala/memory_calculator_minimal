@@ -53,10 +53,10 @@
   background-color: rgba(196, 196, 196, 0.451);
 }
 .controlButtons_container-1 {
-  bottom: 300px;
+  bottom: 200px;
 }
 .controlButtons_container-2 {
-  bottom: 200px;
+  bottom: 100px;
 }
 
 .controlButton_1 {
@@ -111,7 +111,7 @@ body {
   position: relative;
   background-color: rgb(236, 236, 236);
   max-width: 600px;
-  aspect-ratio: 0.6;
+  height: 90vh;
   margin: 0 auto;
   border-radius: 1.5rem;
 }
