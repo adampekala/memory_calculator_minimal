@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Memory calculator minimal</title>
+    <link
+      rel="stylesheet"
+      href="./style.css"
+    />
+  </head>
+  <body>
+    <div class="calculator_container">
+      <h1 class="title">
+        <span class="title-top">Memory</span
+        ><span class="title-bottom">calculator</span>
+      </h1>
+      <div class="score_result_container">
+        <div class="score_container">
+          <div class="score_title">Score</div>
+          <div class="score" id="score">0</div>
+        </div>
+        <div class="result_container">
+          <div class="result_title">Result</div>
+          <div class="result" id="result">0</div>
+        </div>
+      </div>
+
+      <p class="screen">
+        <span class="screen_number screen_number-left" id="left_number">4</span>
+        <span class="screen_operation_sign" id="operation_sign">+</span>
+        <span class="screen_number screen_number-right" id="right_number">5</span>
+      </p>
+
+      <div class="controlButtons_container controlButtons_container-1">
+        <button class="controlButton_1 controlButton_1-green" id="main_button">Start</button>
+    </div>
+    
+    <div class="controlButtons_container controlButtons_container-2">
+        <button class="controlButton_1 controlButton_1-red" id="button_exit">Exit</button>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>

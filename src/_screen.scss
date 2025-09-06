@@ -1,0 +1,26 @@
+.screen {
+  padding-top: 0.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2em;
+  font-weight: 300;
+
+  &_number {
+    width: 30%;
+
+    &-left {
+      text-align: end;
+    }
+
+    &-right {
+      text-align: start;
+    }
+  }
+
+  &_operation_sign {
+    width: 20%;
+    text-align: center;
+  }
+}

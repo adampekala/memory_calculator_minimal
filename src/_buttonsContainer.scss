@@ -1,0 +1,50 @@
+.controlButtons_container {
+  padding: 1rem 0rem 1rem 4rem;
+  line-height: 0px;
+  position: absolute;
+  width: 220px;
+  border-radius: 0 200px 200px 0;
+  background-color: rgba(196, 196, 196, 0.451);
+
+  &-1 {
+    bottom: 300px;
+  }
+
+  &-2 {
+    bottom: 200px;
+  }
+}
+
+.controlButton_1 {
+  color: white;
+  border: none;
+  border-radius: 5px 30px 30px 5px;
+  box-shadow: 3px 3px 5px rgba(208, 152, 152, 0.703);
+  outline: none;
+  padding: 0.8em 2.3em 0.8em 1.5em;
+  font-size: large;
+  letter-spacing: 4px;
+  width: 130px;
+  text-transform: uppercase;
+
+  &-green {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(0, 255, 0),
+      rgb(87, 227, 52),
+      rgb(0, 255, 0)
+    );
+  }
+  &-red {
+    background-image: linear-gradient(to bottom, red, rgb(227, 52, 52), red);
+  }
+}
+
+.controlButton_1-red:hover {
+  box-shadow: 2px 2px 5px rgb(184, 134, 134);
+  transform: translate(-1px, -0px);
+}
+.controlButton_1-green:hover {
+  box-shadow: 2px 2px 5px rgb(147, 184, 134);
+  transform: translate(-1px, -0px);
+}

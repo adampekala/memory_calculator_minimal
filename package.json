@@ -1,0 +1,32 @@
+{
+  "name": "memory_calculator_minimal",
+  "version": "1.0.0",
+  "description": "Minimal version of memory calculator",
+  "main": "index.js",
+  "scripts": {
+    "test": "live-server index-test.html",
+    "start": "live-server",
+    "compileSCSS": "sass src/style.scss style.css --watch",
+    "compileTS": "tsc app.ts --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adampekala/memory_calculator_minimal.git"
+  },
+  "keywords": [
+    "memory",
+    "game",
+    "aritmrthic"
+  ],
+  "author": "Adam Pękala",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adampekala/memory_calculator_minimal/issues"
+  },
+  "homepage": "https://github.com/adampekala/memory_calculator_minimal#readme",
+  "devDependencies": {
+    "live-server": "^1.2.0",
+    "sass": "^1.89.2",
+    "typescript": "^5.8.3"
+  }
+}

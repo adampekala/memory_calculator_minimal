@@ -1,0 +1,19 @@
+.title {
+  padding-top: 0.4em;
+  font-size: 0.2em;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  align-items: center;
+  &-top {
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 400;
+  }
+
+  &-bottom {
+    text-transform: lowercase;
+    font-weight: 100;
+    letter-spacing: 5px;
+  }
+}
