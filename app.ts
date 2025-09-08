@@ -67,7 +67,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
 
       state = STATE_TYPE.asses;
       buttonMain.innerText = "good";
-      buttonExit.innerText = "bed";
+      buttonExit.innerText = "wrong";
 
       switch (true) {
         case arytmeticOperation === OPERATION_TYPE.addition: {

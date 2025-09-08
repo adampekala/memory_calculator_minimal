@@ -50,7 +50,7 @@ buttonMain.addEventListener("click", function (ev) {
             buttonExit.classList.add("active");
             state = STATE_TYPE.asses;
             buttonMain.innerText = "good";
-            buttonExit.innerText = "bed";
+            buttonExit.innerText = "wrong";
             switch (true) {
                 case arytmeticOperation === OPERATION_TYPE.addition: {
                     operationResult = leftNumberValue + rightNumberValue;

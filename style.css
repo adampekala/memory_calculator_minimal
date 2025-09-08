@@ -45,12 +45,12 @@
 }
 
 .controlButtons_container {
-  padding: 1rem 0rem 1rem 4rem;
+  padding: 1rem 0rem 1rem 2rem;
   line-height: 0px;
   margin-bottom: 15px;
-  width: 220px;
+  width: 200px;
   border-radius: 0 200px 200px 0;
-  background-color: rgba(196, 196, 196, 0.451);
+  background-color: rgba(233, 233, 233, 0.252);
 }
 .controlButtons_container-1 {
   bottom: 200px;
@@ -60,32 +60,63 @@
 }
 
 .controlButton_1 {
-  color: white;
-  border: none;
-  border-radius: 5px 30px 30px 5px;
-  box-shadow: 3px 3px 5px rgba(208, 152, 152, 0.703);
-  outline: none;
-  padding: 0.8em 2.3em 0.8em 1.5em;
-  font-size: large;
-  letter-spacing: 4px;
   width: 130px;
   text-transform: uppercase;
+  background-color: transparent;
+  background-image: linear-gradient(#fff, #f5f5fa);
+  border: none;
+  border-radius: 9999px;
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(93, 100, 148, 0.2) 0 1px 3px 0;
+  box-sizing: border-box;
+  /* color: #484c7a; */
+  color: rgb(46, 180, 46);
+  cursor: pointer;
+  display: inline-block;
+  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin: 4px;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: inherit;
+  text-wrap: nowrap;
+  transition: all 0.05s ease-out;
+  transition-behavior: normal;
+  white-space-collapse: collapse;
+  line-height: 1.15;
 }
 .controlButton_1-green {
-  background-image: linear-gradient(to bottom, rgb(0, 255, 0), rgb(87, 227, 52), rgb(0, 255, 0));
+  color: rgb(46, 180, 46);
 }
 .controlButton_1-red {
-  background-image: linear-gradient(to bottom, red, rgb(227, 52, 52), red);
+  color: red;
+}
+
+@media (min-width: 576px) {
+  .controlButton_1 {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
+.controlButton_1-green:hover {
+  color: green;
 }
 
 .controlButton_1-red:hover {
-  box-shadow: 2px 2px 5px rgb(184, 134, 134);
-  transform: translate(-1px, 0px);
+  color: rgb(203, 3, 3);
 }
 
-.controlButton_1-green:hover {
-  box-shadow: 2px 2px 5px rgb(147, 184, 134);
-  transform: translate(-1px, 0px);
+.controlButton_1-green:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+
+.controlButton_1-red:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+
+.controlButton_1:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .root {
@@ -109,7 +140,7 @@ body {
 
 .calculator_container {
   position: relative;
-  background-color: rgb(236, 236, 236);
+  background-color: white;
   max-width: 600px;
   height: 90vh;
   margin: 0 auto;
@@ -150,19 +181,32 @@ body {
 }
 
 .result_title {
-  font-size: small;
+  font-size: 10px;
+  text-transform: uppercase;
   color: rgba(36, 64, 123, 0.895);
   align-self: flex-end;
   padding-right: 5px;
+  letter-spacing: 0;
 }
 
 .result {
-  background-color: rgba(36, 64, 123, 0.895);
+  background-color: rgba(73, 103, 168, 0.895);
   border-radius: 30px 0 0 30px;
   color: white;
   font-size: 35px;
-  padding-left: 20px;
+  padding: 5px 0 5px 20px;
   width: 100%;
+  background-image: linear-gradient(rgba(46, 82, 158, 0.536), rgba(24, 42, 82, 0.895));
+  border: none;
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(93, 100, 148, 0.2) 0 1px 3px 0;
+  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: inherit;
+  text-wrap: nowrap;
+  transition: all 0.05s ease-out;
+  transition-behavior: normal;
+  white-space-collapse: collapse;
 }
 
 .score_indicator {
