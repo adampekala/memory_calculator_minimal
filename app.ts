@@ -26,6 +26,8 @@ const operationSign = document.getElementById(
 ) as HTMLSpanElement;
 const rightNumber = document.getElementById("right_number") as HTMLSpanElement;
 
+const timeCounter = document.getElementById("time_counter") as HTMLDivElement;
+
 const randomNumber = () => {
   return Math.floor(Math.random() * 10) + 1;
 };
@@ -40,13 +42,16 @@ let operationResult: number = 0;
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
-score.innerText = "0";
+score.innerText = "---";
 
 const buttonMain = document.getElementById("main_button") as HTMLDivElement;
 const buttonExit = document.getElementById("button_exit") as HTMLDivElement;
 
 //!!!!!!!!!!!
 // const score = document.getElementById("score") as HTMLDivElement;
+
+let counterIntervalIndex: number;
+let counterProgress: number = 1;
 
 buttonMain.addEventListener("click", (ev: MouseEvent) => {
   switch (true) {
@@ -57,6 +62,17 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       rightNumber.innerText = rightNumberValue.toString();
       state = STATE_TYPE.check;
       buttonMain.innerText = state;
+
+      counterIntervalIndex = setInterval(() => {
+        console.log(counterProgress);
+        if (!(counterProgress > 99)) {
+          timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+          counterProgress++;
+        } else {
+          clearInterval(counterIntervalIndex);
+        }
+      }, 50);
+
       break;
     }
     case state === STATE_TYPE.check: {
@@ -64,6 +80,8 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       /////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS
 
       buttonExit.classList.add("active");
+      counterProgress = 1;
+      clearInterval(counterIntervalIndex);
 
       state = STATE_TYPE.asses;
       buttonMain.innerText = "good";
@@ -101,7 +119,15 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       leftNumber.innerText = leftNumberValue.toString();
       rightNumber.innerText = rightNumberValue.toString();
       score.innerText = scoreNumber.toString();
-
+      counterIntervalIndex = setInterval(() => {
+        console.log(counterProgress);
+        if (!(counterProgress > 99)) {
+          timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+          counterProgress++;
+        } else {
+          clearInterval(counterIntervalIndex);
+        }
+      }, 50);
       break;
     }
 

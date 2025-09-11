@@ -17,6 +17,7 @@ var result = document.getElementById("result");
 var leftNumber = document.getElementById("left_number");
 var operationSign = document.getElementById("operation_sign");
 var rightNumber = document.getElementById("right_number");
+var timeCounter = document.getElementById("time_counter");
 var randomNumber = function () {
     return Math.floor(Math.random() * 10) + 1;
 };
@@ -28,11 +29,13 @@ var operationResult = 0;
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
-score.innerText = "0";
+score.innerText = "---";
 var buttonMain = document.getElementById("main_button");
 var buttonExit = document.getElementById("button_exit");
 //!!!!!!!!!!!
 // const score = document.getElementById("score") as HTMLDivElement;
+var counterIntervalIndex;
+var counterProgress = 1;
 buttonMain.addEventListener("click", function (ev) {
     switch (true) {
         case state === STATE_TYPE.initial: {
@@ -42,12 +45,24 @@ buttonMain.addEventListener("click", function (ev) {
             rightNumber.innerText = rightNumberValue.toString();
             state = STATE_TYPE.check;
             buttonMain.innerText = state;
+            counterIntervalIndex = setInterval(function () {
+                console.log(counterProgress);
+                if (!(counterProgress > 99)) {
+                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
+                    counterProgress++;
+                }
+                else {
+                    clearInterval(counterIntervalIndex);
+                }
+            }, 50);
             break;
         }
         case state === STATE_TYPE.check: {
             /////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS
             /////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS
             buttonExit.classList.add("active");
+            counterProgress = 1;
+            clearInterval(counterIntervalIndex);
             state = STATE_TYPE.asses;
             buttonMain.innerText = "good";
             buttonExit.innerText = "wrong";
@@ -83,6 +98,16 @@ buttonMain.addEventListener("click", function (ev) {
             leftNumber.innerText = leftNumberValue.toString();
             rightNumber.innerText = rightNumberValue.toString();
             score.innerText = scoreNumber.toString();
+            counterIntervalIndex = setInterval(function () {
+                console.log(counterProgress);
+                if (!(counterProgress > 99)) {
+                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
+                    counterProgress++;
+                }
+                else {
+                    clearInterval(counterIntervalIndex);
+                }
+            }, 50);
             break;
         }
         default:
