@@ -45,77 +45,60 @@
 }
 
 .controlButtons_container {
-  padding: 1rem 0rem 1rem 2rem;
+  padding: 1rem 1.7rem 1rem 2rem;
   line-height: 0px;
   margin-bottom: 15px;
-  width: 200px;
   border-radius: 0 200px 200px 0;
-  background-color: rgba(233, 233, 233, 0.252);
+  background-color: rgba(8, 35, 125, 0.174);
+  position: fixed;
+  left: 0;
 }
 .controlButtons_container-1 {
-  bottom: 200px;
+  bottom: calc(5vh + 120px);
 }
 .controlButtons_container-2 {
-  bottom: 100px;
+  bottom: 5vh;
 }
 
-.controlButton_1 {
-  width: 130px;
-  text-transform: uppercase;
+.controlButton {
+  display: inline-block;
+  width: 150px;
+  margin: 4px;
+  padding: 20px 44px;
   background-color: transparent;
   background-image: linear-gradient(#fff, #f5f5fa);
   border: none;
   border-radius: 9999px;
-  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(93, 100, 148, 0.2) 0 1px 3px 0;
-  box-sizing: border-box;
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(74, 80, 118, 0.603) 0 1px 3px 0;
+  text-transform: uppercase;
   color: rgb(46, 180, 46);
-  cursor: pointer;
-  display: inline-block;
   font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-  letter-spacing: 1px;
-  margin: 4px;
-  padding: 12px 24px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 16px;
   text-align: center;
-  text-decoration: inherit;
   text-wrap: nowrap;
-  transition: all 0.05s ease-out;
-  transition-behavior: normal;
-  white-space-collapse: collapse;
   line-height: 1.15;
+  cursor: pointer;
+  transition: all 0.05s ease-out;
 }
-.controlButton_1-green {
+.controlButton-green {
   color: rgb(46, 180, 46);
 }
-.controlButton_1-red {
-  color: red;
-}
-
-@media (min-width: 576px) {
-  .controlButton_1 {
-    padding-bottom: 10px;
-    padding-top: 10px;
-  }
-}
-.controlButton_1-green:hover {
+.controlButton-green:hover {
   color: green;
 }
-
-.controlButton_1-red:hover {
+.controlButton-green:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+.controlButton-red {
+  color: red;
+}
+.controlButton-red:hover {
   color: rgb(203, 3, 3);
 }
-
-.controlButton_1-green:active {
+.controlButton-red:active {
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
-}
-
-.controlButton_1-red:active {
-  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
-}
-
-.controlButton_1:disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
 }
 
 .root {
@@ -131,10 +114,9 @@
 }
 
 body {
-  background-color: rgb(202, 202, 202);
+  background-color: white;
   font-size: 60px;
   margin: 0;
-  padding: 2rem;
 }
 
 .calculator_container {
