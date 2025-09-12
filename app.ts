@@ -76,9 +76,6 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       break;
     }
     case state === STATE_TYPE.check: {
-      /////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS
-      /////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS/////////CLAS
-
       buttonExit.classList.add("active");
       counterProgress = 1;
       clearInterval(counterIntervalIndex);
@@ -149,6 +146,16 @@ buttonExit.addEventListener("click", (ev) => {
     leftNumber.innerText = leftNumberValue.toString();
     rightNumber.innerText = rightNumberValue.toString();
     score.innerText = scoreNumber.toString();
+    result.innerText = "---";
+    counterIntervalIndex = setInterval(() => {
+      console.log(counterProgress);
+      if (!(counterProgress > 99)) {
+        timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+        counterProgress++;
+      } else {
+        clearInterval(counterIntervalIndex);
+      }
+    }, 50);
   }
   console.log("Other event");
 });
