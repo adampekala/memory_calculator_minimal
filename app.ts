@@ -119,6 +119,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       leftNumber.innerText = leftNumberValue.toString();
       rightNumber.innerText = rightNumberValue.toString();
       score.innerText = scoreNumber.toString();
+      result.innerText = "---";
       counterIntervalIndex = setInterval(() => {
         console.log(counterProgress);
         if (!(counterProgress > 99)) {
