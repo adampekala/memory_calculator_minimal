@@ -1,6 +1,5 @@
 var STATE_TYPE = {
     initial: "start",
-    next: "next",
     check: "check",
     asses: "asses",
 };
@@ -144,12 +143,8 @@ buttonExit.addEventListener("click", function (ev) {
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 // const optionButton = document.getElementById("option_button") as HTMLDivElement;
-// const optionButtonClose = document.getElementById(
-//   "option_button-close"
-// ) as HTMLDivElement;
-// const optionContainer = document.getElementById(
-//   "option_container"
-// ) as HTMLDivElement;
+var optionButtonClose = document.getElementById("backToCalculator_button");
+var navigationContainer = document.getElementById("navigation");
 // optionButton.addEventListener("mousedown", (ev) => {
 //   console.log("option_button");
 //   optionButton.classList.add("clicked");
@@ -159,10 +154,11 @@ buttonExit.addEventListener("click", function (ev) {
 //   console.log("option_button");
 //   optionButton.classList.remove("clicked");
 // });
-// optionButtonClose.addEventListener("mousedown", (ev) => {
-//   optionButtonClose.classList.add("clicked");
-//   optionContainer.classList.remove("shown");
-// });
+optionButtonClose.addEventListener("click", function (ev) {
+    console.log("working");
+    // optionButtonClose.classList.add("clicked");
+    navigationContainer.classList.add("closed");
+});
 // optionButtonClose.addEventListener("mouseup", (ev) => {
 //   optionButtonClose.classList.remove("clicked");
 // });

@@ -2,6 +2,25 @@
   display: none;
 }
 
+.nav {
+  position: absolute;
+  background-color: red;
+  top: 0;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 2rem;
+  transition: all 3s ease-in-out;
+}
+.nav_list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+}
+.nav.closed {
+  left: 1000000vw;
+}
+
 .title {
   padding-top: 0.4em;
   font-size: 0.2em;
@@ -120,6 +139,7 @@
 }
 
 body {
+  position: relative;
   background-color: white;
   font-size: 60px;
   margin: 0;

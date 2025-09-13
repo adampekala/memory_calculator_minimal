@@ -1,0 +1,25 @@
+.nav {
+  position: absolute;
+  background-color: red;
+  top: 0;
+  left: 0vw;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 2rem;
+  transition: all 3s ease-in-out;
+
+  &_list {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  &_listItem {
+    &-1 {
+    }
+  }
+}
+
+.nav.closed {
+  left: 1000000vw;
+}

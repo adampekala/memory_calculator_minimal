@@ -1,6 +1,5 @@
 const STATE_TYPE = {
   initial: "start",
-  next: "next",
   check: "check",
   asses: "asses",
 };
@@ -166,13 +165,13 @@ buttonExit.addEventListener("click", (ev) => {
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 
 // const optionButton = document.getElementById("option_button") as HTMLDivElement;
-// const optionButtonClose = document.getElementById(
-//   "option_button-close"
-// ) as HTMLDivElement;
+const optionButtonClose = document.getElementById(
+  "backToCalculator_button"
+) as HTMLDivElement;
 
-// const optionContainer = document.getElementById(
-//   "option_container"
-// ) as HTMLDivElement;
+const navigationContainer = document.getElementById(
+  "navigation"
+) as HTMLDivElement;
 
 // optionButton.addEventListener("mousedown", (ev) => {
 //   console.log("option_button");
@@ -184,10 +183,12 @@ buttonExit.addEventListener("click", (ev) => {
 //   optionButton.classList.remove("clicked");
 // });
 
-// optionButtonClose.addEventListener("mousedown", (ev) => {
-//   optionButtonClose.classList.add("clicked");
-//   optionContainer.classList.remove("shown");
-// });
+optionButtonClose.addEventListener("click", (ev) => {
+  console.log("working");
+
+  // optionButtonClose.classList.add("clicked");
+  navigationContainer.classList.add("closed");
+});
 // optionButtonClose.addEventListener("mouseup", (ev) => {
 //   optionButtonClose.classList.remove("clicked");
 // });
