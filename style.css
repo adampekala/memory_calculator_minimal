@@ -4,13 +4,13 @@
 
 .nav {
   position: absolute;
-  background-color: red;
+  background-color: rgb(8, 35, 125);
   top: 0;
-  left: 0vw;
-  width: 100vw;
+  left: 0;
+  width: 100%;
   height: 100vh;
   padding-top: 2rem;
-  transition: all 3s ease-in-out;
+  transition: all 0.3s ease-in;
 }
 .nav_list {
   list-style: none;
@@ -18,7 +18,66 @@
   margin: 0 auto;
 }
 .nav.closed {
-  left: 1000000vw;
+  top: -100vw;
+}
+
+.navButton {
+  display: inline-block;
+  width: 150px;
+  margin: 4px;
+  padding: 20px 44px;
+  background-color: transparent;
+  background-image: linear-gradient(#fff, #f5f5fa);
+  border: none;
+  border-radius: 9999px;
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(74, 80, 118, 0.603) 0 1px 3px 0;
+  text-transform: uppercase;
+  color: rgb(46, 180, 46);
+  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 16px;
+  text-align: center;
+  text-wrap: nowrap;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: all 0.05s ease-out;
+}
+.navButton-mode {
+  color: rgb(180, 46, 100);
+  text-align: center;
+  padding-left: 100px;
+  padding-right: 100px;
+  margin: 0;
+  width: unset;
+}
+.navButton-mode:hover {
+  color: green;
+}
+.navButton-mode:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+.navButton_difficulty-decrease {
+  background-color: red;
+  color: gray;
+  border-radius: 99999px 0 0 99999px;
+}
+.navButton_difficulty-increase {
+  border-radius: 0 99999px 99999px 0;
+}
+.navButton-red {
+  color: red;
+}
+.navButton-red:hover {
+  color: rgb(203, 3, 3);
+}
+.navButton-red:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+
+.difficulty_scale {
+  background-color: white;
+  color: red;
 }
 
 .title {
@@ -143,12 +202,12 @@ body {
   background-color: white;
   font-size: 60px;
   margin: 0;
+  padding: 0;
 }
 
 .calculator_container {
   position: relative;
   background-color: white;
-  max-width: 600px;
   height: 90vh;
   margin: 0 auto;
   border-radius: 1.5rem;

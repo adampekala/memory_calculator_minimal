@@ -23,12 +23,13 @@ body {
   background-color: white;
   font-size: 60px;
   margin: 0;
+  padding: 0;
 }
 
 .calculator_container {
   position: relative;
   background-color: white;
-  max-width: 600px;
+  // max-width: 600px;
   height: 90vh;
   margin: 0 auto;
   border-radius: 1.5rem;

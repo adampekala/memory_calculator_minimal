@@ -155,8 +155,9 @@ buttonExit.addEventListener("click", (ev) => {
         clearInterval(counterIntervalIndex);
       }
     }, 50);
+  } else {
+    navigationContainer.classList.remove("closed");
   }
-  console.log("Other event");
 });
 
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
@@ -193,22 +194,32 @@ optionButtonClose.addEventListener("click", (ev) => {
 //   optionButtonClose.classList.remove("clicked");
 // });
 
-// const sqrPlus = document.getElementById("sqr-plus") as HTMLDivElement;
-// const sqrMinus = document.getElementById("sqr-minus") as HTMLDivElement;
-// const sqrMultiply = document.getElementById("sqr-multiply") as HTMLDivElement;
+const sqrPlus = document.getElementById(
+  "operation_toggler-add"
+) as HTMLDivElement;
+const sqrMinus = document.getElementById(
+  "operation_toggler-substract"
+) as HTMLDivElement;
+const sqrMultiply = document.getElementById(
+  "operation_toggler-multiply"
+) as HTMLDivElement;
 
-// sqrPlus.addEventListener("click", (ev) => {
-//   screenOperationSign = "+";
-//   arytmeticOperation = OPERATION_TYPE.addition;
-// });
-// sqrMinus.addEventListener("click", (ev) => {
-//   screenOperationSign = "-";
-//   arytmeticOperation = OPERATION_TYPE.substraction;
-// });
-// sqrMultiply.addEventListener("click", (ev) => {
-//   screenOperationSign = "x";
-//   arytmeticOperation = OPERATION_TYPE.multiplication;
-// });
+sqrPlus.addEventListener("click", (ev) => {
+  operationSignValue = "+";
+  operationSign.innerText = "+";
+  arytmeticOperation = OPERATION_TYPE.addition;
+  console.log(arytmeticOperation);
+});
+sqrMinus.addEventListener("click", (ev) => {
+  operationSignValue = "-";
+  operationSign.innerText = "-";
+  arytmeticOperation = OPERATION_TYPE.substraction;
+});
+sqrMultiply.addEventListener("click", (ev) => {
+  operationSignValue = "x";
+  operationSign.innerText = "x";
+  arytmeticOperation = OPERATION_TYPE.multiplication;
+});
 
 // --------------------------
 

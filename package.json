@@ -7,7 +7,7 @@
     "test": "live-server index-test.html",
     "start": "live-server",
     "compileSCSS": "sass src/style.scss style.css --watch",
-    "compileTS": "tsc app.ts --watch"
+    "compileTS": "tsc --watch"
   },
   "repository": {
     "type": "git",

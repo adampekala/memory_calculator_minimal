@@ -1,41 +1,42 @@
-var STATE_TYPE = {
+"use strict";
+const STATE_TYPE = {
     initial: "start",
     check: "check",
     asses: "asses",
 };
-var OPERATION_TYPE = {
+const OPERATION_TYPE = {
     addition: "add",
     substraction: "minus",
     multiplication: "multiply",
 };
-var state = STATE_TYPE.initial;
-var arytmeticOperation = OPERATION_TYPE.multiplication;
-var scoreNumber = 0;
-var score = document.getElementById("score");
-var result = document.getElementById("result");
-var leftNumber = document.getElementById("left_number");
-var operationSign = document.getElementById("operation_sign");
-var rightNumber = document.getElementById("right_number");
-var timeCounter = document.getElementById("time_counter");
-var randomNumber = function () {
+let state = STATE_TYPE.initial;
+let arytmeticOperation = OPERATION_TYPE.multiplication;
+let scoreNumber = 0;
+const score = document.getElementById("score");
+const result = document.getElementById("result");
+const leftNumber = document.getElementById("left_number");
+const operationSign = document.getElementById("operation_sign");
+const rightNumber = document.getElementById("right_number");
+const timeCounter = document.getElementById("time_counter");
+const randomNumber = () => {
     return Math.floor(Math.random() * 10) + 1;
 };
 // const leftDigit
-var leftNumberValue = 0;
-var rightNumberValue = 0;
-var operationSignValue = "x";
-var operationResult = 0;
+let leftNumberValue = 0;
+let rightNumberValue = 0;
+let operationSignValue = "x";
+let operationResult = 0;
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
-var buttonMain = document.getElementById("main_button");
-var buttonExit = document.getElementById("button_exit");
+const buttonMain = document.getElementById("main_button");
+const buttonExit = document.getElementById("button_exit");
 //!!!!!!!!!!!
 // const score = document.getElementById("score") as HTMLDivElement;
-var counterIntervalIndex;
-var counterProgress = 1;
-buttonMain.addEventListener("click", function (ev) {
+let counterIntervalIndex;
+let counterProgress = 1;
+buttonMain.addEventListener("click", (ev) => {
     switch (true) {
         case state === STATE_TYPE.initial: {
             leftNumberValue = randomNumber();
@@ -44,10 +45,10 @@ buttonMain.addEventListener("click", function (ev) {
             rightNumber.innerText = rightNumberValue.toString();
             state = STATE_TYPE.check;
             buttonMain.innerText = state;
-            counterIntervalIndex = setInterval(function () {
+            counterIntervalIndex = setInterval(() => {
                 console.log(counterProgress);
                 if (!(counterProgress > 99)) {
-                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
+                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                     counterProgress++;
                 }
                 else {
@@ -96,10 +97,10 @@ buttonMain.addEventListener("click", function (ev) {
             rightNumber.innerText = rightNumberValue.toString();
             score.innerText = scoreNumber.toString();
             result.innerText = "---";
-            counterIntervalIndex = setInterval(function () {
+            counterIntervalIndex = setInterval(() => {
                 console.log(counterProgress);
                 if (!(counterProgress > 99)) {
-                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
+                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                     counterProgress++;
                 }
                 else {
@@ -112,7 +113,7 @@ buttonMain.addEventListener("click", function (ev) {
             break;
     }
 });
-buttonExit.addEventListener("click", function (ev) {
+buttonExit.addEventListener("click", (ev) => {
     if (state === STATE_TYPE.asses) {
         console.log(ev.target.id);
         scoreNumber--;
@@ -125,10 +126,10 @@ buttonExit.addEventListener("click", function (ev) {
         rightNumber.innerText = rightNumberValue.toString();
         score.innerText = scoreNumber.toString();
         result.innerText = "---";
-        counterIntervalIndex = setInterval(function () {
+        counterIntervalIndex = setInterval(() => {
             console.log(counterProgress);
             if (!(counterProgress > 99)) {
-                timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
+                timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                 counterProgress++;
             }
             else {
@@ -136,15 +137,17 @@ buttonExit.addEventListener("click", function (ev) {
             }
         }, 50);
     }
-    console.log("Other event");
+    else {
+        navigationContainer.classList.remove("closed");
+    }
 });
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 // const optionButton = document.getElementById("option_button") as HTMLDivElement;
-var optionButtonClose = document.getElementById("backToCalculator_button");
-var navigationContainer = document.getElementById("navigation");
+const optionButtonClose = document.getElementById("backToCalculator_button");
+const navigationContainer = document.getElementById("navigation");
 // optionButton.addEventListener("mousedown", (ev) => {
 //   console.log("option_button");
 //   optionButton.classList.add("clicked");
@@ -154,7 +157,7 @@ var navigationContainer = document.getElementById("navigation");
 //   console.log("option_button");
 //   optionButton.classList.remove("clicked");
 // });
-optionButtonClose.addEventListener("click", function (ev) {
+optionButtonClose.addEventListener("click", (ev) => {
     console.log("working");
     // optionButtonClose.classList.add("clicked");
     navigationContainer.classList.add("closed");
@@ -162,21 +165,25 @@ optionButtonClose.addEventListener("click", function (ev) {
 // optionButtonClose.addEventListener("mouseup", (ev) => {
 //   optionButtonClose.classList.remove("clicked");
 // });
-// const sqrPlus = document.getElementById("sqr-plus") as HTMLDivElement;
-// const sqrMinus = document.getElementById("sqr-minus") as HTMLDivElement;
-// const sqrMultiply = document.getElementById("sqr-multiply") as HTMLDivElement;
-// sqrPlus.addEventListener("click", (ev) => {
-//   screenOperationSign = "+";
-//   arytmeticOperation = OPERATION_TYPE.addition;
-// });
-// sqrMinus.addEventListener("click", (ev) => {
-//   screenOperationSign = "-";
-//   arytmeticOperation = OPERATION_TYPE.substraction;
-// });
-// sqrMultiply.addEventListener("click", (ev) => {
-//   screenOperationSign = "x";
-//   arytmeticOperation = OPERATION_TYPE.multiplication;
-// });
+const sqrPlus = document.getElementById("operation_toggler-add");
+const sqrMinus = document.getElementById("operation_toggler-substract");
+const sqrMultiply = document.getElementById("operation_toggler-multiply");
+sqrPlus.addEventListener("click", (ev) => {
+    operationSignValue = "+";
+    operationSign.innerText = "+";
+    arytmeticOperation = OPERATION_TYPE.addition;
+    console.log(arytmeticOperation);
+});
+sqrMinus.addEventListener("click", (ev) => {
+    operationSignValue = "-";
+    operationSign.innerText = "-";
+    arytmeticOperation = OPERATION_TYPE.substraction;
+});
+sqrMultiply.addEventListener("click", (ev) => {
+    operationSignValue = "x";
+    operationSign.innerText = "x";
+    arytmeticOperation = OPERATION_TYPE.multiplication;
+});
 // --------------------------
 // const changeToAdditionBtn = document.querySelector(
 //   "#changeToAdditionBtn"
