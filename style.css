@@ -19,6 +19,7 @@
 }
 .nav.closed {
   top: -40000000px;
+  display: none;
 }
 
 .navButton {
