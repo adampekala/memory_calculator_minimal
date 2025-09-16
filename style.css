@@ -4,7 +4,7 @@
 
 .nav {
   position: absolute;
-  background-color: rgb(8, 35, 125);
+  background-image: linear-gradient(to bottom right, rgb(55, 83, 173) 60%, rgb(8, 35, 125));
   top: 0;
   left: 0;
   width: 100%;
@@ -13,10 +13,25 @@
   transition: all 0.1s ease-in;
 }
 .nav_list {
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3rem;
   list-style: none;
   padding: 0;
   margin: 0 auto;
 }
+.nav_listItem {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.nav_listItem-back {
+  align-self: center;
+}
+
 .nav.closed {
   top: -40000000px;
   display: none;
@@ -31,7 +46,7 @@
   background-image: linear-gradient(#fff, #f5f5fa);
   border: none;
   border-radius: 9999px;
-  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(74, 80, 118, 0.603) 0 1px 3px 0;
+  box-shadow: rgb(105, 130, 156) 0 2px 3px 0, rgba(137, 144, 186, 0.737) 0 1px 3px 0;
   text-transform: uppercase;
   color: rgb(46, 180, 46);
   font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -49,8 +64,8 @@
   text-align: center;
   padding-left: 100px;
   padding-right: 100px;
-  margin: 0;
-  width: unset;
+  margin-top: 3rem;
+  width: 100%;
 }
 .navButton-mode:hover {
   color: green;
@@ -58,13 +73,25 @@
 .navButton-mode:active {
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
 }
+.navButton-back {
+  margin-top: 4rem;
+}
 .navButton_difficulty-decrease {
   background-color: red;
   color: gray;
+  width: 20%;
   border-radius: 99999px 0 0 99999px;
 }
 .navButton_difficulty-increase {
+  width: 20%;
   border-radius: 0 99999px 99999px 0;
+}
+.navButton_difficulty_scale {
+  background-color: white;
+  color: red;
+  margin: 4px;
+  flex-grow: 1;
+  text-align: center;
 }
 .navButton-red {
   color: red;
@@ -74,11 +101,6 @@
 }
 .navButton-red:active {
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
-}
-
-.difficulty_scale {
-  background-color: white;
-  color: red;
 }
 
 .title {

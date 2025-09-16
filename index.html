@@ -45,33 +45,23 @@
         <button class="controlButton controlButton-red" id="button_exit">Exit</button>
     </div>
 
-    <div class="nav closed" id="navigation">
+    <div class="nav" id="navigation">
       <ul class="nav_list">
         <li class="nav_listItem nav_listItem-1">
            <button class="navButton navButton-mode" id="mode_toggler">Mode</button>
         </li>
-        <li class="nav_listItem nav_listItem-2"> 
-          <span>Difficulty</span><br>
-          <button class="navButton navButton_difficulty navButton_difficulty-decrease" id="difficulty_toggler">Difficulty</button>
-          <span class="difficulty_scale" id="difficulty_scale">xxx</span>
-          <button class="navButton navButton_difficulty navButton_difficulty-increase" id="difficulty_toggler">Difficulty</button>
-        </li>
-        <li class="nav_listItem nav_listItem-3"> 
-          <!-- <button class="navButton navButton-green" id="main_button">Start</button> -->
-        </li>
-        <li class="nav_listItem nav_listItem-4">
-           <!-- <button class="navButton navButton-green" id="main_button">Start</button> -->
-        </li>
-        <li class="nav_listItem nav_listItem-5">
-           <!-- <button class="navButton navButton-green" id="main_button">Start</button> -->
+        <li class="nav_listItem nav_listItem-difficulty"> 
+          <button class="navButton navButton_difficulty navButton_difficulty-decrease" id="difficulty_toggler">-</button>
+          <span class="navButton_difficulty_scale" id="difficulty_scale">---</span>
+          <button class="navButton navButton_difficulty navButton_difficulty-increase" id="difficulty_toggler">+</button>
         </li>
         <li class="nav_listItem nav_listItem-7">
           <button class="navButton navButton-green" id="operation_toggler-add">+</button>
           <button class="navButton navButton-green" id="operation_toggler-multiply">x</button>
           <button class="navButton navButton-green" id="operation_toggler-substract">-</button>
         </li>
-        <li class="nav_listItem nav_listItem-6">
-           <button class="navButton navButton-green" id="backToCalculator_button">Back</button>
+        <li class="nav_listItem nav_listItem-back">
+           <button class="navButton navButton-back" id="backToCalculator_button">Back</button>
         </li>
       </ul>
     </div>
