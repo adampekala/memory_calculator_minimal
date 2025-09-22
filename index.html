@@ -44,28 +44,42 @@
     <div class="controlButtons_container controlButtons_container-2">
         <button class="controlButton controlButton-red" id="button_exit">Exit</button>
     </div>
+<!-- closed -->
+    <div class="options" id="navigation">
+      <h1 class="title">
+        <span class="title-top">Memory</span
+        ><span class="title-bottom">calculator</span>
+      </h1>
+      <ul class="options_list">
+        <div class="options_modeContainer">
+          <button class="options_button options_button-mode" id="mode_toggler">Mode</button>
+          <span class="options_modeText">fast</span>
+        </div>
+        <div class="options_gameOptionsContainer">
+          <li class="options_listItem options_listItem-difficulty"> 
+            <button class="options_button options_button_difficulty options_button_difficulty-decrease" id="difficulty_toggler">-</button>
+            <span class="options_button_difficulty_scale" id="difficulty_scale">---</span>
+            <button class="options_button options_button_difficulty options_button_difficulty-increase" id="difficulty_toggler">+</button>
+          </li>
+          <li class="options_listItem options_listItem-7">
+            <button class="options_button options_button-green" id="operation_toggler-add">+</button>
+            <button class="options_button options_button-green" id="operation_toggler-multiply">x</button>
+            <button class="options_button options_button-green" id="operation_toggler-substract">-</button>
+          </li>
 
-    <div class="nav closed" id="navigation">
-      <ul class="nav_list">
-        <li class="nav_listItem nav_listItem-1">
-           <button class="navButton navButton-mode" id="mode_toggler">Mode</button>
-        </li>
-        <li class="nav_listItem nav_listItem-difficulty"> 
-          <button class="navButton navButton_difficulty navButton_difficulty-decrease" id="difficulty_toggler">-</button>
-          <span class="navButton_difficulty_scale" id="difficulty_scale">---</span>
-          <button class="navButton navButton_difficulty navButton_difficulty-increase" id="difficulty_toggler">+</button>
-        </li>
-        <li class="nav_listItem nav_listItem-7">
-          <button class="navButton navButton-green" id="operation_toggler-add">+</button>
-          <button class="navButton navButton-green" id="operation_toggler-multiply">x</button>
-          <button class="navButton navButton-green" id="operation_toggler-substract">-</button>
-        </li>
-        <li class="nav_listItem nav_listItem-back">
-           <button class="navButton navButton-back" id="backToCalculator_button">Back</button>
-        </li>
+        </div>
+        <div class="options_backButtonContainer">
+          <li class="options_listItem options_listItem-back">
+             <button class="options_button options_button-back" id="backToCalculator_button">Back</button>
+          </li>
+          <li class="options_listItem options_listItem-back">
+             <button class="options_button" id="xxx">Statistic</button>
+          </li>
+        </div>
       </ul>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
+    <!-- <script type="module" src="mod.js"></script> -->
   </body>
 </html>

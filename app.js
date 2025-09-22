@@ -1,42 +1,41 @@
-"use strict";
-const STATE_TYPE = {
+var STATE_TYPE = {
     initial: "start",
     check: "check",
     asses: "asses",
 };
-const OPERATION_TYPE = {
+var OPERATION_TYPE = {
     addition: "add",
     substraction: "minus",
     multiplication: "multiply",
 };
-let state = STATE_TYPE.initial;
-let arytmeticOperation = OPERATION_TYPE.multiplication;
-let scoreNumber = 0;
-const score = document.getElementById("score");
-const result = document.getElementById("result");
-const leftNumber = document.getElementById("left_number");
-const operationSign = document.getElementById("operation_sign");
-const rightNumber = document.getElementById("right_number");
-const timeCounter = document.getElementById("time_counter");
-const randomNumber = () => {
+var state = STATE_TYPE.initial;
+var arytmeticOperation = OPERATION_TYPE.multiplication;
+var scoreNumber = 0;
+var score = document.getElementById("score");
+var result = document.getElementById("result");
+var leftNumber = document.getElementById("left_number");
+var operationSign = document.getElementById("operation_sign");
+var rightNumber = document.getElementById("right_number");
+var timeCounter = document.getElementById("time_counter");
+var randomNumber = function () {
     return Math.floor(Math.random() * 10) + 1;
 };
 // const leftDigit
-let leftNumberValue = 0;
-let rightNumberValue = 0;
-let operationSignValue = "x";
-let operationResult = 0;
+var leftNumberValue = 0;
+var rightNumberValue = 0;
+var operationSignValue = "x";
+var operationResult = 0;
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
-const buttonMain = document.getElementById("main_button");
-const buttonExit = document.getElementById("button_exit");
+var buttonMain = document.getElementById("main_button");
+var buttonExit = document.getElementById("button_exit");
 //!!!!!!!!!!!
 // const score = document.getElementById("score") as HTMLDivElement;
-let counterIntervalIndex;
-let counterProgress = 1;
-buttonMain.addEventListener("click", (ev) => {
+var counterIntervalIndex;
+var counterProgress = 1;
+buttonMain.addEventListener("click", function (ev) {
     switch (true) {
         case state === STATE_TYPE.initial: {
             leftNumberValue = randomNumber();
@@ -45,10 +44,10 @@ buttonMain.addEventListener("click", (ev) => {
             rightNumber.innerText = rightNumberValue.toString();
             state = STATE_TYPE.check;
             buttonMain.innerText = state;
-            counterIntervalIndex = setInterval(() => {
+            counterIntervalIndex = setInterval(function () {
                 console.log(counterProgress);
                 if (!(counterProgress > 99)) {
-                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
                     counterProgress++;
                 }
                 else {
@@ -97,10 +96,10 @@ buttonMain.addEventListener("click", (ev) => {
             rightNumber.innerText = rightNumberValue.toString();
             score.innerText = scoreNumber.toString();
             result.innerText = "---";
-            counterIntervalIndex = setInterval(() => {
+            counterIntervalIndex = setInterval(function () {
                 console.log(counterProgress);
                 if (!(counterProgress > 99)) {
-                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                    timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
                     counterProgress++;
                 }
                 else {
@@ -113,7 +112,7 @@ buttonMain.addEventListener("click", (ev) => {
             break;
     }
 });
-buttonExit.addEventListener("click", (ev) => {
+buttonExit.addEventListener("click", function (ev) {
     if (state === STATE_TYPE.asses) {
         console.log(ev.target.id);
         scoreNumber--;
@@ -126,10 +125,10 @@ buttonExit.addEventListener("click", (ev) => {
         rightNumber.innerText = rightNumberValue.toString();
         score.innerText = scoreNumber.toString();
         result.innerText = "---";
-        counterIntervalIndex = setInterval(() => {
+        counterIntervalIndex = setInterval(function () {
             console.log(counterProgress);
             if (!(counterProgress > 99)) {
-                timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                timeCounter.style.backgroundImage = "linear-gradient( to right, rgb(22, 40, 159) ".concat(counterProgress, "%, transparent ").concat(counterProgress, "% 99%, rgb(22, 40, 159) 99%)");
                 counterProgress++;
             }
             else {
@@ -146,8 +145,8 @@ buttonExit.addEventListener("click", (ev) => {
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 //OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION//OPTION
 // const optionButton = document.getElementById("option_button") as HTMLDivElement;
-const optionButtonClose = document.getElementById("backToCalculator_button");
-const navigationContainer = document.getElementById("navigation");
+var optionButtonClose = document.getElementById("backToCalculator_button");
+var navigationContainer = document.getElementById("navigation");
 // optionButton.addEventListener("mousedown", (ev) => {
 //   console.log("option_button");
 //   optionButton.classList.add("clicked");
@@ -157,7 +156,7 @@ const navigationContainer = document.getElementById("navigation");
 //   console.log("option_button");
 //   optionButton.classList.remove("clicked");
 // });
-optionButtonClose.addEventListener("click", (ev) => {
+optionButtonClose.addEventListener("click", function (ev) {
     console.log("working");
     // optionButtonClose.classList.add("clicked");
     navigationContainer.classList.add("closed");
@@ -165,21 +164,21 @@ optionButtonClose.addEventListener("click", (ev) => {
 // optionButtonClose.addEventListener("mouseup", (ev) => {
 //   optionButtonClose.classList.remove("clicked");
 // });
-const sqrPlus = document.getElementById("operation_toggler-add");
-const sqrMinus = document.getElementById("operation_toggler-substract");
-const sqrMultiply = document.getElementById("operation_toggler-multiply");
-sqrPlus.addEventListener("click", (ev) => {
+var sqrPlus = document.getElementById("operation_toggler-add");
+var sqrMinus = document.getElementById("operation_toggler-substract");
+var sqrMultiply = document.getElementById("operation_toggler-multiply");
+sqrPlus.addEventListener("click", function (ev) {
     operationSignValue = "+";
     operationSign.innerText = "+";
     arytmeticOperation = OPERATION_TYPE.addition;
     console.log(arytmeticOperation);
 });
-sqrMinus.addEventListener("click", (ev) => {
+sqrMinus.addEventListener("click", function (ev) {
     operationSignValue = "-";
     operationSign.innerText = "-";
     arytmeticOperation = OPERATION_TYPE.substraction;
 });
-sqrMultiply.addEventListener("click", (ev) => {
+sqrMultiply.addEventListener("click", function (ev) {
     operationSignValue = "x";
     operationSign.innerText = "x";
     arytmeticOperation = OPERATION_TYPE.multiplication;
