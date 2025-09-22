@@ -10,9 +10,35 @@ const OPERATION_TYPE = {
   multiplication: "multiply",
 };
 
+const MODE_TYPE = {
+  addition: ["up to 100", "up to 1000"],
+  substraction: ["from 100", "from 1000"],
+  multiplication: ["up to 50", "up to 100", "count down"],
+};
+
 let state = STATE_TYPE.initial;
 let arytmeticOperation = OPERATION_TYPE.multiplication;
+let currentMode = MODE_TYPE.multiplication[0];
+const modeToggler = document.getElementById(
+  "mode_toggler"
+) as HTMLButtonElement;
+const modeText = document.getElementById("mode_text") as HTMLSpanElement;
 
+let modeTogglerIndex = 0;
+modeToggler.addEventListener("click", (ev) => {
+  if (arytmeticOperation === OPERATION_TYPE.multiplication) {
+    console.log("Toggle");
+    if (modeTogglerIndex < MODE_TYPE.multiplication.length - 1) {
+      modeTogglerIndex++;
+      modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
+    } else {
+      modeTogglerIndex = 0;
+      modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
+    }
+  } else {
+    console.log("NNNNN");
+  }
+});
 let scoreNumber = 0;
 
 const score = document.getElementById("score") as HTMLDivElement;
