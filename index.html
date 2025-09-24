@@ -58,9 +58,9 @@
         <div class="options_gameOptionsContainer">
           
           <li class="options_listItem options_listItem-difficulty"> 
-            <button class="options_button options_button_difficulty options_button_difficulty-decrease" id="difficulty_toggler">-</button>
-            <span class="options_button_difficulty_scale" id="difficulty_scale">---</span>
-            <button class="options_button options_button_difficulty options_button_difficulty-increase" id="difficulty_toggler">+</button>
+            <button class="options_button options_button_difficulty options_button_difficulty-decrease" id="difficulty_toggler-decrease">-</button>
+            <span class="options_button_difficulty_scale" id="difficulty_scale">&#x2606;</span>
+            <button class="options_button options_button_difficulty options_button_difficulty-increase" id="difficulty_toggler-increase">+</button>
           </li>
 
           <li class="options_listItem options_listItem-7">
@@ -81,7 +81,9 @@
       </ul>
     </div>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="dist/app.js"></script>
+    <script type="module" src="dist/helpers.js"></script>
+    <script type="module" src="dist/mode.js"></script>
     <!-- <script type="module" src="mod.js"></script> -->
   </body>
 </html>
