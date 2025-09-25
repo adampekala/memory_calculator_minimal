@@ -1,25 +1,113 @@
 const randomNumber = (min = 1, max = 10) => {
-    return Math.floor(Math.random() * (max - min + 1) + 1);
+    return Math.floor(Math.random() * (max - min + 1) + min);
 };
-export const calculateNumberHelper = (difficulty) => {
-    switch (difficulty) {
-        case 1: {
-            return randomNumber();
+export const calculateNumberHelper = (operationType = "devide", difficulty = 1) => {
+    if (operationType === "multiply" || operationType === "add") {
+        switch (true) {
+            case difficulty === 1: {
+                return new Array(randomNumber(), randomNumber());
+            }
+            case difficulty === 2: {
+                return new Array(randomNumber(2, 10), randomNumber(2, 10));
+            }
+            case difficulty === 3: {
+                return new Array(randomNumber(5, 10), randomNumber(5, 10));
+            }
+            case difficulty === 4: {
+                return new Array(randomNumber(2, 12), randomNumber(2, 12));
+            }
+            case difficulty === 5: {
+                return new Array(randomNumber(5, 15), randomNumber(5, 15));
+            }
         }
-        case 2: {
-            return randomNumber(2, 10);
+    }
+    if (operationType === "substract") {
+        switch (true) {
+            case difficulty === 1: {
+                console.log("substr");
+                let num1 = randomNumber();
+                let num2 = randomNumber();
+                if (num1 > num2) {
+                    console.log("substr");
+                    return new Array(num1, num2);
+                }
+                else {
+                    console.log("substr");
+                    return new Array(num2, num1);
+                }
+            }
+            case difficulty === 2: {
+                let num1 = randomNumber(1, 50);
+                let num2 = randomNumber(1, 50);
+                console.log("substr");
+                if (num1 > num2) {
+                    console.log("substr");
+                    return new Array(num1, num2);
+                }
+                else {
+                    console.log("substr");
+                    return new Array(num2, num1);
+                }
+            }
+            case difficulty === 3: {
+                let num1 = randomNumber(1, 100);
+                let num2 = randomNumber(1, 100);
+                if (num1 > num2) {
+                    return new Array(num1, num2);
+                }
+                else {
+                    return new Array(num2, num1);
+                }
+            }
+            case difficulty === 4: {
+                let num1 = randomNumber(1, 1000);
+                let num2 = randomNumber(1, 1000);
+                if (num1 > num2) {
+                    return new Array(num1, num2);
+                }
+                else {
+                    return new Array(num2, num1);
+                }
+            }
+            case difficulty === 5: {
+                let num1 = randomNumber(500, 1500);
+                let num2 = randomNumber(500, 1500);
+                if (num1 > num2) {
+                    return new Array(num1, num2);
+                }
+                else {
+                    return new Array(num2, num1);
+                }
+            }
         }
-        case 3: {
-            return randomNumber(5, 10);
-        }
-        case 4: {
-            return randomNumber(2, 12);
-        }
-        case 5: {
-            return randomNumber(5, 15);
-        }
-        default: {
-            return randomNumber();
+    }
+    if (operationType === "devide") {
+        switch (true) {
+            case difficulty === 1: {
+                let num1 = randomNumber();
+                let num2 = randomNumber();
+                return new Array(num1 * num2, num1, num2);
+            }
+            case difficulty === 2: {
+                let num1 = randomNumber(2, 10);
+                let num2 = randomNumber(2, 10);
+                return new Array(num1 * num2, num1, num2);
+            }
+            case difficulty === 3: {
+                let num1 = randomNumber(5, 10);
+                let num2 = randomNumber(5, 10);
+                return new Array(num1 * num2, num1, num2);
+            }
+            case difficulty === 4: {
+                let num1 = randomNumber(2, 12);
+                let num2 = randomNumber(2, 12);
+                return new Array(num1 * num2, num1, num2);
+            }
+            case difficulty === 5: {
+                let num1 = randomNumber(5, 15);
+                let num2 = randomNumber(5, 15);
+                return new Array(num1 * num2, num1, num2);
+            }
         }
     }
 };

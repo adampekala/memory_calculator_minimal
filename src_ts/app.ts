@@ -1,7 +1,12 @@
 import { calculateNumberHelper } from "./helpers.js";
 import { STATE_TYPE, appState, MODE_TYPE, OPERATION_TYPE } from "./mode.js";
 
-console.log(calculateNumberHelper(5));
+console.log(
+  calculateNumberHelper(appState.arytmeticOperation, appState.difficulty)
+);
+
+// console.log(appState.arytmeticOperation);
+// console.log(appState.difficulty);
 
 let scoreNumber = 0;
 
@@ -16,12 +21,6 @@ const operationSign = document.getElementById(
 const rightNumber = document.getElementById("right_number") as HTMLSpanElement;
 
 const timeCounter = document.getElementById("time_counter") as HTMLDivElement;
-
-const randomNumber = () => {
-  return Math.floor(Math.random() * 10) + 1;
-};
-
-// const leftDigit
 
 let leftNumberValue: number = 0;
 let rightNumberValue: number = 0;
@@ -45,8 +44,12 @@ let counterProgress: number = 1;
 buttonMain.addEventListener("click", (ev: MouseEvent) => {
   switch (true) {
     case appState.state === STATE_TYPE.initial: {
-      leftNumberValue = randomNumber();
-      rightNumberValue = randomNumber();
+      let numbers = calculateNumberHelper(
+        appState.arytmeticOperation,
+        appState.difficulty
+      );
+      leftNumberValue = numbers[0];
+      rightNumberValue = numbers[1];
       leftNumber.innerText = leftNumberValue.toString();
       rightNumber.innerText = rightNumberValue.toString();
       appState.state = STATE_TYPE.check;
@@ -100,8 +103,12 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       buttonExit.classList.remove("active");
       buttonMain.innerText = appState.state;
       buttonExit.innerText = "exit";
-      leftNumberValue = randomNumber();
-      rightNumberValue = randomNumber();
+      let numbers = calculateNumberHelper(
+        appState.arytmeticOperation,
+        appState.difficulty
+      );
+      leftNumberValue = numbers[0];
+      rightNumberValue = numbers[1];
       leftNumber.innerText = leftNumberValue.toString();
       rightNumber.innerText = rightNumberValue.toString();
       score.innerText = scoreNumber.toString();
@@ -130,8 +137,12 @@ buttonExit.addEventListener("click", (ev) => {
     appState.state = STATE_TYPE.check;
     buttonMain.innerText = appState.state;
     buttonExit.innerText = "exit";
-    leftNumberValue = randomNumber();
-    rightNumberValue = randomNumber();
+    let numbers = calculateNumberHelper(
+      appState.arytmeticOperation,
+      appState.difficulty
+    );
+    leftNumberValue = numbers[0];
+    rightNumberValue = numbers[1];
     leftNumber.innerText = leftNumberValue.toString();
     rightNumber.innerText = rightNumberValue.toString();
     score.innerText = scoreNumber.toString();

@@ -1,13 +1,23 @@
+export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
+
+type OPERATION_OBJ = {
+  addition: OPERATION_TYPE;
+  substraction: OPERATION_TYPE;
+  multiplication: OPERATION_TYPE;
+  division: OPERATION_TYPE;
+};
+
 export const STATE_TYPE = {
   initial: "start",
   check: "check",
   asses: "asses",
 };
 
-export const OPERATION_TYPE = {
+export const OPERATION_TYPE: OPERATION_OBJ = {
   addition: "add",
-  substraction: "minus",
+  substraction: "substract",
   multiplication: "multiply",
+  division: "devide",
 };
 
 export const appState = {

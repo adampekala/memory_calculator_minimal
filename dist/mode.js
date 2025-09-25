@@ -5,8 +5,9 @@ export const STATE_TYPE = {
 };
 export const OPERATION_TYPE = {
     addition: "add",
-    substraction: "minus",
+    substraction: "substract",
     multiplication: "multiply",
+    division: "devide",
 };
 export const appState = {
     state: STATE_TYPE.initial,
