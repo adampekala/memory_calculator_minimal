@@ -7,6 +7,27 @@ type OPERATION_OBJ = {
   division: OPERATION_TYPE;
 };
 
+export type MODE_TYPE_COMMON =
+  | "repretition"
+  | "train"
+  | "get 50"
+  | "get 100"
+  | "count down";
+export type MODE_TYPE_ADDITION = MODE_TYPE_COMMON | "up to 100" | "up to 1000";
+export type MODE_TYPE_SUBSTRACTION =
+  | MODE_TYPE_COMMON
+  | "from 100"
+  | "from 1000";
+export type MODE_TYPE_MULTIPLICATION = MODE_TYPE_COMMON;
+export type MODE_TYPE_DIVISION = MODE_TYPE_COMMON;
+
+export interface MODE_TYPE {
+  addition: MODE_TYPE_ADDITION[];
+  substraction: MODE_TYPE_SUBSTRACTION[];
+  multiplication: MODE_TYPE_MULTIPLICATION[];
+  division: MODE_TYPE_DIVISION[];
+}
+
 export const STATE_TYPE = {
   initial: "start",
   check: "check",
@@ -27,10 +48,27 @@ export const appState = {
   difficulty: 1,
 };
 
-export const MODE_TYPE = {
-  addition: ["up to 100", "up to 1000"],
-  substraction: ["from 100", "from 1000"],
-  multiplication: ["up to 50", "up to 100", "count down"],
+export const MODE_TYPE: MODE_TYPE = {
+  addition: [
+    "train",
+    "repretition",
+    "get 50",
+    "get 100",
+    "count down",
+    "up to 100",
+    "up to 1000",
+  ],
+  substraction: [
+    "train",
+    "repretition",
+    "get 50",
+    "get 100",
+    "count down",
+    "from 100",
+    "from 1000",
+  ],
+  multiplication: ["train", "repretition", "get 50", "get 100", "count down"],
+  division: ["train", "repretition", "get 50", "get 100", "count down"],
 };
 
 let currentMode = MODE_TYPE.multiplication[0];
@@ -51,8 +89,33 @@ modeToggler.addEventListener("click", (ev) => {
       modeTogglerIndex = 0;
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     }
-  } else {
-    console.log("NNNNN");
+  } else if (appState.arytmeticOperation === OPERATION_TYPE.substraction) {
+    console.log("Toggle");
+    if (modeTogglerIndex < MODE_TYPE.substraction.length - 1) {
+      modeTogglerIndex++;
+      modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
+    } else {
+      modeTogglerIndex = 0;
+      modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
+    }
+  } else if (appState.arytmeticOperation === OPERATION_TYPE.addition) {
+    console.log("Toggle");
+    if (modeTogglerIndex < MODE_TYPE.addition.length - 1) {
+      modeTogglerIndex++;
+      modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
+    } else {
+      modeTogglerIndex = 0;
+      modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
+    }
+  } else if (appState.arytmeticOperation === OPERATION_TYPE.division) {
+    console.log("Toggle");
+    if (modeTogglerIndex < MODE_TYPE.division.length - 1) {
+      modeTogglerIndex++;
+      modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
+    } else {
+      modeTogglerIndex = 0;
+      modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
+    }
   }
 });
 
@@ -74,7 +137,6 @@ difficultyDecreaseToggler.addEventListener("click", () => {
     scaleInnettext.length = appState.difficulty;
     scaleInnettext.fill("\u2606");
     difficultyScale.innerText = scaleInnettext.join("");
-    // console.log(appState.difficulty);
   }
 });
 difficultyIncreaseToggler.addEventListener("click", () => {
@@ -85,6 +147,5 @@ difficultyIncreaseToggler.addEventListener("click", () => {
     scaleInnettext.length = appState.difficulty;
     scaleInnettext.fill("\u2606");
     difficultyScale.innerText = scaleInnettext.join("");
-    // console.log(appState.difficulty);
   }
 });

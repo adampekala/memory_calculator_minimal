@@ -1,8 +1,6 @@
 import { calculateNumberHelper } from "./helpers.js";
 import { STATE_TYPE, appState, OPERATION_TYPE } from "./mode.js";
 console.log(calculateNumberHelper(appState.arytmeticOperation, appState.difficulty));
-// console.log(appState.arytmeticOperation);
-// console.log(appState.difficulty);
 let scoreNumber = 0;
 const score = document.getElementById("score");
 const result = document.getElementById("result");
@@ -19,14 +17,19 @@ rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
 const buttonMain = document.getElementById("main_button");
-const buttonExit = document.getElementById("button_exit");
-//!!!!!!!!!!!
-// const score = document.getElementById("score") as HTMLDivElement;
+const buttonMenu = document.getElementById("button_menu");
 let counterIntervalIndex;
 let counterProgress = 1;
+let gameFinished = false;
 buttonMain.addEventListener("click", (ev) => {
     switch (true) {
         case appState.state === STATE_TYPE.initial: {
+            if (gameFinished) {
+                scoreNumber = 0;
+                score.innerText = "---";
+                timeCounter.innerText = null;
+            }
+            gameFinished = false;
             let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
             leftNumberValue = numbers[0];
             rightNumberValue = numbers[1];
@@ -47,12 +50,12 @@ buttonMain.addEventListener("click", (ev) => {
             break;
         }
         case appState.state === STATE_TYPE.check: {
-            buttonExit.classList.add("active");
+            buttonMenu.classList.add("active");
             counterProgress = 1;
             clearInterval(counterIntervalIndex);
             appState.state = STATE_TYPE.asses;
             buttonMain.innerText = "good";
-            buttonExit.innerText = "wrong";
+            buttonMenu.innerText = "wrong";
             switch (true) {
                 case appState.arytmeticOperation === OPERATION_TYPE.addition: {
                     operationResult = leftNumberValue + rightNumberValue;
@@ -76,40 +79,59 @@ buttonMain.addEventListener("click", (ev) => {
         }
         case appState.state === STATE_TYPE.asses: {
             scoreNumber++;
-            appState.state = STATE_TYPE.check;
-            buttonExit.classList.remove("active");
-            buttonMain.innerText = appState.state;
-            buttonExit.innerText = "exit";
-            let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
-            leftNumberValue = numbers[0];
-            rightNumberValue = numbers[1];
-            leftNumber.innerText = leftNumberValue.toString();
-            rightNumber.innerText = rightNumberValue.toString();
-            score.innerText = scoreNumber.toString();
-            result.innerText = "---";
-            counterIntervalIndex = setInterval(() => {
-                console.log(counterProgress);
-                if (!(counterProgress > 99)) {
-                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
-                    counterProgress++;
-                }
-                else {
-                    clearInterval(counterIntervalIndex);
-                }
-            }, 50);
-            break;
+            /////////
+            ////when finishes?????
+            // if (function(modeType)) { }
+            if (scoreNumber >= 50) {
+                clearInterval(counterIntervalIndex);
+                gameFinished = true;
+                appState.state = STATE_TYPE.initial;
+                score.innerText = scoreNumber.toString();
+                buttonMain.innerText = "again";
+                buttonMenu.innerText = "menu";
+                timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) 1%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                timeCounter.style.textAlign = "center";
+                timeCounter.style.color = "red";
+                timeCounter.innerText = "You win!!!";
+                console.log("success!!!!");
+                break;
+            }
+            else {
+                appState.state = STATE_TYPE.check;
+                buttonMenu.classList.remove("active");
+                buttonMain.innerText = appState.state;
+                buttonMenu.innerText = "menu";
+                let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+                leftNumberValue = numbers[0];
+                rightNumberValue = numbers[1];
+                leftNumber.innerText = leftNumberValue.toString();
+                rightNumber.innerText = rightNumberValue.toString();
+                score.innerText = scoreNumber.toString();
+                result.innerText = "---";
+                counterIntervalIndex = setInterval(() => {
+                    console.log(counterProgress);
+                    if (!(counterProgress > 99)) {
+                        timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                        counterProgress++;
+                    }
+                    else {
+                        clearInterval(counterIntervalIndex);
+                    }
+                }, 50);
+                break;
+            }
         }
         default:
             break;
     }
 });
-buttonExit.addEventListener("click", (ev) => {
+buttonMenu.addEventListener("click", (ev) => {
     if (appState.state === STATE_TYPE.asses) {
         console.log(ev.target.id);
         scoreNumber--;
         appState.state = STATE_TYPE.check;
         buttonMain.innerText = appState.state;
-        buttonExit.innerText = "exit";
+        buttonMenu.innerText = "menu";
         let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
         leftNumberValue = numbers[0];
         rightNumberValue = numbers[1];
