@@ -1,3 +1,4 @@
+import { countStopGameLimit } from "./helpers.js";
 export const STATE_TYPE = {
     initial: "start",
     check: "check",
@@ -9,18 +10,12 @@ export const OPERATION_TYPE = {
     multiplication: "multiply",
     division: "devide",
 };
-export const appState = {
-    state: STATE_TYPE.initial,
-    arytmeticOperation: OPERATION_TYPE.multiplication,
-    scoreNumber: 0,
-    difficulty: 1,
-};
 export const MODE_TYPE = {
     addition: [
         "train",
         "repretition",
+        "get 20",
         "get 50",
-        "get 100",
         "count down",
         "up to 100",
         "up to 1000",
@@ -28,16 +23,23 @@ export const MODE_TYPE = {
     substraction: [
         "train",
         "repretition",
+        "get 20",
         "get 50",
-        "get 100",
         "count down",
         "from 100",
         "from 1000",
     ],
-    multiplication: ["train", "repretition", "get 50", "get 100", "count down"],
-    division: ["train", "repretition", "get 50", "get 100", "count down"],
+    multiplication: ["train", "repretition", "get 20", "get 50", "count down"],
+    division: ["train", "repretition", "get 20", "get 50", "count down"],
 };
-let currentMode = MODE_TYPE.multiplication[0];
+export const appState = {
+    state: STATE_TYPE.initial,
+    arytmeticOperation: OPERATION_TYPE.multiplication,
+    scoreNumber: 0,
+    difficulty: 1,
+    mode: MODE_TYPE.multiplication[0],
+};
+export let stopGameLimit = countStopGameLimit(appState.mode);
 const modeToggler = document.getElementById("mode_toggler");
 const modeText = document.getElementById("mode_text");
 let modeTogglerIndex = 0;
@@ -46,10 +48,14 @@ modeToggler.addEventListener("click", (ev) => {
         console.log("Toggle");
         if (modeTogglerIndex < MODE_TYPE.multiplication.length - 1) {
             modeTogglerIndex++;
+            appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
         }
         else {
             modeTogglerIndex = 0;
+            appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
         }
     }
@@ -57,10 +63,14 @@ modeToggler.addEventListener("click", (ev) => {
         console.log("Toggle");
         if (modeTogglerIndex < MODE_TYPE.substraction.length - 1) {
             modeTogglerIndex++;
+            appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
         }
         else {
             modeTogglerIndex = 0;
+            appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
         }
     }
@@ -68,10 +78,14 @@ modeToggler.addEventListener("click", (ev) => {
         console.log("Toggle");
         if (modeTogglerIndex < MODE_TYPE.addition.length - 1) {
             modeTogglerIndex++;
+            appState.mode = MODE_TYPE.addition[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
         }
         else {
             modeTogglerIndex = 0;
+            appState.mode = MODE_TYPE.addition[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
         }
     }
@@ -79,10 +93,14 @@ modeToggler.addEventListener("click", (ev) => {
         console.log("Toggle");
         if (modeTogglerIndex < MODE_TYPE.division.length - 1) {
             modeTogglerIndex++;
+            appState.mode = MODE_TYPE.division[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
         }
         else {
             modeTogglerIndex = 0;
+            appState.mode = MODE_TYPE.division[modeTogglerIndex];
+            stopGameLimit = countStopGameLimit(appState.mode);
             modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
         }
     }

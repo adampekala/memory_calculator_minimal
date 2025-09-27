@@ -1,3 +1,5 @@
+import { countStopGameLimit } from "./helpers.js";
+
 export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 
 type OPERATION_OBJ = {
@@ -10,8 +12,8 @@ type OPERATION_OBJ = {
 export type MODE_TYPE_COMMON =
   | "repretition"
   | "train"
+  | "get 20"
   | "get 50"
-  | "get 100"
   | "count down";
 export type MODE_TYPE_ADDITION = MODE_TYPE_COMMON | "up to 100" | "up to 1000";
 export type MODE_TYPE_SUBSTRACTION =
@@ -20,6 +22,12 @@ export type MODE_TYPE_SUBSTRACTION =
   | "from 1000";
 export type MODE_TYPE_MULTIPLICATION = MODE_TYPE_COMMON;
 export type MODE_TYPE_DIVISION = MODE_TYPE_COMMON;
+export type MODE_ALL =
+  | MODE_TYPE_COMMON
+  | MODE_TYPE_ADDITION
+  | MODE_TYPE_DIVISION
+  | MODE_TYPE_MULTIPLICATION
+  | MODE_TYPE_SUBSTRACTION;
 
 export interface MODE_TYPE {
   addition: MODE_TYPE_ADDITION[];
@@ -28,7 +36,14 @@ export interface MODE_TYPE {
   division: MODE_TYPE_DIVISION[];
 }
 
-export const STATE_TYPE = {
+export type STATE_TYPE = "start" | "check" | "asses";
+
+export interface STATE_TYPE_OBJ {
+  initial: "start";
+  check: "check";
+  asses: "asses";
+}
+export const STATE_TYPE: STATE_TYPE_OBJ = {
   initial: "start",
   check: "check",
   asses: "asses",
@@ -41,19 +56,12 @@ export const OPERATION_TYPE: OPERATION_OBJ = {
   division: "devide",
 };
 
-export const appState = {
-  state: STATE_TYPE.initial,
-  arytmeticOperation: OPERATION_TYPE.multiplication,
-  scoreNumber: 0,
-  difficulty: 1,
-};
-
 export const MODE_TYPE: MODE_TYPE = {
   addition: [
     "train",
     "repretition",
+    "get 20",
     "get 50",
-    "get 100",
     "count down",
     "up to 100",
     "up to 1000",
@@ -61,17 +69,33 @@ export const MODE_TYPE: MODE_TYPE = {
   substraction: [
     "train",
     "repretition",
+    "get 20",
     "get 50",
-    "get 100",
     "count down",
     "from 100",
     "from 1000",
   ],
-  multiplication: ["train", "repretition", "get 50", "get 100", "count down"],
-  division: ["train", "repretition", "get 50", "get 100", "count down"],
+  multiplication: ["train", "repretition", "get 20", "get 50", "count down"],
+  division: ["train", "repretition", "get 20", "get 50", "count down"],
 };
 
-let currentMode = MODE_TYPE.multiplication[0];
+export interface APP_STATE {
+  state: STATE_TYPE;
+  arytmeticOperation: OPERATION_TYPE;
+  scoreNumber: number;
+  difficulty: number;
+  mode: MODE_ALL;
+}
+
+export const appState: APP_STATE = {
+  state: STATE_TYPE.initial,
+  arytmeticOperation: OPERATION_TYPE.multiplication,
+  scoreNumber: 0,
+  difficulty: 1,
+  mode: MODE_TYPE.multiplication[0],
+};
+
+export let stopGameLimit = countStopGameLimit(appState.mode);
 
 const modeToggler = document.getElementById(
   "mode_toggler"
@@ -84,36 +108,52 @@ modeToggler.addEventListener("click", (ev) => {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.multiplication.length - 1) {
       modeTogglerIndex++;
+      appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
+      appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.substraction) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.substraction.length - 1) {
       modeTogglerIndex++;
+      appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
+      appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.addition) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.addition.length - 1) {
       modeTogglerIndex++;
+      appState.mode = MODE_TYPE.addition[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
+      appState.mode = MODE_TYPE.addition[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.division) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.division.length - 1) {
       modeTogglerIndex++;
+      appState.mode = MODE_TYPE.division[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
+      appState.mode = MODE_TYPE.division[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.mode);
       modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
     }
   }

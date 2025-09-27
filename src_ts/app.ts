@@ -1,9 +1,17 @@
-import { calculateNumberHelper } from "./helpers.js";
-import { STATE_TYPE, appState, MODE_TYPE, OPERATION_TYPE } from "./mode.js";
+import { calculateNumberHelper, countStopGameLimit } from "./helpers.js";
+import {
+  STATE_TYPE,
+  appState,
+  MODE_TYPE,
+  OPERATION_TYPE,
+  stopGameLimit,
+} from "./mode.js";
 
-console.log(
-  calculateNumberHelper(appState.arytmeticOperation, appState.difficulty)
-);
+// console.log(
+//   calculateNumberHelper(appState.arytmeticOperation, appState.difficulty)
+// );
+
+console.log(countStopGameLimit(appState.mode) + "   " + appState.mode);
 
 let scoreNumber = 0;
 
@@ -105,7 +113,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       ////when finishes?????
       // if (function(modeType)) { }
 
-      if (scoreNumber >= 50) {
+      if (scoreNumber >= stopGameLimit) {
         clearInterval(counterIntervalIndex);
         gameFinished = true;
         appState.state = STATE_TYPE.initial;

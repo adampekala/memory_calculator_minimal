@@ -1,4 +1,11 @@
-import { OPERATION_TYPE } from "./mode";
+import {
+  OPERATION_TYPE,
+  MODE_TYPE_COMMON,
+  MODE_TYPE_ADDITION,
+  MODE_TYPE_DIVISION,
+  MODE_TYPE_MULTIPLICATION,
+  MODE_TYPE_SUBSTRACTION,
+} from "./mode";
 const randomNumber = (min: number = 1, max: number = 10) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -111,6 +118,30 @@ export const calculateNumberHelper = (
         let num2 = randomNumber(5, 15);
         return new Array(num1 * num2, num1, num2);
       }
+    }
+  }
+};
+
+export const countStopGameLimit = (
+  modeType:
+    | MODE_TYPE_COMMON
+    | MODE_TYPE_ADDITION
+    | MODE_TYPE_DIVISION
+    | MODE_TYPE_MULTIPLICATION
+    | MODE_TYPE_SUBSTRACTION = "get 20"
+) => {
+  switch (modeType) {
+    case "get 20": {
+      console.log("get 20");
+      return 20;
+    }
+    case "get 50": {
+      console.log("get 50");
+      return 50;
+    }
+    default: {
+      console.log("get else");
+      return Infinity;
     }
   }
 };

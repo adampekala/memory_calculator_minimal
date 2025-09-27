@@ -111,3 +111,19 @@ export const calculateNumberHelper = (operationType = "devide", difficulty = 1) 
         }
     }
 };
+export const countStopGameLimit = (modeType = "get 20") => {
+    switch (modeType) {
+        case "get 20": {
+            console.log("get 20");
+            return 20;
+        }
+        case "get 50": {
+            console.log("get 50");
+            return 50;
+        }
+        default: {
+            console.log("get else");
+            return Infinity;
+        }
+    }
+};
