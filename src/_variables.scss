@@ -1,6 +1,12 @@
-$backgroundColor: rgb(254 249 206);
-$primaryColor: rgb(236, 236, 236);
-$secondaryColor: rgb(130 170 133);
-$tertiaryColor: rgb(36 64 123);
+@use "sass:color";
 
-$fontMainColor: rgb(24 48 124);
+//COLORS
+
+$backgroundColor: white;
+$primaryColor: hsl(220, 100%, 25%);
+$secondaryColor: color.adjust($primaryColor, $hue: 120deg, $lightness: 10%);
+$tertiaryColor: color.adjust($secondaryColor, $hue: 120deg);
+
+//FONT COLORS
+
+$fontMainColor: $primaryColor;

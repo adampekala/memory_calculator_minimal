@@ -2,7 +2,7 @@ import { countStopGameLimit } from "./helpers.js";
 
 export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 
-type OPERATION_OBJ = {
+export type OPERATION_OBJ = {
   addition: OPERATION_TYPE;
   substraction: OPERATION_TYPE;
   multiplication: OPERATION_TYPE;

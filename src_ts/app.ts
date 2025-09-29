@@ -1,48 +1,30 @@
-import { calculateNumberHelper, countStopGameLimit } from "./helpers.js";
-import {
-  STATE_TYPE,
-  appState,
-  MODE_TYPE,
-  OPERATION_TYPE,
-  stopGameLimit,
-} from "./mode.js";
-
-// console.log(
-//   calculateNumberHelper(appState.arytmeticOperation, appState.difficulty)
-// );
-
-console.log(countStopGameLimit(appState.mode) + "   " + appState.mode);
+import { calculateNumberHelper } from "./helpers.js";
+import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
 
 let scoreNumber = 0;
+let leftNumberValue: number = 0;
+let rightNumberValue: number = 0;
+let operationSignValue = "x";
+let operationResult: number = 0;
+let counterIntervalIndex: number;
+let counterProgress: number = 1;
+let gameFinished = false;
 
 const score = document.getElementById("score") as HTMLDivElement;
-
 const result = document.getElementById("result") as HTMLDivElement;
-
 const leftNumber = document.getElementById("left_number") as HTMLSpanElement;
 const operationSign = document.getElementById(
   "operation_sign"
 ) as HTMLSpanElement;
 const rightNumber = document.getElementById("right_number") as HTMLSpanElement;
-
 const timeCounter = document.getElementById("time_counter") as HTMLDivElement;
-
-let leftNumberValue: number = 0;
-let rightNumberValue: number = 0;
-let operationSignValue = "x";
-let operationResult: number = 0;
+const buttonMain = document.getElementById("main_button") as HTMLDivElement;
+const buttonMenu = document.getElementById("button_menu") as HTMLDivElement;
 
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
-
-const buttonMain = document.getElementById("main_button") as HTMLDivElement;
-const buttonMenu = document.getElementById("button_menu") as HTMLDivElement;
-
-let counterIntervalIndex: number;
-let counterProgress: number = 1;
-let gameFinished = false;
 
 buttonMain.addEventListener("click", (ev: MouseEvent) => {
   switch (true) {
@@ -108,11 +90,6 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
     }
     case appState.state === STATE_TYPE.asses: {
       scoreNumber++;
-
-      /////////
-      ////when finishes?????
-      // if (function(modeType)) { }
-
       if (scoreNumber >= stopGameLimit) {
         clearInterval(counterIntervalIndex);
         gameFinished = true;
@@ -192,7 +169,6 @@ buttonMenu.addEventListener("click", (ev) => {
 const optionButtonClose = document.getElementById(
   "backToCalculator_button"
 ) as HTMLDivElement;
-
 const navigationContainer = document.getElementById(
   "navigation"
 ) as HTMLDivElement;

@@ -1,29 +1,25 @@
-import { calculateNumberHelper, countStopGameLimit } from "./helpers.js";
-import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit, } from "./mode.js";
-// console.log(
-//   calculateNumberHelper(appState.arytmeticOperation, appState.difficulty)
-// );
-console.log(countStopGameLimit(appState.mode) + "   " + appState.mode);
+import { calculateNumberHelper } from "./helpers.js";
+import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
 let scoreNumber = 0;
+let leftNumberValue = 0;
+let rightNumberValue = 0;
+let operationSignValue = "x";
+let operationResult = 0;
+let counterIntervalIndex;
+let counterProgress = 1;
+let gameFinished = false;
 const score = document.getElementById("score");
 const result = document.getElementById("result");
 const leftNumber = document.getElementById("left_number");
 const operationSign = document.getElementById("operation_sign");
 const rightNumber = document.getElementById("right_number");
 const timeCounter = document.getElementById("time_counter");
-let leftNumberValue = 0;
-let rightNumberValue = 0;
-let operationSignValue = "x";
-let operationResult = 0;
+const buttonMain = document.getElementById("main_button");
+const buttonMenu = document.getElementById("button_menu");
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
-const buttonMain = document.getElementById("main_button");
-const buttonMenu = document.getElementById("button_menu");
-let counterIntervalIndex;
-let counterProgress = 1;
-let gameFinished = false;
 buttonMain.addEventListener("click", (ev) => {
     switch (true) {
         case appState.state === STATE_TYPE.initial: {
@@ -82,9 +78,6 @@ buttonMain.addEventListener("click", (ev) => {
         }
         case appState.state === STATE_TYPE.asses: {
             scoreNumber++;
-            /////////
-            ////when finishes?????
-            // if (function(modeType)) { }
             if (scoreNumber >= stopGameLimit) {
                 clearInterval(counterIntervalIndex);
                 gameFinished = true;

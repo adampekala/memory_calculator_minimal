@@ -1,0 +1,37 @@
+.result_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+}
+
+.result_title {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: $fontMainColor;
+  align-self: flex-end;
+  padding-right: 5px;
+  letter-spacing: 0;
+}
+
+.result {
+  border-radius: 30px 0 0 30px;
+  color: $backgroundColor;
+  font-size: 35px;
+  padding: 5px 0 5px 20px;
+  width: 100%;
+  background-image: linear-gradient(rgb(46, 82, 158), rgb(24, 42, 82));
+  border: none;
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0,
+    rgba(93, 100, 148, 0.2) 0 1px 3px 0;
+  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI",
+    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  text-decoration: inherit;
+  text-wrap: nowrap;
+  transition: all 0.05s ease-out;
+  transition-behavior: normal;
+  white-space-collapse: collapse;
+}

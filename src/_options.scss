@@ -1,6 +1,8 @@
+@use "sass:color";
+
 .options {
   position: absolute;
-  background: white;
+  background: $backgroundColor;
   top: 0;
   left: 0;
   width: 100%;
@@ -62,9 +64,6 @@
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
-    &-1 {
-      // text-align: center;
-    }
 
     &-difficulty {
       gap: 0rem;
@@ -99,7 +98,7 @@
     transition: all 0.05s ease-out;
 
     &:hover {
-      color: green;
+      color: red;
     }
 
     &:active {
@@ -116,7 +115,7 @@
 
 .options_button {
   &-mode {
-    color: rgb(180, 46, 100);
+    color: darken($tertiaryColor, 5%);
     text-align: center;
     // padding-left: 100px;
     // padding-right: 100px;
@@ -133,8 +132,15 @@
   }
 
   &-back {
-    // margin-top: 4rem;
-    color: rgb(46, 180, 46);
+    background-image: linear-gradient(
+      $primaryColor,
+      color.adjust($primaryColor, $lightness: 5%)
+    );
+    color: $backgroundColor;
+
+    &:hover {
+      color: $backgroundColor;
+    }
   }
 
   &_difficulty {
