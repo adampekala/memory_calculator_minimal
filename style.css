@@ -151,11 +151,6 @@
 .options_button:active {
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
 }
-.options.closed {
-  top: -40000000px;
-  display: none;
-}
-
 .options_button-mode {
   color: hsl(100, 100%, 30%);
   text-align: center;
@@ -197,14 +192,15 @@
   box-shadow: rgb(105, 130, 156) 0 2px 3px 0, rgba(137, 144, 186, 0.737) 0 1px 3px 0;
   font-size: 1.5rem;
 }
-.options_button-red {
-  color: red;
+.options_button.active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0, rgba(93, 100, 148, 0.5) 0 1px 2px 0;
 }
-.options_button-red:hover {
+.options_button.active:hover {
   color: rgb(203, 3, 3);
 }
-.options_button-red:active {
-  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+.options.closed {
+  top: -40000000px;
+  display: none;
 }
 
 .title {

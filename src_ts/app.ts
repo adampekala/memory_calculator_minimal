@@ -192,15 +192,24 @@ sqrPlus.addEventListener("click", (ev) => {
   operationSignValue = "+";
   operationSign.innerText = "+";
   appState.arytmeticOperation = OPERATION_TYPE.addition;
+  sqrPlus.classList.add("active");
+  sqrMinus.classList.remove("active");
+  sqrMultiply.classList.remove("active");
   console.log(appState.arytmeticOperation);
 });
 sqrMinus.addEventListener("click", (ev) => {
   operationSignValue = "-";
   operationSign.innerText = "-";
+  sqrPlus.classList.remove("active");
+  sqrMinus.classList.add("active");
+  sqrMultiply.classList.remove("active");
   appState.arytmeticOperation = OPERATION_TYPE.substraction;
 });
 sqrMultiply.addEventListener("click", (ev) => {
   operationSignValue = "x";
   operationSign.innerText = "x";
+  sqrPlus.classList.remove("active");
+  sqrMinus.classList.remove("active");
+  sqrMultiply.classList.add("active");
   appState.arytmeticOperation = OPERATION_TYPE.multiplication;
 });
