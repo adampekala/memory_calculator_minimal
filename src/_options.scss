@@ -97,7 +97,7 @@
     transition: all 0.05s ease-out;
 
     &:hover {
-      color: red;
+      // color: red;
     }
 
     &:active {
@@ -106,16 +106,53 @@
     }
 
     &-mode {
-      color: darken($tertiaryColor, 5%);
+      // color: darken($tertiaryColor, 5%);
       text-align: center;
 
       &:hover {
-        color: green;
+        box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px,
+          rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
       }
 
       &:active {
         box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
           rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+      }
+    }
+
+    &_difficulty {
+      position: relative;
+      display: flex;
+      font-size: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      &-decrease {
+        border-radius: 99999px 0 0 99999px;
+      }
+      &-increase {
+        border-radius: 0 99999px 99999px 0;
+      }
+
+      &_scale {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        box-shadow: rgb(105, 130, 156) 0 2px 3px 0,
+          rgba(137, 144, 186, 0.737) 0 1px 3px 0;
+        font-size: 1.8rem;
+        padding: 0 1rem;
+      }
+    }
+
+    &-operationToggler {
+      font-size: 1.5rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      &:hover {
+        box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px,
+          rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
       }
     }
 
@@ -130,41 +167,11 @@
         color: $backgroundColor;
       }
     }
-    &_difficulty {
-      position: relative;
-      &-decrease {
-        background-color: red;
-        color: gray;
-        width: 20%;
-        border-radius: 99999px 0 0 99999px;
-        box-shadow: rgb(105, 130, 156) 0 2px 3px 0,
-          rgba(137, 144, 186, 0.737) 0 1px 3px 0;
-      }
-      &-increase {
-        width: 20%;
-        border-radius: 0 99999px 99999px 0;
-      }
-
-      &_scale {
-        display: flex;
-        color: rgb(180, 46, 100);
-        justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-        line-height: 44px;
-        box-shadow: rgb(105, 130, 156) 0 2px 3px 0,
-          rgba(137, 144, 186, 0.737) 0 1px 3px 0;
-        font-size: 1.5rem;
-      }
-    }
 
     &.active {
-      //////---------------------------------
-      ///
       box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0,
         rgba(93, 100, 148, 0.5) 0 1px 2px 0;
       &:hover {
-        color: rgb(203, 3, 3);
       }
     }
   }
