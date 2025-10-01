@@ -8,6 +8,8 @@ let operationResult = 0;
 let counterIntervalIndex;
 let counterProgress = 1;
 let gameFinished = false;
+let numbers;
+let wrongAnswers = [];
 const score = document.getElementById("score");
 const result = document.getElementById("result");
 const leftNumber = document.getElementById("left_number");
@@ -29,7 +31,7 @@ buttonMain.addEventListener("click", (ev) => {
                 timeCounter.innerText = null;
             }
             gameFinished = false;
-            let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+            numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
             leftNumberValue = numbers[0];
             rightNumberValue = numbers[1];
             leftNumber.innerText = leftNumberValue.toString();
@@ -97,7 +99,7 @@ buttonMain.addEventListener("click", (ev) => {
                 buttonMenu.classList.remove("active");
                 buttonMain.innerText = appState.state;
                 buttonMenu.innerText = "menu";
-                let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+                numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
                 leftNumberValue = numbers[0];
                 rightNumberValue = numbers[1];
                 leftNumber.innerText = leftNumberValue.toString();
@@ -125,10 +127,18 @@ buttonMenu.addEventListener("click", (ev) => {
     if (appState.state === STATE_TYPE.asses) {
         console.log(ev.target.id);
         scoreNumber--;
+        let wrongAnswer = [
+            numbers[0],
+            numbers[1],
+            appState.arytmeticOperation,
+        ];
+        wrongAnswers.push(wrongAnswer);
+        console.log(wrongAnswers);
+        console.warn("MY INFO wrongAnswers" + "line: 152");
         appState.state = STATE_TYPE.check;
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
-        let numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+        numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
         leftNumberValue = numbers[0];
         rightNumberValue = numbers[1];
         leftNumber.innerText = leftNumberValue.toString();

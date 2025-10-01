@@ -1,6 +1,7 @@
 import { calculateNumberHelper } from "./helpers.js";
 import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
 
+type WRONG_ANSWER = [number, number, OPERATION_TYPE];
 let scoreNumber = 0;
 let leftNumberValue: number = 0;
 let rightNumberValue: number = 0;
@@ -9,6 +10,8 @@ let operationResult: number = 0;
 let counterIntervalIndex: number;
 let counterProgress: number = 1;
 let gameFinished = false;
+let numbers: number[];
+let wrongAnswers: [number, number, OPERATION_TYPE][] = [];
 
 const score = document.getElementById("score") as HTMLDivElement;
 const result = document.getElementById("result") as HTMLDivElement;
@@ -35,7 +38,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
         timeCounter.innerText = null;
       }
       gameFinished = false;
-      let numbers = calculateNumberHelper(
+      numbers = calculateNumberHelper(
         appState.arytmeticOperation,
         appState.difficulty
       );
@@ -108,7 +111,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
         buttonMenu.classList.remove("active");
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
-        let numbers = calculateNumberHelper(
+        numbers = calculateNumberHelper(
           appState.arytmeticOperation,
           appState.difficulty
         );
@@ -139,10 +142,19 @@ buttonMenu.addEventListener("click", (ev) => {
   if (appState.state === STATE_TYPE.asses) {
     console.log((ev.target as HTMLElement).id);
     scoreNumber--;
+    let wrongAnswer: WRONG_ANSWER = [
+      numbers[0],
+      numbers[1],
+      appState.arytmeticOperation,
+    ];
+    wrongAnswers.push(wrongAnswer);
+    console.log(wrongAnswers);
+    console.warn("MY INFO wrongAnswers" + "line: 152");
+
     appState.state = STATE_TYPE.check;
     buttonMain.innerText = appState.state;
     buttonMenu.innerText = "menu";
-    let numbers = calculateNumberHelper(
+    numbers = calculateNumberHelper(
       appState.arytmeticOperation,
       appState.difficulty
     );
