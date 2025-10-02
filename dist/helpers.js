@@ -127,3 +127,49 @@ export const countStopGameLimit = (modeType = "get 20") => {
         }
     }
 };
+let mcm_add = ["1--3", "5--6"];
+let mcm_substract = ["1--3", "5--6"];
+let mcm_devide = ["1--3", "5--6"];
+let mcm_multiply = ["1--3", "5--6"];
+//"add" | "substract" | "devide" | "multiply"
+export const getAndConvertStorage = () => {
+    let mistakesAdd;
+    let mistakesSubstract;
+    let mistakesMultiply;
+    let mistakesDevide;
+    mistakesAdd = JSON.parse(localStorage.getItem("mcm_add")) || [];
+    mistakesSubstract = JSON.parse(localStorage.getItem("mcm_substract")) || [];
+    mistakesMultiply = JSON.parse(localStorage.getItem("mcm_multiply")) || [];
+    mistakesDevide = JSON.parse(localStorage.getItem("mcm_devide")) || [];
+    return { mistakesAdd, mistakesSubstract, mistakesMultiply, mistakesDevide };
+};
+export const setConvertedStorage = (arr, obj) => {
+    arr.forEach((subarr) => {
+        switch (subarr[2]) {
+            case "add":
+                obj.mistakesAdd.push(`${subarr[0]}--${subarr[1]}`);
+                break;
+            case "devide":
+                obj.mistakesDevide.push(`${subarr[0]}--${subarr[1]}`);
+                break;
+            case "substract":
+                obj.mistakesSubstract.push(`${subarr[0]}--${subarr[1]}`);
+                break;
+            case "multiply":
+                obj.mistakesMultiply.push(`${subarr[0]}--${subarr[1]}`);
+                break;
+            default:
+                console.warn("Sth wrong with switch");
+                break;
+        }
+    });
+    // let mistakesAdd: string[] | null = null;
+    // let mistakesSubstract: string[] | null = null;
+    // let mistakesMultiply: string[] | null = null;
+    // let mistakesDevide: string[] | null = null;
+    localStorage.setItem("mcm_add", JSON.stringify(obj.mistakesAdd));
+    localStorage.setItem("mcm_substract", JSON.stringify(obj.mistakesSubstract));
+    localStorage.setItem("mcm_multiply", JSON.stringify(obj.mistakesMultiply));
+    localStorage.setItem("mcm_devide", JSON.stringify(obj.mistakesDevide));
+};
+console.log(getAndConvertStorage());

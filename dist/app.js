@@ -1,4 +1,4 @@
-import { calculateNumberHelper } from "./helpers.js";
+import { calculateNumberHelper, getAndConvertStorage, setConvertedStorage, } from "./helpers.js";
 import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
 let scoreNumber = 0;
 let leftNumberValue = 0;
@@ -9,6 +9,8 @@ let counterIntervalIndex;
 let counterProgress = 1;
 let gameFinished = false;
 let numbers;
+let storage = getAndConvertStorage();
+console.log(storage);
 let wrongAnswers = [];
 const score = document.getElementById("score");
 const result = document.getElementById("result");
@@ -157,6 +159,7 @@ buttonMenu.addEventListener("click", (ev) => {
         }, 50);
     }
     else {
+        setConvertedStorage(wrongAnswers, storage);
         navigationContainer.classList.remove("closed");
     }
 });
@@ -194,3 +197,17 @@ sqrMultiply.addEventListener("click", (ev) => {
     sqrMultiply.classList.add("active");
     appState.arytmeticOperation = OPERATION_TYPE.multiplication;
 });
+// const statisticsBtn = document.getElementById(
+//   "statistics"
+// ) as HTMLButtonElement;
+// const statisticsList = document.getElementById("statisticsList");
+// statisticsBtn.addEventListener("click", () => {
+//   statisticsList.innerHTML = "";
+//   storage.mistakesMultiply.forEach((values) => {
+//     let newElement = document.createElement("li");
+//     newElement.innerText = `${values.split("--")[0]} x ${
+//       values.split("--")[1]
+//     }`;
+//     statisticsList.appendChild(newElement);
+//   });
+// });
