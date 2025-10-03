@@ -1,3 +1,23 @@
+.root {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  color: $fontMainColor;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  background-color: $backgroundColor;
+  font-size: 60px;
+  margin: 0;
+  padding: 0;
+}
+
 .invisible {
   display: none;
 }

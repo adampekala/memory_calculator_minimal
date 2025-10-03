@@ -1,5 +1,6 @@
 import { calculateNumberHelper, getAndConvertStorage, setConvertedStorage, } from "./helpers.js";
 import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
+import { createStatisticTable } from "./createStatisticsTableHelper.js";
 let scoreNumber = 0;
 let leftNumberValue = 0;
 let rightNumberValue = 0;
@@ -12,6 +13,7 @@ let numbers;
 let storage = getAndConvertStorage();
 console.log(storage);
 let wrongAnswers = [];
+const body = document.querySelector("body");
 const score = document.getElementById("score");
 const result = document.getElementById("result");
 const leftNumber = document.getElementById("left_number");
@@ -197,17 +199,19 @@ sqrMultiply.addEventListener("click", (ev) => {
     sqrMultiply.classList.add("active");
     appState.arytmeticOperation = OPERATION_TYPE.multiplication;
 });
-// const statisticsBtn = document.getElementById(
-//   "statistics"
-// ) as HTMLButtonElement;
-// const statisticsList = document.getElementById("statisticsList");
-// statisticsBtn.addEventListener("click", () => {
-//   statisticsList.innerHTML = "";
-//   storage.mistakesMultiply.forEach((values) => {
-//     let newElement = document.createElement("li");
-//     newElement.innerText = `${values.split("--")[0]} x ${
-//       values.split("--")[1]
-//     }`;
-//     statisticsList.appendChild(newElement);
-//   });
-// });
+const statisticsBtn = document.getElementById("statistics");
+const statisticsList = document.getElementById("statisticsList");
+const refreshStorageFn = () => {
+    storage = getAndConvertStorage();
+};
+statisticsBtn.addEventListener("click", () => {
+    createStatisticTable(body, storage, refreshStorageFn);
+    // statisticsList.innerHTML = "";
+    // storage.mistakesMultiply.forEach((values) => {
+    //   let newElement = document.createElement("li");
+    //   newElement.innerText = `${values.split("--")[0]} x ${
+    //     values.split("--")[1]
+    //   }`;
+    //   statisticsList.appendChild(newElement);
+    // });
+});

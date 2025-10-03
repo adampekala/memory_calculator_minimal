@@ -1,0 +1,38 @@
+table {
+  //   width: 80vw;
+  height: 90vh;
+  margin: 2rem auto;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 4;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+thead {
+  background-color: $primaryColor;
+}
+
+th {
+  padding: 1rem 2rem;
+  color: white;
+  /* border: 1px solid black; */
+}
+
+td {
+  padding: 0.5rem 2rem;
+  text-align: center;
+  /* border: 1px solid black; */
+}
+
+tr > td:nth-child(3n):hover > .fa {
+  color: red;
+}
+
+tr:nth-child(2n) {
+  background-color: rgba(8, 35, 125, 0.174);
+}
