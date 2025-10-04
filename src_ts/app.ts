@@ -185,6 +185,7 @@ buttonMenu.addEventListener("click", (ev) => {
     }, 50);
   } else {
     setConvertedStorage(wrongAnswers, storage);
+    wrongAnswers = [];
     navigationContainer.classList.remove("closed");
   }
 });

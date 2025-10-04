@@ -1,30 +1,39 @@
 export const createStatisticTable = (body, storage, refreshStorageFn) => {
-    let statisticTable = document.createElement("table");
-    statisticTable.innerHTML = `<thead><tr><th>First number</th><th>Secound number</th><th>Delete</th></tr></thead><tbody></tbody><tfoot><tr><td colspan="3"><div class="options_backButtonContainer"><button class="options_button options_button-back" id="backToOptions">Back</button><button class="options_button" id="deleteStorage">Delete all</button></div></td></tr></tfoot>`;
-    body.appendChild(statisticTable);
-    console.log(statisticTable.children[1]);
+    let statisticContainer = document.createElement("div");
+    statisticContainer.classList.add("statistics_container");
+    let statisticTableContainer = document.createElement("div");
+    let statisticBackBtnContainer = document.createElement("div");
+    statisticBackBtnContainer.classList.add("statistics_backButtonContainer");
+    statisticTableContainer.classList.add("table_container");
+    statisticTableContainer.innerHTML = `<table><thead><tr><th>First number</th><th>Secound number</th><th>Delete</th></tr></thead><tbody></tbody></table>`;
+    statisticBackBtnContainer.innerHTML = `<button class="options_button options_button-back" id="backToOptions">Back</button><button class="options_button" id="deleteStorage">Delete all</button>`;
+    body.appendChild(statisticContainer);
+    statisticContainer.appendChild(statisticTableContainer);
+    statisticContainer.appendChild(statisticBackBtnContainer);
+    console.log(statisticTableContainer.children[0]);
     const deleteStorageBtn = document.getElementById("deleteStorage");
     const backToOptionsBtn = document.getElementById("backToOptions");
     // statisticsList.innerHTML = "";
     storage.mistakesMultiply.forEach((values) => {
         let newElement = document.createElement("tr");
         newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${values.split("--")[1]}</td><td><i class="fa fa-trash-o"></i></td></tr> `;
-        statisticTable.children[1].appendChild(newElement);
+        statisticTableContainer.children[0].children[1].appendChild(newElement);
     });
     backToOptionsBtn.addEventListener("click", () => {
-        statisticTable.remove();
+        statisticContainer.remove();
     });
     deleteStorageBtn.addEventListener("click", () => {
         localStorage.clear();
         refreshStorageFn();
         console.log("XXXX");
-        statisticTable.children[1].innerHTML = `<tbody></tbody>`;
+        statisticTableContainer.children[0].children[1].innerHTML = "";
+        console.log(statisticTableContainer.children[0].children[1]);
         // storage.mistakesMultiply.forEach((values) => {
         //   let newElement = document.createElement("tr");
         //   newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${
         //     values.split("--")[1]
         //   }</td><td><i class="fa fa-trash-o"></i></td></tr> `;
-        //   statisticTable.children[1].appendChild(newElement);
+        //   statisticTableContainer.children[1].appendChild(newElement);
         // });
     });
 };

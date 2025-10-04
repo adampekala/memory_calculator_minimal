@@ -1,16 +1,35 @@
-table {
-  //   width: 80vw;
-  height: 90vh;
-  margin: 2rem auto;
-  background-color: white;
+.statistics_container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 4;
+  background-color: white;
+}
+
+.table_container {
+  height: 65vh;
+  // border: 2px solid red;
+  overflow: scroll;
+}
+
+table {
+  height: 10rem;
+  margin: 2rem auto;
+  background-color: white;
   border-collapse: collapse;
   font-size: 1rem;
+  margin-bottom: 8rem;
+}
+
+tbody {
 }
 
 thead {
@@ -35,4 +54,17 @@ tr > td:nth-child(3n):hover > .fa {
 
 tr:nth-child(2n) {
   background-color: rgba(8, 35, 125, 0.174);
+}
+
+.statistics_backButtonContainer {
+  position: absolute;
+  bottom: 5rem;
+  padding: 1rem 1.5rem 1rem;
+  line-height: 0px;
+  border-radius: 200px 200px;
+  background-color: rgba(8, 35, 125, 0.174);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 5;
 }
