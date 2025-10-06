@@ -328,6 +328,7 @@ body {
 }
 
 .statistics_container {
+  padding-top: 1rem;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -350,7 +351,7 @@ body {
 
 table {
   height: 10rem;
-  margin: 2rem auto;
+  margin: 0.5rem auto;
   background-color: white;
   border-collapse: collapse;
   font-size: 1rem;
@@ -383,7 +384,7 @@ tr:nth-child(2n) {
 
 .statistics_backButtonContainer {
   position: absolute;
-  bottom: 5rem;
+  bottom: 7rem;
   padding: 1rem 1.5rem 1rem;
   line-height: 0px;
   border-radius: 200px 200px;
@@ -392,6 +393,49 @@ tr:nth-child(2n) {
   justify-content: space-between;
   gap: 1rem;
   z-index: 5;
+}
+
+.table_modeContainer {
+  margin-top: 1rem;
+  padding: 0.1rem 0.3rem;
+  line-height: 0px;
+  border-radius: 200px 200px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+.table_button {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: transparent;
+  background-image: linear-gradient(#fff, #f5f5fa);
+  border: none;
+  border-radius: 9999px;
+  box-shadow: rgb(105, 130, 156) 0 2px 3px 0, rgba(137, 144, 186, 0.737) 0 1px 3px 0;
+  text-transform: uppercase;
+  color: rgb(24, 48, 124);
+  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  font-size: 16px;
+  text-align: center;
+  text-wrap: nowrap;
+  line-height: 1.15;
+  cursor: pointer;
+  transition: all 0.05s ease-out;
+}
+.table_button:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+.table_button-mode {
+  text-align: center;
+}
+.table_button-mode:hover {
+  box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px, rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
+}
+.table_button-mode:active {
+  box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
 }
 
 .calculator_container {
