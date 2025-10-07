@@ -20,7 +20,6 @@ export const createStatisticTable = (body, storage, refreshStorageFn) => {
     console.log(statisticTableContainer.children[0]);
     const deleteStorageBtn = document.getElementById("deleteStorage");
     const backToOptionsBtn = document.getElementById("backToOptions");
-    // statisticsList.innerHTML = "";
     storage.mistakesMultiply.forEach((values) => {
         let newElement = document.createElement("tr");
         newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${values.split("--")[1]}</td><td><i class="fa fa-trash-o"></i></td></tr> `;
@@ -44,64 +43,3 @@ export const createStatisticTable = (body, storage, refreshStorageFn) => {
         // });
     });
 };
-// <table id="table">
-//   <thead>
-//     <tr>
-//       <th>First number</th>
-//       <th>Secound number</th>
-//       <th>delete</th>
-//     </tr>
-//   </thead>
-//   <tbody>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//     <tr>
-//       <td>1</td>
-//       <td>1</td>
-//       <td>
-//         <i class="fa fa-trash-o"></i>
-//       </td>
-//     </tr>
-//   </tbody>
-//   <tfoot>
-//     <tr>
-//       <td colspan="3">
-//         <button id="backToOptions">Back</button>
-//         <button>Delete all</button>
-//       </td>
-//     </tr>
-//   </tfoot>
-// </table>;
