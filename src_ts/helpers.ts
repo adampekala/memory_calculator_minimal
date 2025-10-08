@@ -5,7 +5,8 @@ import {
   MODE_TYPE_DIVISION,
   MODE_TYPE_MULTIPLICATION,
   MODE_TYPE_SUBSTRACTION,
-} from "./mode";
+  APP_STATE,
+} from "./mode.js";
 const randomNumber = (min: number = 1, max: number = 10) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
@@ -212,3 +213,22 @@ export const setConvertedStorage = (
 };
 
 console.log(getAndConvertStorage());
+
+export const statisticsTableRenderedOperations = (
+  storage: MISTAKES_OBJ,
+  operations:
+    | "mistakesAdd"
+    | "mistakesSubstract"
+    | "mistakesMultiply"
+    | "mistakesDevide",
+  statisticTableContainer: HTMLDivElement
+) => {
+  statisticTableContainer.children[1].children[1].innerHTML = "";
+  storage[operations].forEach((values) => {
+    let newElement = document.createElement("tr");
+    newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${
+      values.split("--")[1]
+    }</td><td><i class="fa fa-trash-o"></i></td></tr> `;
+    statisticTableContainer.children[1].children[1].appendChild(newElement);
+  });
+};

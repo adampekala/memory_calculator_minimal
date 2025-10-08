@@ -206,13 +206,5 @@ const refreshStorageFn = () => {
     storage = getAndConvertStorage();
 };
 statisticsBtn.addEventListener("click", () => {
-    createStatisticTable(body, storage, refreshStorageFn);
-    // statisticsList.innerHTML = "";
-    // storage.mistakesMultiply.forEach((values) => {
-    //   let newElement = document.createElement("li");
-    //   newElement.innerText = `${values.split("--")[0]} x ${
-    //     values.split("--")[1]
-    //   }`;
-    //   statisticsList.appendChild(newElement);
-    // });
+    createStatisticTable(body, getAndConvertStorage, refreshStorageFn);
 });

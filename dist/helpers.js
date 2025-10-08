@@ -173,3 +173,11 @@ export const setConvertedStorage = (arr, obj) => {
     localStorage.setItem("mcm_devide", JSON.stringify(obj.mistakesDevide));
 };
 console.log(getAndConvertStorage());
+export const statisticsTableRenderedOperations = (storage, operations, statisticTableContainer) => {
+    statisticTableContainer.children[1].children[1].innerHTML = "";
+    storage[operations].forEach((values) => {
+        let newElement = document.createElement("tr");
+        newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${values.split("--")[1]}</td><td><i class="fa fa-trash-o"></i></td></tr> `;
+        statisticTableContainer.children[1].children[1].appendChild(newElement);
+    });
+};

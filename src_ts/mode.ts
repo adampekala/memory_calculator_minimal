@@ -3,10 +3,10 @@ import { countStopGameLimit } from "./helpers.js";
 export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 
 export type OPERATION_OBJ = {
-  addition: OPERATION_TYPE;
-  substraction: OPERATION_TYPE;
-  multiplication: OPERATION_TYPE;
-  division: OPERATION_TYPE;
+  addition: "add";
+  substraction: "substract";
+  multiplication: "multiply";
+  division: "devide";
 };
 
 export type MODE_TYPE_COMMON =
@@ -84,7 +84,8 @@ export interface APP_STATE {
   arytmeticOperation: OPERATION_TYPE;
   scoreNumber: number;
   difficulty: number;
-  mode: MODE_ALL;
+  gameMode: MODE_ALL;
+  statisticsTableMode: OPERATION_TYPE;
 }
 
 export const appState: APP_STATE = {
@@ -92,10 +93,11 @@ export const appState: APP_STATE = {
   arytmeticOperation: OPERATION_TYPE.multiplication,
   scoreNumber: 0,
   difficulty: 1,
-  mode: MODE_TYPE.multiplication[0],
+  gameMode: MODE_TYPE.multiplication[0],
+  statisticsTableMode: OPERATION_TYPE.multiplication,
 };
 
-export let stopGameLimit = countStopGameLimit(appState.mode);
+export let stopGameLimit = countStopGameLimit(appState.gameMode);
 
 const modeToggler = document.getElementById(
   "mode_toggler"
@@ -108,52 +110,52 @@ modeToggler.addEventListener("click", (ev) => {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.multiplication.length - 1) {
       modeTogglerIndex++;
-      appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.multiplication[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
-      appState.mode = MODE_TYPE.multiplication[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.multiplication[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.substraction) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.substraction.length - 1) {
       modeTogglerIndex++;
-      appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.substraction[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
-      appState.mode = MODE_TYPE.substraction[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.substraction[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.addition) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.addition.length - 1) {
       modeTogglerIndex++;
-      appState.mode = MODE_TYPE.addition[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.addition[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
-      appState.mode = MODE_TYPE.addition[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.addition[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.division) {
     console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.division.length - 1) {
       modeTogglerIndex++;
-      appState.mode = MODE_TYPE.division[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.division[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
     } else {
       modeTogglerIndex = 0;
-      appState.mode = MODE_TYPE.division[modeTogglerIndex];
-      stopGameLimit = countStopGameLimit(appState.mode);
+      appState.gameMode = MODE_TYPE.division[modeTogglerIndex];
+      stopGameLimit = countStopGameLimit(appState.gameMode);
       modeText.innerText = MODE_TYPE.division[modeTogglerIndex];
     }
   }
