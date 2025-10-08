@@ -120,6 +120,15 @@ tr:nth-child(2n) {
       // color: darken($tertiaryColor, 5%);
       text-align: center;
 
+      &.active {
+        box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0,
+          rgba(93, 100, 148, 0.5) 0 1px 2px 0;
+        &:hover {
+          box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0,
+            rgba(93, 100, 148, 0.5) 0 1px 2px 0;
+        }
+      }
+
       &:hover {
         box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px,
           rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
@@ -132,46 +141,3 @@ tr:nth-child(2n) {
     }
   }
 }
-
-// &_modeText {
-//   margin-left: auto;
-//   font-size: 1.2rem;
-//   text-transform: uppercase;
-//   letter-spacing: 1px;
-// }
-
-// &_gameOptionsContainer {
-//   padding: 1.6rem 1.5rem;
-//   line-height: 0px;
-//   border-radius: 50px 50px;
-//   border: 4px solid rgba(8, 35, 125, 0.174);
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-around;
-//   gap: 2rem;
-// }
-
-// &_backButtonContainer {
-//   padding: 1rem 1.5rem 1rem;
-//   line-height: 0px;
-//   border-radius: 200px 200px;
-//   background-color: rgba(8, 35, 125, 0.174);
-//   display: flex;
-//   justify-content: space-between;
-// }
-
-// &_listItem {
-//   // text-align: center;
-//   display: flex;
-//   flex-direction: row;
-//   flex-wrap: nowrap;
-//   justify-content: space-between;
-
-//   &-difficulty {
-//     gap: 0rem;
-//   }
-
-//   &-back {
-//     align-self: center;
-//   }
-// }
