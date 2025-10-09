@@ -7,7 +7,7 @@ import {
   MODE_TYPE_SUBSTRACTION,
   APP_STATE,
 } from "./mode.js";
-const randomNumber = (min: number = 1, max: number = 10) => {
+export const randomNumber = (min: number = 1, max: number = 10) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
@@ -120,6 +120,81 @@ export const calculateNumberHelper = (
         return new Array(num1 * num2, num1, num2);
       }
     }
+  }
+};
+
+export const calculateNumberHelperMax = (
+  appState: APP_STATE,
+  storage: MISTAKES_OBJ
+) => {
+  let fakeNumbersArr = [
+    [7, 6],
+    [8, 7],
+    [7, 7],
+    [5, 8],
+    [6, 4],
+  ];
+  let fakeNumbersArrDevide = [
+    [81, 9],
+    [64, 8],
+    [42, 6],
+    [42, 7],
+  ];
+  let numbers: number[];
+  if (appState.gameMode === "repretition") {
+    switch (appState.arytmeticOperation) {
+      case "add": {
+        numbers =
+          storage.mistakesAdd.length !== 0
+            ? storage.mistakesAdd[
+                randomNumber(0, storage.mistakesAdd.length - 1)
+              ]
+                .split("--")
+                .map((el) => +el)
+            : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+        return numbers;
+      }
+      case "substract": {
+        numbers =
+          storage.mistakesSubstract.length !== 0
+            ? storage.mistakesSubstract[
+                randomNumber(0, storage.mistakesSubstract.length - 1)
+              ]
+                .split("--")
+                .map((el) => +el)
+            : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+        return numbers;
+      }
+      case "devide": {
+        numbers =
+          storage.mistakesDevide.length !== 0
+            ? storage.mistakesDevide[
+                randomNumber(0, storage.mistakesDevide.length - 1)
+              ]
+                .split("--")
+                .map((el) => +el)
+            : fakeNumbersArrDevide[randomNumber(0, fakeNumbersArr.length - 1)];
+        return numbers;
+      }
+
+      case "multiply": {
+        numbers =
+          storage.mistakesMultiply.length !== 0
+            ? storage.mistakesMultiply[
+                randomNumber(0, storage.mistakesMultiply.length - 1)
+              ]
+                .split("--")
+                .map((el) => +el)
+            : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+        return numbers;
+      }
+    }
+  } else {
+    numbers = calculateNumberHelper(
+      appState.arytmeticOperation,
+      appState.difficulty
+    );
+    return numbers;
   }
 };
 

@@ -1,5 +1,5 @@
-import { calculateNumberHelper, getAndConvertStorage, setConvertedStorage, } from "./helpers.js";
-import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit } from "./mode.js";
+import { calculateNumberHelperMax, getAndConvertStorage, setConvertedStorage, } from "./helpers.js";
+import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit, } from "./mode.js";
 import { createStatisticTable } from "./createStatisticsTableHelper.js";
 let scoreNumber = 0;
 let leftNumberValue = 0;
@@ -35,7 +35,16 @@ buttonMain.addEventListener("click", (ev) => {
                 timeCounter.innerText = null;
             }
             gameFinished = false;
-            numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+            console.log(appState.state + "INITIAL");
+            console.log("appState.arytmeticOperation");
+            console.log(appState.arytmeticOperation);
+            console.log("appState.gameMode");
+            console.log(appState.gameMode);
+            numbers = calculateNumberHelperMax(appState, storage);
+            // numbers = calculateNumberHelper(
+            //   appState.arytmeticOperation,
+            //   appState.difficulty
+            // );
             leftNumberValue = numbers[0];
             rightNumberValue = numbers[1];
             leftNumber.innerText = leftNumberValue.toString();
@@ -43,7 +52,7 @@ buttonMain.addEventListener("click", (ev) => {
             appState.state = STATE_TYPE.check;
             buttonMain.innerText = appState.state;
             counterIntervalIndex = setInterval(() => {
-                console.log(counterProgress);
+                // console.log(counterProgress);
                 if (!(counterProgress > 99)) {
                     timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                     counterProgress++;
@@ -83,6 +92,7 @@ buttonMain.addEventListener("click", (ev) => {
             break;
         }
         case appState.state === STATE_TYPE.asses: {
+            console.log(appState.state + "ASSES");
             scoreNumber++;
             if (scoreNumber >= stopGameLimit) {
                 clearInterval(counterIntervalIndex);
@@ -103,7 +113,15 @@ buttonMain.addEventListener("click", (ev) => {
                 buttonMenu.classList.remove("active");
                 buttonMain.innerText = appState.state;
                 buttonMenu.innerText = "menu";
-                numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+                console.log("appState.arytmeticOperation");
+                console.log(appState.arytmeticOperation);
+                console.log("appState.gameMode");
+                console.log(appState.gameMode);
+                numbers = calculateNumberHelperMax(appState, storage);
+                // numbers = calculateNumberHelper(
+                //   appState.arytmeticOperation,
+                //   appState.difficulty
+                // );
                 leftNumberValue = numbers[0];
                 rightNumberValue = numbers[1];
                 leftNumber.innerText = leftNumberValue.toString();
@@ -111,7 +129,7 @@ buttonMain.addEventListener("click", (ev) => {
                 score.innerText = scoreNumber.toString();
                 result.innerText = "---";
                 counterIntervalIndex = setInterval(() => {
-                    console.log(counterProgress);
+                    // console.log(counterProgress);
                     if (!(counterProgress > 99)) {
                         timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                         counterProgress++;
@@ -128,21 +146,69 @@ buttonMain.addEventListener("click", (ev) => {
     }
 });
 buttonMenu.addEventListener("click", (ev) => {
+    console.log(appState.state + "ASSES");
     if (appState.state === STATE_TYPE.asses) {
-        console.log(ev.target.id);
         scoreNumber--;
         let wrongAnswer = [
             numbers[0],
             numbers[1],
             appState.arytmeticOperation,
         ];
-        wrongAnswers.push(wrongAnswer);
+        if (appState.gameMode !== "repretition") {
+            wrongAnswers.push(wrongAnswer);
+        }
         console.log(wrongAnswers);
         console.warn("MY INFO wrongAnswers" + "line: 152");
         appState.state = STATE_TYPE.check;
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
-        numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+        console.log("appState.arytmeticOperation");
+        console.log(appState.arytmeticOperation);
+        console.log("appState.gameMode");
+        console.log(appState.gameMode);
+        ////////////////////
+        numbers = calculateNumberHelperMax(appState, storage);
+        // if (appState.gameMode === "repretition") {
+        //   switch (appState.arytmeticOperation) {
+        //     case "add": {
+        //       numbers = storage.mistakesAdd[
+        //         randomNumber(0, storage.mistakesAdd.length - 1)
+        //       ]
+        //         .split("--")
+        //         .map((el) => +el);
+        //       break;
+        //     }
+        //     case "substract": {
+        //       numbers = storage.mistakesSubstract[
+        //         randomNumber(0, storage.mistakesSubstract.length - 1)
+        //       ]
+        //         .split("--")
+        //         .map((el) => +el);
+        //       break;
+        //     }
+        //     case "devide": {
+        //       numbers = storage.mistakesDevide[
+        //         randomNumber(0, storage.mistakesDevide.length - 1)
+        //       ]
+        //         .split("--")
+        //         .map((el) => +el);
+        //       break;
+        //     }
+        //     case "multiply": {
+        //       numbers = storage.mistakesMultiply[
+        //         randomNumber(0, storage.mistakesMultiply.length - 1)
+        //       ]
+        //         .split("--")
+        //         .map((el) => +el);
+        //       break;
+        //     }
+        //   }
+        // } else {
+        //   numbers = calculateNumberHelper(
+        //     appState.arytmeticOperation,
+        //     appState.difficulty
+        //   );
+        // }
         leftNumberValue = numbers[0];
         rightNumberValue = numbers[1];
         leftNumber.innerText = leftNumberValue.toString();
@@ -150,7 +216,7 @@ buttonMenu.addEventListener("click", (ev) => {
         score.innerText = scoreNumber.toString();
         result.innerText = "---";
         counterIntervalIndex = setInterval(() => {
-            console.log(counterProgress);
+            // console.log(counterProgress);
             if (!(counterProgress > 99)) {
                 timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                 counterProgress++;

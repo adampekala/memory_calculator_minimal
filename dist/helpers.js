@@ -1,4 +1,4 @@
-const randomNumber = (min = 1, max = 10) => {
+export const randomNumber = (min = 1, max = 10) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 export const calculateNumberHelper = (operationType = "devide", difficulty = 1) => {
@@ -109,6 +109,66 @@ export const calculateNumberHelper = (operationType = "devide", difficulty = 1) 
                 return new Array(num1 * num2, num1, num2);
             }
         }
+    }
+};
+export const calculateNumberHelperMax = (appState, storage) => {
+    let fakeNumbersArr = [
+        [7, 6],
+        [8, 7],
+        [7, 7],
+        [5, 8],
+        [6, 4],
+    ];
+    let fakeNumbersArrDevide = [
+        [81, 9],
+        [64, 8],
+        [42, 6],
+        [42, 7],
+    ];
+    let numbers;
+    if (appState.gameMode === "repretition") {
+        switch (appState.arytmeticOperation) {
+            case "add": {
+                numbers =
+                    storage.mistakesAdd.length !== 0
+                        ? storage.mistakesAdd[randomNumber(0, storage.mistakesAdd.length - 1)]
+                            .split("--")
+                            .map((el) => +el)
+                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                return numbers;
+            }
+            case "substract": {
+                numbers =
+                    storage.mistakesSubstract.length !== 0
+                        ? storage.mistakesSubstract[randomNumber(0, storage.mistakesSubstract.length - 1)]
+                            .split("--")
+                            .map((el) => +el)
+                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                return numbers;
+            }
+            case "devide": {
+                numbers =
+                    storage.mistakesDevide.length !== 0
+                        ? storage.mistakesDevide[randomNumber(0, storage.mistakesDevide.length - 1)]
+                            .split("--")
+                            .map((el) => +el)
+                        : fakeNumbersArrDevide[randomNumber(0, fakeNumbersArr.length - 1)];
+                return numbers;
+            }
+            case "multiply": {
+                numbers =
+                    storage.mistakesMultiply.length !== 0
+                        ? storage.mistakesMultiply[randomNumber(0, storage.mistakesMultiply.length - 1)]
+                            .split("--")
+                            .map((el) => +el)
+                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                return numbers;
+            }
+        }
+    }
+    else {
+        numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+        return numbers;
     }
 };
 export const countStopGameLimit = (modeType = "get 20") => {

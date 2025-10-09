@@ -12,25 +12,25 @@ export const OPERATION_TYPE = {
 };
 export const MODE_TYPE = {
     addition: [
-        "train",
-        "repretition",
         "get 20",
         "get 50",
+        "repretition",
         "count down",
         "up to 100",
         "up to 1000",
+        "train",
     ],
     substraction: [
-        "train",
-        "repretition",
         "get 20",
         "get 50",
+        "repretition",
         "count down",
         "from 100",
         "from 1000",
+        "train",
     ],
-    multiplication: ["train", "repretition", "get 20", "get 50", "count down"],
-    division: ["train", "repretition", "get 20", "get 50", "count down"],
+    multiplication: ["get 20", "get 50", "repretition", "count down", "train"],
+    division: ["get 20", "get 50", "repretition", "count down", "train"],
 };
 export const appState = {
     state: STATE_TYPE.initial,
