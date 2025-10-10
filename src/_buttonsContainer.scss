@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .controlButtons_container {
   padding: 1rem 1.7rem 1rem 2rem;
   line-height: 0px;
@@ -29,7 +31,7 @@
     rgba(74, 80, 118, 0.603) 0 1px 3px 0;
 
   text-transform: uppercase;
-  color: rgb(46, 180, 46);
+  // color: yellow;
   font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
@@ -66,6 +68,18 @@
     &:active {
       box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
         rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+    }
+  }
+
+  &-menu {
+    background-image: linear-gradient(
+      $primaryColor,
+      color.adjust($primaryColor, $lightness: 5%)
+    );
+    color: $backgroundColor;
+
+    &:hover {
+      color: $backgroundColor;
     }
   }
 }

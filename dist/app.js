@@ -35,21 +35,15 @@ buttonMain.addEventListener("click", (ev) => {
                 timeCounter.innerText = null;
             }
             gameFinished = false;
-            console.log(appState.state + "INITIAL");
-            console.log("appState.arytmeticOperation");
-            console.log(appState.arytmeticOperation);
-            console.log("appState.gameMode");
-            console.log(appState.gameMode);
             numbers = calculateNumberHelperMax(appState, storage);
-            // numbers = calculateNumberHelper(
-            //   appState.arytmeticOperation,
-            //   appState.difficulty
-            // );
             leftNumberValue = numbers[0];
             rightNumberValue = numbers[1];
             leftNumber.innerText = leftNumberValue.toString();
             rightNumber.innerText = rightNumberValue.toString();
             appState.state = STATE_TYPE.check;
+            buttonMain.classList.remove("controlButton-green");
+            buttonMenu.classList.remove("controlButton-red");
+            buttonMenu.classList.add("controlButton-menu");
             buttonMain.innerText = appState.state;
             counterIntervalIndex = setInterval(() => {
                 // console.log(counterProgress);
@@ -68,7 +62,10 @@ buttonMain.addEventListener("click", (ev) => {
             counterProgress = 1;
             clearInterval(counterIntervalIndex);
             appState.state = STATE_TYPE.asses;
+            buttonMain.classList.add("controlButton-green");
             buttonMain.innerText = "good";
+            buttonMenu.classList.add("controlButton-red");
+            buttonMenu.classList.remove("controlButton-menu");
             buttonMenu.innerText = "wrong";
             switch (true) {
                 case appState.arytmeticOperation === OPERATION_TYPE.addition: {
@@ -99,6 +96,9 @@ buttonMain.addEventListener("click", (ev) => {
                 gameFinished = true;
                 appState.state = STATE_TYPE.initial;
                 score.innerText = scoreNumber.toString();
+                buttonMain.classList.remove("controlButton-green");
+                buttonMenu.classList.remove("controlButton-red");
+                buttonMenu.classList.add("controlButton-menu");
                 buttonMain.innerText = "again";
                 buttonMenu.innerText = "menu";
                 timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) 1%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
@@ -111,6 +111,9 @@ buttonMain.addEventListener("click", (ev) => {
             else {
                 appState.state = STATE_TYPE.check;
                 buttonMenu.classList.remove("active");
+                buttonMain.classList.remove("controlButton-green");
+                buttonMenu.classList.remove("controlButton-red");
+                buttonMenu.classList.add("controlButton-menu");
                 buttonMain.innerText = appState.state;
                 buttonMenu.innerText = "menu";
                 console.log("appState.arytmeticOperation");
@@ -160,6 +163,9 @@ buttonMenu.addEventListener("click", (ev) => {
         console.log(wrongAnswers);
         console.warn("MY INFO wrongAnswers" + "line: 152");
         appState.state = STATE_TYPE.check;
+        buttonMain.classList.remove("controlButton-green");
+        buttonMenu.classList.remove("controlButton-red");
+        buttonMenu.classList.add("controlButton-menu");
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
         console.log("appState.arytmeticOperation");

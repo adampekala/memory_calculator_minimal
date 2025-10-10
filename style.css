@@ -297,7 +297,6 @@ body {
   border-radius: 9999px;
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0, rgba(74, 80, 118, 0.603) 0 1px 3px 0;
   text-transform: uppercase;
-  color: rgb(46, 180, 46);
   font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
   letter-spacing: 2px;
@@ -325,6 +324,13 @@ body {
 }
 .controlButton-red:active {
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0, rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+}
+.controlButton-menu {
+  background-image: linear-gradient(hsl(220, 100%, 25%), hsl(220, 100%, 30%));
+  color: white;
+}
+.controlButton-menu:hover {
+  color: white;
 }
 
 .statistics_container {
