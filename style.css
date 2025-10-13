@@ -371,13 +371,11 @@ thead {
 th {
   padding: 1rem 2rem;
   color: white;
-  /* border: 1px solid black; */
 }
 
 td {
   padding: 0.5rem 2rem;
   text-align: center;
-  /* border: 1px solid black; */
 }
 
 tr > td:nth-child(3n):hover > .fa {

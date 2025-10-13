@@ -58,7 +58,6 @@
   }
 
   &_listItem {
-    // text-align: center;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -97,7 +96,6 @@
     transition: all 0.05s ease-out;
 
     &:hover {
-      // color: red;
     }
 
     &:active {
@@ -106,7 +104,6 @@
     }
 
     &-mode {
-      // color: darken($tertiaryColor, 5%);
       text-align: center;
 
       &:hover {

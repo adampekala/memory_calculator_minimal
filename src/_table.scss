@@ -17,7 +17,6 @@
 
 .table_container {
   height: 65vh;
-  // border: 2px solid red;
   overflow: scroll;
 }
 
@@ -40,13 +39,11 @@ thead {
 th {
   padding: 1rem 2rem;
   color: white;
-  /* border: 1px solid black; */
 }
 
 td {
   padding: 0.5rem 2rem;
   text-align: center;
-  /* border: 1px solid black; */
 }
 
 tr > td:nth-child(3n):hover > .fa {
@@ -77,7 +74,6 @@ tr:nth-child(2n) {
     padding: 0.1rem 0.3rem;
     line-height: 0px;
     border-radius: 200px 200px;
-    // background-color: rgba(8, 35, 125, 0.174);
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -108,7 +104,6 @@ tr:nth-child(2n) {
     transition: all 0.05s ease-out;
 
     &:hover {
-      // color: red;
     }
 
     &:active {
@@ -117,7 +112,6 @@ tr:nth-child(2n) {
     }
 
     &-mode {
-      // color: darken($tertiaryColor, 5%);
       text-align: center;
 
       &.active {
