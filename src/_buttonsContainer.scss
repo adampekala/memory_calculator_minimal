@@ -5,7 +5,7 @@
   line-height: 0px;
   margin-bottom: 15px;
   border-radius: 0 200px 200px 0;
-  background-color: rgba(8, 35, 125, 0.174);
+  background-color: $color-background-secondary;
   position: fixed;
   left: 0;
 
@@ -29,20 +29,20 @@
   border-radius: 9999px;
   box-shadow: rgba(37, 44, 97, 0.15) 0 4px 11px 0,
     rgba(74, 80, 118, 0.603) 0 1px 3px 0;
-
   text-transform: uppercase;
-  font-family: Hind, system-ui, BlinkMacSystemFont, -apple-system, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans",
-    "Helvetica Neue", sans-serif;
   font-weight: 600;
   letter-spacing: 2px;
   font-size: 16px;
   text-align: center;
   text-wrap: nowrap;
   line-height: 1.15;
-
   cursor: pointer;
   transition: all 0.05s ease-out;
+
+  &:hover {
+    // color: red;
+    // @include shadow();
+  }
 
   &-green {
     color: rgb(46, 180, 46);
@@ -52,8 +52,7 @@
     }
 
     &:active {
-      box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
-        rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+      @include shadow();
     }
   }
 
@@ -65,20 +64,20 @@
     }
 
     &:active {
-      box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
-        rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+      @include shadow();
     }
   }
 
   &-menu {
     background-image: linear-gradient(
-      $primaryColor,
-      color.adjust($primaryColor, $lightness: 5%)
+      $color-primary,
+      color.adjust($color-primary, $lightness: 5%)
     );
-    color: $backgroundColor;
+    color: $color-background-primary;
 
     &:hover {
-      color: $backgroundColor;
+      color: $color-background-primary;
+      // @include shadow();
     }
   }
 }

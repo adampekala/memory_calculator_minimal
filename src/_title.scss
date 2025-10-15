@@ -1,10 +1,11 @@
 .title {
   padding-top: 0.4em;
   font-size: 0.2em;
-  display: flex;
-  flex-direction: column;
-  align-self: flex-start;
-  align-items: center;
+  @include flex-column() {
+    align-self: flex-start;
+    align-items: center;
+  }
+
   &-top {
     text-transform: uppercase;
     letter-spacing: 8px;

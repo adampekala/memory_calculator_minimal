@@ -2,7 +2,7 @@
 
 .options {
   position: absolute;
-  background: $backgroundColor;
+  background: $color-background-primary;
   top: 0;
   left: 0;
   width: 100%;
@@ -12,10 +12,11 @@
 
   &_list {
     max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 3rem;
+    @include flex-column() {
+      align-items: stretch;
+      gap: 3rem;
+    }
+
     list-style: none;
     padding: 0;
     margin: 0 auto;
@@ -26,7 +27,7 @@
     padding: 1rem 1.5rem 1rem;
     line-height: 0px;
     border-radius: 200px 200px;
-    background-color: rgba(8, 35, 125, 0.174);
+    background-color: $color-background-secondary;
     display: flex;
     align-items: center;
   }
@@ -41,18 +42,18 @@
     padding: 1.6rem 1.5rem;
     line-height: 0px;
     border-radius: 50px 50px;
-    border: 4px solid rgba(8, 35, 125, 0.174);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    gap: 2rem;
+    border: 4px solid $color-background-secondary;
+    @include flex-column() {
+      justify-content: space-around;
+      gap: 2rem;
+    }
   }
 
   &_backButtonContainer {
     padding: 1rem 1.5rem 1rem;
     line-height: 0px;
     border-radius: 200px 200px;
-    background-color: rgba(8, 35, 125, 0.174);
+    background-color: $color-background-secondary;
     display: flex;
     justify-content: space-between;
   }
@@ -93,27 +94,25 @@
     text-wrap: nowrap;
     line-height: 1.15;
     cursor: pointer;
-    transition: all 0.05s ease-out;
+    transition: all 0.2s ease-out;
 
     &:hover {
+      // @include shadow-hover();
     }
 
     &:active {
-      box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
-        rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+      @include shadow-pressed();
     }
 
     &-mode {
       text-align: center;
 
       &:hover {
-        box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px,
-          rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
+        @include shadow-hover();
       }
 
       &:active {
-        box-shadow: rgba(37, 44, 97, 0.15) 0 4px 3px 0,
-          rgba(93, 100, 148, 0.2) 0 1px 1px 0;
+        @include shadow-pressed();
       }
     }
 
@@ -148,24 +147,30 @@
       padding-bottom: 1rem;
 
       &:hover {
-        box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px,
-          rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
+        @include shadow-hover();
       }
     }
 
     &-back {
       background-image: linear-gradient(
-        $primaryColor,
-        color.adjust($primaryColor, $lightness: 5%)
+        $color-primary,
+        color.adjust($color-primary, $lightness: 5%)
       );
-      color: $backgroundColor;
+      color: $color-background-primary;
 
       &:hover {
-        color: $backgroundColor;
+        color: $color-background-primary;
+        @include shadow-hover();
       }
     }
 
-    &.active {
+    &-statistics {
+      &:hover {
+        @include shadow-hover();
+      }
+    }
+
+    &.pressed {
       box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0,
         rgba(93, 100, 148, 0.5) 0 1px 2px 0;
       &:hover {

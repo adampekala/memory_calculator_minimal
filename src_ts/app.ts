@@ -202,52 +202,7 @@ buttonMenu.addEventListener("click", (ev) => {
     console.log("appState.gameMode");
     console.log(appState.gameMode);
 
-    ////////////////////
-
     numbers = calculateNumberHelperMax(appState, storage);
-
-    // if (appState.gameMode === "repretition") {
-    //   switch (appState.arytmeticOperation) {
-    //     case "add": {
-    //       numbers = storage.mistakesAdd[
-    //         randomNumber(0, storage.mistakesAdd.length - 1)
-    //       ]
-    //         .split("--")
-    //         .map((el) => +el);
-    //       break;
-    //     }
-    //     case "substract": {
-    //       numbers = storage.mistakesSubstract[
-    //         randomNumber(0, storage.mistakesSubstract.length - 1)
-    //       ]
-    //         .split("--")
-    //         .map((el) => +el);
-    //       break;
-    //     }
-    //     case "devide": {
-    //       numbers = storage.mistakesDevide[
-    //         randomNumber(0, storage.mistakesDevide.length - 1)
-    //       ]
-    //         .split("--")
-    //         .map((el) => +el);
-    //       break;
-    //     }
-
-    //     case "multiply": {
-    //       numbers = storage.mistakesMultiply[
-    //         randomNumber(0, storage.mistakesMultiply.length - 1)
-    //       ]
-    //         .split("--")
-    //         .map((el) => +el);
-    //       break;
-    //     }
-    //   }
-    // } else {
-    //   numbers = calculateNumberHelper(
-    //     appState.arytmeticOperation,
-    //     appState.difficulty
-    //   );
-    // }
 
     leftNumberValue = numbers[0];
     rightNumberValue = numbers[1];
@@ -256,7 +211,6 @@ buttonMenu.addEventListener("click", (ev) => {
     score.innerText = scoreNumber.toString();
     result.innerText = "---";
     counterIntervalIndex = setInterval(() => {
-      // console.log(counterProgress);
       if (!(counterProgress > 99)) {
         timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
         counterProgress++;
@@ -297,25 +251,25 @@ sqrPlus.addEventListener("click", (ev) => {
   operationSignValue = "+";
   operationSign.innerText = "+";
   appState.arytmeticOperation = OPERATION_TYPE.addition;
-  sqrPlus.classList.add("active");
-  sqrMinus.classList.remove("active");
-  sqrMultiply.classList.remove("active");
+  sqrPlus.classList.add("pressed");
+  sqrMinus.classList.remove("pressed");
+  sqrMultiply.classList.remove("pressed");
   console.log(appState.arytmeticOperation);
 });
 sqrMinus.addEventListener("click", (ev) => {
   operationSignValue = "-";
   operationSign.innerText = "-";
-  sqrPlus.classList.remove("active");
-  sqrMinus.classList.add("active");
-  sqrMultiply.classList.remove("active");
+  sqrPlus.classList.remove("pressed");
+  sqrMinus.classList.add("pressed");
+  sqrMultiply.classList.remove("pressed");
   appState.arytmeticOperation = OPERATION_TYPE.substraction;
 });
 sqrMultiply.addEventListener("click", (ev) => {
   operationSignValue = "x";
   operationSign.innerText = "x";
-  sqrPlus.classList.remove("active");
-  sqrMinus.classList.remove("active");
-  sqrMultiply.classList.add("active");
+  sqrPlus.classList.remove("pressed");
+  sqrMinus.classList.remove("pressed");
+  sqrMultiply.classList.add("pressed");
   appState.arytmeticOperation = OPERATION_TYPE.multiplication;
 });
 
