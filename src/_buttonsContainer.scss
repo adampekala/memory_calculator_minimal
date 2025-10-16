@@ -32,17 +32,12 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 2px;
-  font-size: 16px;
+  font-size: 1rem;
   text-align: center;
   text-wrap: nowrap;
   line-height: 1.15;
   cursor: pointer;
   transition: all 0.05s ease-out;
-
-  &:hover {
-    // color: red;
-    // @include shadow();
-  }
 
   &-green {
     color: rgb(46, 180, 46);

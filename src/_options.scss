@@ -95,13 +95,13 @@
     line-height: 1.15;
     cursor: pointer;
     transition: all 0.2s ease-out;
-
-    &:hover {
-      // @include shadow-hover();
-    }
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
     &:active {
       @include shadow-pressed();
+      background-color: red;
     }
 
     &-mode {

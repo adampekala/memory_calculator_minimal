@@ -114,13 +114,6 @@ tr:nth-child(2n) {
     transition: all 0.05s ease-out;
 
     &:hover {
-    }
-
-    // &:active {
-    //   @include shadow();
-    // }
-
-    &:hover {
       @include shadow-hover();
     }
 
