@@ -166,6 +166,24 @@ export const calculateNumberHelperMax = (appState, storage) => {
             }
         }
     }
+    else if (appState.gameMode === "up to 100" ||
+        appState.gameMode === "up to 1000") {
+        numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+        numbers[0] = appState.lastResult || 0;
+        appState.lastResult = numbers[0] + numbers[1];
+        return numbers;
+    }
+    else if (appState.gameMode === "from 100" ||
+        appState.gameMode === "from 1000") {
+        if (appState.lastResult === null) {
+            //TODO reset of caclulator settings
+            appState.lastResult = appState.gameMode === "from 100" ? 100 : 1000;
+        }
+        numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
+        numbers[0] = appState.lastResult || 0;
+        appState.lastResult = numbers[0] - numbers[1];
+        return numbers;
+    }
     else {
         numbers = calculateNumberHelper(appState.arytmeticOperation, appState.difficulty);
         return numbers;

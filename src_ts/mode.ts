@@ -86,6 +86,7 @@ export interface APP_STATE {
   difficulty: number;
   gameMode: MODE_ALL;
   statisticsTableMode: OPERATION_TYPE;
+  lastResult: number | null;
 }
 
 export const appState: APP_STATE = {
@@ -95,6 +96,7 @@ export const appState: APP_STATE = {
   difficulty: 1,
   gameMode: MODE_TYPE.multiplication[0],
   statisticsTableMode: OPERATION_TYPE.multiplication,
+  lastResult: null,
 };
 
 export let stopGameLimit = countStopGameLimit(appState.gameMode);

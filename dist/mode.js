@@ -39,6 +39,7 @@ export const appState = {
     difficulty: 1,
     gameMode: MODE_TYPE.multiplication[0],
     statisticsTableMode: OPERATION_TYPE.multiplication,
+    lastResult: null,
 };
 export let stopGameLimit = countStopGameLimit(appState.gameMode);
 const modeToggler = document.getElementById("mode_toggler");

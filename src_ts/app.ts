@@ -234,6 +234,17 @@ const navigationContainer = document.getElementById(
 
 optionButtonClose.addEventListener("click", (ev) => {
   console.log("working");
+  score.innerText = "---";
+  appState.state = "start";
+  leftNumberValue = 0;
+  rightNumberValue = 0;
+  leftNumber.innerText = leftNumberValue.toString();
+  rightNumber.innerText = leftNumberValue.toString();
+  counterProgress = 1;
+  timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+  clearInterval(counterIntervalIndex);
+  gameFinished = true;
+  buttonMain.innerText = "start";
   navigationContainer.classList.add("closed");
 });
 
