@@ -19,13 +19,27 @@ body {
 }
 @media screen and (min-width: 450px) {
   body {
-    background-color: rgba(8, 35, 125, 0.174);
+    background-color: rgba(8, 35, 125, 0.076);
     padding-top: 0.5rem;
   }
 }
 
 .invisible {
   display: none;
+}
+
+.calculator_container {
+  position: relative;
+  background-color: white;
+  height: 90vh;
+  margin: 0 auto;
+  border-radius: 1.5rem;
+}
+@media screen and (min-width: 450px) {
+  .calculator_container {
+    width: 400px;
+    height: 98vh;
+  }
 }
 
 .score {
@@ -87,6 +101,7 @@ body {
 }
 
 .options {
+  padding: 1rem;
   position: absolute;
   background: white;
   top: 0;
@@ -94,7 +109,6 @@ body {
   width: 100%;
   height: 100vh;
   padding-top: 2rem;
-  transition: all 0.1s ease-in;
 }
 .options_list {
   max-width: 400px;
@@ -108,7 +122,7 @@ body {
 }
 .options_modeContainer {
   margin-top: 3rem;
-  padding: 1rem 1.5rem 1rem;
+  padding: 1rem 1.2rem 1rem;
   line-height: 0px;
   border-radius: 200px 200px;
   background-color: rgba(8, 35, 125, 0.174);
@@ -132,7 +146,7 @@ body {
   gap: 2rem;
 }
 .options_backButtonContainer {
-  padding: 1rem 1.5rem 1rem;
+  padding: 1rem 1.2rem 1rem;
   line-height: 0px;
   border-radius: 200px 200px;
   background-color: rgba(8, 35, 125, 0.174);
@@ -153,7 +167,7 @@ body {
 }
 .options_button {
   display: inline-block;
-  padding: 20px 44px;
+  padding: 1.3rem 2.5rem;
   background-color: transparent;
   background-image: linear-gradient(#fff, #f5f5fa);
   border: none;
@@ -211,8 +225,7 @@ body {
 }
 .options_button-operationToggler {
   font-size: 1.5rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem 2.7rem;
 }
 .options_button-operationToggler:hover {
   box-shadow: rgba(105, 130, 156, 0.782) 0 2px 3px 1px, rgba(137, 144, 186, 0.365) 0 1px 3px 1px;
@@ -290,13 +303,13 @@ body {
   margin-bottom: 15px;
   border-radius: 0 200px 200px 0;
   background-color: rgba(8, 35, 125, 0.174);
-  position: fixed;
+  position: absolute;
   left: 0;
 }
-.controlButtons_container-1 {
+.controlButtons_container-top {
   bottom: calc(5vh + 120px);
 }
-.controlButtons_container-2 {
+.controlButtons_container-bottom {
   bottom: 5vh;
 }
 
@@ -467,20 +480,6 @@ tr:nth-child(2n) {
 }
 .table_button-mode.active:hover {
   box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0, rgba(93, 100, 148, 0.5) 0 1px 2px 0;
-}
-
-.calculator_container {
-  position: relative;
-  background-color: white;
-  height: 90vh;
-  margin: 0 auto;
-  border-radius: 1.5rem;
-}
-@media screen and (min-width: 450px) {
-  .calculator_container {
-    width: 400px;
-    height: 98vh;
-  }
 }
 
 /*# sourceMappingURL=style.css.map */

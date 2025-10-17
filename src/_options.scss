@@ -1,6 +1,7 @@
 @use "sass:color";
 
 .options {
+  padding: 1rem;
   position: absolute;
   background: $color-background-primary;
   top: 0;
@@ -8,7 +9,6 @@
   width: 100%;
   height: 100vh;
   padding-top: 2rem;
-  transition: all 0.1s ease-in;
 
   &_list {
     max-width: 400px;
@@ -24,7 +24,7 @@
 
   &_modeContainer {
     margin-top: 3rem;
-    padding: 1rem 1.5rem 1rem;
+    padding: 1rem 1.2rem 1rem;
     line-height: 0px;
     border-radius: 200px 200px;
     background-color: $color-background-secondary;
@@ -50,7 +50,7 @@
   }
 
   &_backButtonContainer {
-    padding: 1rem 1.5rem 1rem;
+    padding: 1rem 1.2rem 1rem;
     line-height: 0px;
     border-radius: 200px 200px;
     background-color: $color-background-secondary;
@@ -75,7 +75,7 @@
 
   &_button {
     display: inline-block;
-    padding: 20px 44px;
+    padding: 1.3rem 2.5rem;
     background-color: transparent;
     background-image: linear-gradient(#fff, #f5f5fa);
     border: none;
@@ -143,8 +143,7 @@
 
     &-operationToggler {
       font-size: 1.5rem;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      padding: 1rem 2.7rem;
 
       &:hover {
         @include shadow-hover();
@@ -173,8 +172,6 @@
     &.pressed {
       box-shadow: rgba(37, 44, 97, 0.15) 0 0px 2px 0,
         rgba(93, 100, 148, 0.5) 0 1px 2px 0;
-      &:hover {
-      }
     }
   }
 

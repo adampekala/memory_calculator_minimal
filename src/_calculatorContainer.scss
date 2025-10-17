@@ -1,0 +1,12 @@
+.calculator_container {
+  position: relative;
+  background-color: $color-background-primary;
+  height: 90vh;
+  margin: 0 auto;
+  border-radius: 1.5rem;
+
+  @media screen and (min-width: 450px) {
+    width: 400px;
+    height: 98vh;
+  }
+}
