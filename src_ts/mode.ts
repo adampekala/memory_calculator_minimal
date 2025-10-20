@@ -109,7 +109,6 @@ const modeText = document.getElementById("mode_text") as HTMLSpanElement;
 let modeTogglerIndex = 0;
 modeToggler.addEventListener("click", (ev) => {
   if (appState.arytmeticOperation === OPERATION_TYPE.multiplication) {
-    console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.multiplication.length - 1) {
       modeTogglerIndex++;
       appState.gameMode = MODE_TYPE.multiplication[modeTogglerIndex];
@@ -122,7 +121,6 @@ modeToggler.addEventListener("click", (ev) => {
       modeText.innerText = MODE_TYPE.multiplication[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.substraction) {
-    console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.substraction.length - 1) {
       modeTogglerIndex++;
       appState.gameMode = MODE_TYPE.substraction[modeTogglerIndex];
@@ -135,7 +133,6 @@ modeToggler.addEventListener("click", (ev) => {
       modeText.innerText = MODE_TYPE.substraction[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.addition) {
-    console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.addition.length - 1) {
       modeTogglerIndex++;
       appState.gameMode = MODE_TYPE.addition[modeTogglerIndex];
@@ -148,7 +145,6 @@ modeToggler.addEventListener("click", (ev) => {
       modeText.innerText = MODE_TYPE.addition[modeTogglerIndex];
     }
   } else if (appState.arytmeticOperation === OPERATION_TYPE.division) {
-    console.log("Toggle");
     if (modeTogglerIndex < MODE_TYPE.division.length - 1) {
       modeTogglerIndex++;
       appState.gameMode = MODE_TYPE.division[modeTogglerIndex];
@@ -174,7 +170,6 @@ const difficultyScale = document.getElementById(
 ) as HTMLButtonElement;
 
 difficultyDecreaseToggler.addEventListener("click", () => {
-  console.log("decrease");
   if (appState.difficulty > 1) {
     let scaleInnettext = [];
     appState.difficulty--;
@@ -184,7 +179,6 @@ difficultyDecreaseToggler.addEventListener("click", () => {
   }
 });
 difficultyIncreaseToggler.addEventListener("click", () => {
-  console.log("increase");
   if (appState.difficulty < 5) {
     let scaleInnettext = [];
     appState.difficulty++;

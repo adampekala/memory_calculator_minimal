@@ -2,6 +2,7 @@ import {
   calculateNumberHelper,
   calculateNumberHelperMax,
   getAndConvertStorage,
+  MISTAKES_OBJ,
   randomNumber,
   setConvertedStorage,
 } from "./helpers.js";
@@ -24,8 +25,9 @@ let counterIntervalIndex: number;
 let counterProgress: number = 1;
 let gameFinished = false;
 let numbers: number[];
-let storage = getAndConvertStorage();
-console.log(storage);
+let storage: MISTAKES_OBJ = getAndConvertStorage();
+// console.log("APP_storage");
+// console.log(storage);
 
 let wrongAnswers: [number, number, OPERATION_TYPE][] = [];
 
@@ -115,7 +117,6 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
       break;
     }
     case appState.state === STATE_TYPE.asses: {
-      console.log(appState.state + "ASSES");
       scoreNumber++;
       if (scoreNumber >= stopGameLimit) {
         clearInterval(counterIntervalIndex);
@@ -131,7 +132,7 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
         timeCounter.style.textAlign = "center";
         timeCounter.style.color = "red";
         timeCounter.innerText = "You win!!!";
-        console.log("success!!!!");
+
         break;
       } else {
         appState.state = STATE_TYPE.check;
@@ -141,11 +142,6 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
         buttonMenu.classList.add("controlButton-menu");
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
-
-        console.log("appState.arytmeticOperation");
-        console.log(appState.arytmeticOperation);
-        console.log("appState.gameMode");
-        console.log(appState.gameMode);
 
         numbers = calculateNumberHelperMax(appState, storage);
         // numbers = calculateNumberHelper(
@@ -176,7 +172,6 @@ buttonMain.addEventListener("click", (ev: MouseEvent) => {
 });
 
 buttonMenu.addEventListener("click", (ev) => {
-  console.log(appState.state + "ASSES");
   if (appState.state === STATE_TYPE.asses) {
     scoreNumber--;
     let wrongAnswer: WRONG_ANSWER = [
@@ -196,11 +191,6 @@ buttonMenu.addEventListener("click", (ev) => {
     buttonMenu.classList.add("controlButton-menu");
     buttonMain.innerText = appState.state;
     buttonMenu.innerText = "menu";
-
-    console.log("appState.arytmeticOperation");
-    console.log(appState.arytmeticOperation);
-    console.log("appState.gameMode");
-    console.log(appState.gameMode);
 
     numbers = calculateNumberHelperMax(appState, storage);
 
@@ -233,7 +223,6 @@ const navigationContainer = document.getElementById(
 ) as HTMLDivElement;
 
 optionButtonClose.addEventListener("click", (ev) => {
-  console.log("working");
   score.innerText = "---";
   appState.state = "start";
   leftNumberValue = 0;
@@ -265,7 +254,6 @@ sqrPlus.addEventListener("click", (ev) => {
   sqrPlus.classList.add("pressed");
   sqrMinus.classList.remove("pressed");
   sqrMultiply.classList.remove("pressed");
-  console.log(appState.arytmeticOperation);
 });
 sqrMinus.addEventListener("click", (ev) => {
   operationSignValue = "-";

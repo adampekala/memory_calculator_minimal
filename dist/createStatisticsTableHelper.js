@@ -20,7 +20,6 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
     statisticContainer.appendChild(header);
     statisticContainer.appendChild(statisticTableContainer);
     statisticContainer.appendChild(statisticBackBtnContainer);
-    console.log(statisticTableContainer.children[0]);
     const statisticsTableModeTogglerAdd = document.getElementById("tableMode_togglerAdd");
     statisticsTableModeTogglerAdd.addEventListener("click", () => {
         statisticsTableModeTogglerAdd.classList.add("active");

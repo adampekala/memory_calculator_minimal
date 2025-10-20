@@ -11,7 +11,8 @@ let counterProgress = 1;
 let gameFinished = false;
 let numbers;
 let storage = getAndConvertStorage();
-console.log(storage);
+// console.log("APP_storage");
+// console.log(storage);
 let wrongAnswers = [];
 const body = document.querySelector("body");
 const score = document.getElementById("score");
@@ -89,7 +90,6 @@ buttonMain.addEventListener("click", (ev) => {
             break;
         }
         case appState.state === STATE_TYPE.asses: {
-            console.log(appState.state + "ASSES");
             scoreNumber++;
             if (scoreNumber >= stopGameLimit) {
                 clearInterval(counterIntervalIndex);
@@ -105,7 +105,6 @@ buttonMain.addEventListener("click", (ev) => {
                 timeCounter.style.textAlign = "center";
                 timeCounter.style.color = "red";
                 timeCounter.innerText = "You win!!!";
-                console.log("success!!!!");
                 break;
             }
             else {
@@ -116,10 +115,6 @@ buttonMain.addEventListener("click", (ev) => {
                 buttonMenu.classList.add("controlButton-menu");
                 buttonMain.innerText = appState.state;
                 buttonMenu.innerText = "menu";
-                console.log("appState.arytmeticOperation");
-                console.log(appState.arytmeticOperation);
-                console.log("appState.gameMode");
-                console.log(appState.gameMode);
                 numbers = calculateNumberHelperMax(appState, storage);
                 // numbers = calculateNumberHelper(
                 //   appState.arytmeticOperation,
@@ -149,7 +144,6 @@ buttonMain.addEventListener("click", (ev) => {
     }
 });
 buttonMenu.addEventListener("click", (ev) => {
-    console.log(appState.state + "ASSES");
     if (appState.state === STATE_TYPE.asses) {
         scoreNumber--;
         let wrongAnswer = [
@@ -168,10 +162,6 @@ buttonMenu.addEventListener("click", (ev) => {
         buttonMenu.classList.add("controlButton-menu");
         buttonMain.innerText = appState.state;
         buttonMenu.innerText = "menu";
-        console.log("appState.arytmeticOperation");
-        console.log(appState.arytmeticOperation);
-        console.log("appState.gameMode");
-        console.log(appState.gameMode);
         numbers = calculateNumberHelperMax(appState, storage);
         leftNumberValue = numbers[0];
         rightNumberValue = numbers[1];
@@ -198,7 +188,6 @@ buttonMenu.addEventListener("click", (ev) => {
 const optionButtonClose = document.getElementById("backToCalculator_button");
 const navigationContainer = document.getElementById("navigation");
 optionButtonClose.addEventListener("click", (ev) => {
-    console.log("working");
     score.innerText = "---";
     appState.state = "start";
     leftNumberValue = 0;
@@ -222,7 +211,6 @@ sqrPlus.addEventListener("click", (ev) => {
     sqrPlus.classList.add("pressed");
     sqrMinus.classList.remove("pressed");
     sqrMultiply.classList.remove("pressed");
-    console.log(appState.arytmeticOperation);
 });
 sqrMinus.addEventListener("click", (ev) => {
     operationSignValue = "-";

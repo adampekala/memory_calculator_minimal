@@ -37,27 +37,21 @@ export const calculateNumberHelper = (
   if (operationType === "substract") {
     switch (true) {
       case difficulty === 1: {
-        console.log("substr");
-
         let num1 = randomNumber();
         let num2 = randomNumber();
         if (num1 > num2) {
-          console.log("substr");
           return new Array(num1, num2);
         } else {
-          console.log("substr");
           return new Array(num2, num1);
         }
       }
       case difficulty === 2: {
         let num1 = randomNumber(1, 50);
         let num2 = randomNumber(1, 50);
-        console.log("substr");
+
         if (num1 > num2) {
-          console.log("substr");
           return new Array(num1, num2);
         } else {
-          console.log("substr");
           return new Array(num2, num1);
         }
       }
@@ -235,15 +229,12 @@ export const countStopGameLimit = (
 ) => {
   switch (modeType) {
     case "get 20": {
-      console.log("get 20");
       return 20;
     }
     case "get 50": {
-      console.log("get 50");
       return 50;
     }
     default: {
-      console.log("get else");
       return Infinity;
     }
   }
@@ -279,22 +270,22 @@ export const getAndConvertStorage = (): MISTAKES_OBJ => {
 
 export const setConvertedStorage = (
   arr: [number, number, OPERATION_TYPE][],
-  obj: MISTAKES_OBJ
+  storage: MISTAKES_OBJ
 ) => {
   arr.forEach((subarr) => {
     switch (subarr[2]) {
       case "add":
-        obj.mistakesAdd.push(`${subarr[0]}--${subarr[1]}`);
+        storage.mistakesAdd.push(`${subarr[0]}--${subarr[1]}`);
         break;
       case "devide":
-        obj.mistakesDevide.push(`${subarr[0]}--${subarr[1]}`);
+        storage.mistakesDevide.push(`${subarr[0]}--${subarr[1]}`);
         break;
       case "substract":
-        obj.mistakesSubstract.push(`${subarr[0]}--${subarr[1]}`);
+        storage.mistakesSubstract.push(`${subarr[0]}--${subarr[1]}`);
 
         break;
       case "multiply":
-        obj.mistakesMultiply.push(`${subarr[0]}--${subarr[1]}`);
+        storage.mistakesMultiply.push(`${subarr[0]}--${subarr[1]}`);
 
         break;
 
@@ -303,18 +294,92 @@ export const setConvertedStorage = (
         break;
     }
   });
+
   // let mistakesAdd: string[] | null = null;
   // let mistakesSubstract: string[] | null = null;
   // let mistakesMultiply: string[] | null = null;
   // let mistakesDevide: string[] | null = null;
 
-  localStorage.setItem("mcm_add", JSON.stringify(obj.mistakesAdd));
-  localStorage.setItem("mcm_substract", JSON.stringify(obj.mistakesSubstract));
-  localStorage.setItem("mcm_multiply", JSON.stringify(obj.mistakesMultiply));
-  localStorage.setItem("mcm_devide", JSON.stringify(obj.mistakesDevide));
+  localStorage.setItem("mcm_add", JSON.stringify(storage.mistakesAdd));
+  localStorage.setItem(
+    "mcm_substract",
+    JSON.stringify(storage.mistakesSubstract)
+  );
+  localStorage.setItem(
+    "mcm_multiply",
+    JSON.stringify(storage.mistakesMultiply)
+  );
+  localStorage.setItem("mcm_devide", JSON.stringify(storage.mistakesDevide));
 };
 
-console.log(getAndConvertStorage());
+export const updateConvertedStorage = (
+  removedValuesArr: [number, number, OPERATION_TYPE],
+  storage: MISTAKES_OBJ,
+  statisticTableContainer: HTMLDivElement
+) => {
+  console.log("HELPERS Storage");
+
+  console.log(storage);
+
+  switch (removedValuesArr[2]) {
+    case "add":
+      let updatedMistakesAdd = storage.mistakesAdd.filter((el) => {
+        return (
+          el.toString() !==
+          `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
+        );
+      });
+      localStorage.setItem("mcm_add", JSON.stringify(updatedMistakesAdd));
+      storage = getAndConvertStorage();
+      statisticsTableRenderedOperations(
+        storage,
+        "mistakesAdd",
+        statisticTableContainer
+      );
+      break;
+    //TODO /////////////
+    case "devide":
+      let updatedMistakesDevide = storage.mistakesDevide.filter((el) => {
+        // return (
+        //   el.toString() !==
+        //   `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
+        // );
+
+        return el.toString() !== removedValuesArr.toString();
+      });
+      localStorage.setItem("mcm_devide", JSON.stringify(updatedMistakesDevide));
+      //  statisticsTableRenderedOperations(
+      //    storage,
+      //    "mistakesAdd",
+      //    statisticTableContainer
+      //  );
+      break;
+    case "substract":
+      let updatedMistakesSubstract = storage.mistakesSubstract.filter(
+        (el) => el.toString() !== removedValuesArr.toString()
+      );
+      localStorage.setItem(
+        "mcm_substract",
+        JSON.stringify(updatedMistakesSubstract)
+      );
+      break;
+    case "multiply":
+      let updatedMistakesMultiply = storage.mistakesMultiply.filter(
+        (el) => el.toString() !== removedValuesArr.toString()
+      );
+      localStorage.setItem(
+        "mcm_multiply",
+        JSON.stringify(updatedMistakesMultiply)
+      );
+      break;
+
+    default:
+      console.warn("Sth wrong with switch");
+      break;
+  }
+};
+
+// console.log(getAndConvertStorage());
 
 export const statisticsTableRenderedOperations = (
   storage: MISTAKES_OBJ,
@@ -326,11 +391,56 @@ export const statisticsTableRenderedOperations = (
   statisticTableContainer: HTMLDivElement
 ) => {
   statisticTableContainer.children[1].children[1].innerHTML = "";
-  storage[operations].forEach((values) => {
+  storage[operations].forEach((values, index) => {
     let newElement = document.createElement("tr");
     newElement.innerHTML = `<tr><td>${values.split("--")[0]}</td><td>${
       values.split("--")[1]
-    }</td><td><i class="fa fa-trash-o"></i></td></tr> `;
+    }</td><td><i class="fa fa-trash-o" id="removeRowInStatisticTable-${index}"></i></td></tr> `;
     statisticTableContainer.children[1].children[1].appendChild(newElement);
+  });
+
+  let removeRowInStatisticTableArr = document.querySelectorAll(
+    "[id^=removeRowInStatisticTable-]"
+  );
+
+  removeRowInStatisticTableArr.forEach((el) => {
+    el.addEventListener("click", (e) => {
+      let row = el.parentElement.parentElement;
+
+      let firstNumber = +row.children[0].innerHTML;
+
+      let secondNumber = +row.children[1].innerHTML;
+
+      let operation: OPERATION_TYPE;
+
+      switch (operations) {
+        case "mistakesAdd": {
+          operation = "add";
+          break;
+        }
+
+        case "mistakesSubstract": {
+          operation = "substract";
+          break;
+        }
+        case "mistakesMultiply": {
+          operation = "multiply";
+          break;
+        }
+        case "mistakesDevide": {
+          operation = "devide";
+          break;
+        }
+      }
+
+      let removedValues: [number, number, OPERATION_TYPE] = [
+        firstNumber,
+        secondNumber,
+        operation,
+      ];
+      console.log(removedValues);
+
+      updateConvertedStorage(removedValues, storage, statisticTableContainer);
+    });
   });
 };

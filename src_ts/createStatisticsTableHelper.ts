@@ -40,8 +40,6 @@ export const createStatisticTable = (
   statisticContainer.appendChild(statisticTableContainer);
   statisticContainer.appendChild(statisticBackBtnContainer);
 
-  console.log(statisticTableContainer.children[0]);
-
   const statisticsTableModeTogglerAdd = document.getElementById(
     "tableMode_togglerAdd"
   );
