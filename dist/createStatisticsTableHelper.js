@@ -1,4 +1,4 @@
-import { statisticsTableRenderedOperations, } from "./helpers.js";
+import { getAndConvertStorage, statisticsTableRenderedOperations, } from "./helpers.js";
 export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
     let storageActiveKey = "mcm_multiply";
     let storage = storageFn();
@@ -25,6 +25,7 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
         statisticsTableModeTogglerAdd.classList.add("active");
         statisticsTableModeTogglerMultiply.classList.remove("active");
         statisticsTableModeTogglerSubstract.classList.remove("active");
+        storage = getAndConvertStorage();
         storageActiveKey = "mcm_add";
         statisticsTableRenderedOperations(storage, "mistakesAdd", statisticTableContainer);
     });
@@ -34,6 +35,7 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
         statisticsTableModeTogglerMultiply.classList.add("active");
         statisticsTableModeTogglerSubstract.classList.remove("active");
         storageActiveKey = "mcm_multiply";
+        storage = getAndConvertStorage();
         statisticsTableRenderedOperations(storage, "mistakesMultiply", statisticTableContainer);
     });
     const statisticsTableModeTogglerSubstract = document.getElementById("tableMode_togglerSubstract");
@@ -42,6 +44,7 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
         statisticsTableModeTogglerMultiply.classList.remove("active");
         statisticsTableModeTogglerSubstract.classList.add("active");
         storageActiveKey = "mcm_substract";
+        storage = getAndConvertStorage();
         statisticsTableRenderedOperations(storage, "mistakesSubstract", statisticTableContainer);
     });
     const deleteStorageBtn = document.getElementById("deleteStorage");
@@ -57,3 +60,4 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
         statisticTableContainer.children[1].children[1].innerHTML = "";
     });
 };
+//# sourceMappingURL=createStatisticsTableHelper.js.map

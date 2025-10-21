@@ -337,39 +337,55 @@ export const updateConvertedStorage = (
         statisticTableContainer
       );
       break;
-    //TODO /////////////
     case "devide":
       let updatedMistakesDevide = storage.mistakesDevide.filter((el) => {
-        // return (
-        //   el.toString() !==
-        //   `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
-        // );
-
-        return el.toString() !== removedValuesArr.toString();
+        return (
+          el.toString() !==
+          `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
+        );
       });
       localStorage.setItem("mcm_devide", JSON.stringify(updatedMistakesDevide));
-      //  statisticsTableRenderedOperations(
-      //    storage,
-      //    "mistakesAdd",
-      //    statisticTableContainer
-      //  );
+      storage = getAndConvertStorage();
+      statisticsTableRenderedOperations(
+        storage,
+        "mistakesDevide",
+        statisticTableContainer
+      );
       break;
     case "substract":
-      let updatedMistakesSubstract = storage.mistakesSubstract.filter(
-        (el) => el.toString() !== removedValuesArr.toString()
-      );
+      let updatedMistakesSubstract = storage.mistakesSubstract.filter((el) => {
+        return (
+          el.toString() !==
+          `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
+        );
+      });
       localStorage.setItem(
         "mcm_substract",
         JSON.stringify(updatedMistakesSubstract)
       );
+      storage = getAndConvertStorage();
+      statisticsTableRenderedOperations(
+        storage,
+        "mistakesSubstract",
+        statisticTableContainer
+      );
       break;
     case "multiply":
-      let updatedMistakesMultiply = storage.mistakesMultiply.filter(
-        (el) => el.toString() !== removedValuesArr.toString()
-      );
+      let updatedMistakesMultiply = storage.mistakesMultiply.filter((el) => {
+        return (
+          el.toString() !==
+          `${removedValuesArr[0].toString()}--${removedValuesArr[1].toString()}`
+        );
+      });
       localStorage.setItem(
         "mcm_multiply",
         JSON.stringify(updatedMistakesMultiply)
+      );
+      storage = getAndConvertStorage();
+      statisticsTableRenderedOperations(
+        storage,
+        "mistakesMultiply",
+        statisticTableContainer
       );
       break;
 

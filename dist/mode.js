@@ -124,3 +124,4 @@ difficultyIncreaseToggler.addEventListener("click", () => {
         difficultyScale.innerText = scaleInnettext.join("");
     }
 });
+//# sourceMappingURL=mode.js.map

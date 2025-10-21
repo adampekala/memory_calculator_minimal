@@ -3,6 +3,7 @@
     "rootDir": "./src_ts",
     "outDir": "./dist",
     "target": "ES2015",
-    "module": "ES2015"
+    "module": "ES2015",
+    "sourceMap": true
   }
 }

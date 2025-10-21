@@ -236,3 +236,4 @@ const refreshStorageFn = () => {
 statisticsBtn.addEventListener("click", () => {
     createStatisticTable(body, getAndConvertStorage, refreshStorageFn);
 });
+//# sourceMappingURL=app.js.map
