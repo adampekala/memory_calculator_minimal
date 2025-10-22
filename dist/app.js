@@ -11,8 +11,6 @@ let counterProgress = 1;
 let gameFinished = false;
 let numbers;
 let storage = getAndConvertStorage();
-// console.log("APP_storage");
-// console.log(storage);
 let wrongAnswers = [];
 const body = document.querySelector("body");
 const score = document.getElementById("score");

@@ -26,8 +26,6 @@ let counterProgress: number = 1;
 let gameFinished = false;
 let numbers: number[];
 let storage: MISTAKES_OBJ = getAndConvertStorage();
-// console.log("APP_storage");
-// console.log(storage);
 
 let wrongAnswers: [number, number, OPERATION_TYPE][] = [];
 

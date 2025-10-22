@@ -7,6 +7,7 @@ import {
   MODE_TYPE_SUBSTRACTION,
   APP_STATE,
 } from "./mode.js";
+
 export const randomNumber = (min: number = 1, max: number = 10) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
