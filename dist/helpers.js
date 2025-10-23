@@ -1,6 +1,93 @@
 export const randomNumber = (min = 1, max = 10) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
+export const generateDevisibleNumbersArr = (difficulty = 1) => {
+    return [1, 2];
+};
+export const generateSortedNumbersArr = (difficulty = 1) => {
+    return [1, 2];
+};
+export const generateNumbersWithFixedFirstValue = (difficulty = 1) => {
+    return [1, 2];
+};
+export const generateNumbers = (difficulty) => {
+    switch (difficulty) {
+        case 1: {
+            return randomNumber();
+        }
+        case 2: {
+            return randomNumber(2, 10);
+        }
+        case 3: {
+            return randomNumber(5, 10);
+        }
+        case 4: {
+            return randomNumber(2, 12);
+        }
+        case 5: {
+            return randomNumber(5, 15);
+        }
+    }
+};
+// export const createArrayWithTwoRandomNumbers: (
+//   typeOfMathematicalOperation: OPERATION_TYPE,
+//   difficulty: 1 | 2 | 3 | 4 | 5,
+//   sorted: boolean,
+//   divisable: boolean,
+//   firstDefineNumber: null | number
+// ) => [number, number] = (
+//   typeOfMathematicalOperation = "add",
+//   difficulty = 1,
+//   firstDefineNumber = null
+// ) => {
+//   if (firstDefineNumber !== null) {
+//     switch (typeOfMathematicalOperation) {
+//       case "add": {
+//         return [
+//           firstDefineNumber,
+//           generateOperationNumber(difficulty, typeOfMathematicalOperation),
+//         ];
+//       }
+//       case "substract": {
+//         let number = generateOperationNumber(
+//           difficulty,
+//           typeOfMathematicalOperation
+//         );
+//         if (typeof firstDefineNumber === "number") {
+//           let secondNumber =
+//             number > firstDefineNumber ? firstDefineNumber : number;
+//         }
+//         return [firstDefineNumber];
+//         break;
+//       }
+//       default:
+//         break;
+//     }
+//   } else {
+//   }
+//   if (divisable) {
+//     let num1 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
+//     let num2 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
+//   }
+//   if (sorted) {
+//     return numbers.sort((a, b) => a - b);
+//   }
+//   let num1 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
+//   let num2 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
+//   return [num1, num2];
+// };
+/*
+
+!!!!!TODO!!!!!
+randomNumbers
+[num1,num2] dodawanie i mnoźenie
+[num1>num2] odejmowanie
+[num1, num2%num1] -- dzielenie
+[previus, num2] -- up to
+[previus, num2<=previous] -- from
+
+
+*/
 export const calculateNumberHelper = (operationType = "devide", difficulty = 1) => {
     if (operationType === "multiply" || operationType === "add") {
         switch (true) {
