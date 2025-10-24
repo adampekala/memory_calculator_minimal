@@ -21,87 +21,108 @@ export const generateDevisibleNumbersArr: (
 export const generateSortedNumbersArr: (
   difficulty: 1 | 2 | 3 | 4 | 5
 ) => [number, number] = (difficulty = 1) => {
-  return [1, 2];
+  let arr: [number, number];
+  switch (difficulty) {
+    case 1: {
+      arr = [randomNumber(), randomNumber()];
+    }
+    case 2: {
+      arr = [randomNumber(2, 10), randomNumber(2, 10)];
+      break;
+    }
+    case 3: {
+      arr = [randomNumber(5, 10), randomNumber(5, 10)];
+      break;
+    }
+    case 4: {
+      arr = [randomNumber(2, 12), randomNumber(2, 12)];
+      break;
+    }
+    case 5: {
+      arr = [randomNumber(5, 15), randomNumber(5, 15)];
+      break;
+    }
+  }
+  return arr.sort((a, b) => b - a) as [number, number];
 };
 
 export const generateNumbersWithFixedFirstValue: (
-  difficulty: 1 | 2 | 3 | 4 | 5
-) => [number, number] = (difficulty = 1) => {
-  return [1, 2];
-};
-
-export const generateNumbers = (difficulty) => {
+  difficulty: 1 | 2 | 3 | 4 | 5,
+  firstDefineNumber: number
+) => [number, number] = (difficulty = 1, firstDefineNumber) => {
+  let secondNumber: number;
   switch (difficulty) {
     case 1: {
-      return randomNumber();
+      secondNumber = randomNumber();
+      break;
     }
     case 2: {
-      return randomNumber(2, 10);
+      secondNumber = randomNumber(2, 10);
+      break;
     }
     case 3: {
-      return randomNumber(5, 10);
+      secondNumber = randomNumber(5, 10);
+      break;
     }
     case 4: {
-      return randomNumber(2, 12);
+      secondNumber = randomNumber(2, 12);
+      break;
     }
     case 5: {
-      return randomNumber(5, 15);
+      secondNumber = randomNumber(5, 15);
+      break;
+    }
+  }
+  secondNumber =
+    secondNumber > firstDefineNumber ? firstDefineNumber : secondNumber;
+
+  return [firstDefineNumber, secondNumber];
+};
+
+export const generateNumbers: (
+  difficulty: 1 | 2 | 3 | 4 | 5
+) => [number, number] = (difficulty) => {
+  switch (difficulty) {
+    case 1: {
+      return [randomNumber(), randomNumber()];
+    }
+    case 2: {
+      return [randomNumber(2, 10), randomNumber(2, 10)];
+    }
+    case 3: {
+      return [randomNumber(5, 10), randomNumber(5, 10)];
+    }
+    case 4: {
+      return [randomNumber(2, 12), randomNumber(2, 12)];
+    }
+    case 5: {
+      return [randomNumber(5, 15), randomNumber(5, 15)];
     }
   }
 };
 
-// export const createArrayWithTwoRandomNumbers: (
-//   typeOfMathematicalOperation: OPERATION_TYPE,
-//   difficulty: 1 | 2 | 3 | 4 | 5,
-//   sorted: boolean,
-//   divisable: boolean,
-//   firstDefineNumber: null | number
-// ) => [number, number] = (
-//   typeOfMathematicalOperation = "add",
-//   difficulty = 1,
-//   firstDefineNumber = null
-// ) => {
-//   if (firstDefineNumber !== null) {
-//     switch (typeOfMathematicalOperation) {
-//       case "add": {
-//         return [
-//           firstDefineNumber,
-//           generateOperationNumber(difficulty, typeOfMathematicalOperation),
-//         ];
-//       }
-
-//       case "substract": {
-//         let number = generateOperationNumber(
-//           difficulty,
-//           typeOfMathematicalOperation
-//         );
-//         if (typeof firstDefineNumber === "number") {
-//           let secondNumber =
-//             number > firstDefineNumber ? firstDefineNumber : number;
-//         }
-//         return [firstDefineNumber];
-
-//         break;
-//       }
-
-//       default:
-//         break;
-//     }
-//   } else {
-//   }
-//   if (divisable) {
-//     let num1 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
-//     let num2 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
-//   }
-
-//   if (sorted) {
-//     return numbers.sort((a, b) => a - b);
-//   }
-
-//   let num1 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
-//   let num2 = generateOperationNumber(difficulty, typeOfMathematicalOperation);
-//   return [num1, num2];
-// };
+export const createArrayWithTwoRandomNumbers: (
+  typeOfMathematicalOperation: OPERATION_TYPE,
+  difficulty: 1 | 2 | 3 | 4 | 5,
+  firstDefineNumber: null | number
+) => [number, number] = (
+  typeOfMathematicalOperation = "add",
+  difficulty = 1,
+  firstDefineNumber = null
+) => {
+  if (firstDefineNumber !== null) {
+    return generateNumbersWithFixedFirstValue(difficulty, firstDefineNumber);
+  } else {
+    switch (typeOfMathematicalOperation) {
+      case "substract":
+        return generateSortedNumbersArr(difficulty);
+      case "devide":
+        return generateDevisibleNumbersArr(difficulty);
+      default:
+        return generateNumbers(difficulty);
+    }
+  }
+};
 
 /*
 
@@ -118,107 +139,17 @@ randomNumbers
 
 export const calculateNumberHelper = (
   operationType: OPERATION_TYPE = "devide",
-  difficulty: number = 1
+  difficulty: 1 | 2 | 3 | 4 | 5 = 1
 ): number[] => {
   if (operationType === "multiply" || operationType === "add") {
-    switch (true) {
-      case difficulty === 1: {
-        return new Array(randomNumber(), randomNumber());
-      }
-      case difficulty === 2: {
-        return new Array(randomNumber(2, 10), randomNumber(2, 10));
-      }
-      case difficulty === 3: {
-        return new Array(randomNumber(5, 10), randomNumber(5, 10));
-      }
-      case difficulty === 4: {
-        return new Array(randomNumber(2, 12), randomNumber(2, 12));
-      }
-      case difficulty === 5: {
-        return new Array(randomNumber(5, 15), randomNumber(5, 15));
-      }
-    }
+    return generateNumbers(difficulty);
   }
   if (operationType === "substract") {
-    switch (true) {
-      case difficulty === 1: {
-        let num1 = randomNumber();
-        let num2 = randomNumber();
-        if (num1 > num2) {
-          return new Array(num1, num2);
-        } else {
-          return new Array(num2, num1);
-        }
-      }
-      case difficulty === 2: {
-        let num1 = randomNumber(1, 50);
-        let num2 = randomNumber(1, 50);
-
-        if (num1 > num2) {
-          return new Array(num1, num2);
-        } else {
-          return new Array(num2, num1);
-        }
-      }
-      case difficulty === 3: {
-        let num1 = randomNumber(1, 100);
-        let num2 = randomNumber(1, 100);
-        if (num1 > num2) {
-          return new Array(num1, num2);
-        } else {
-          return new Array(num2, num1);
-        }
-      }
-      case difficulty === 4: {
-        let num1 = randomNumber(1, 1000);
-        let num2 = randomNumber(1, 1000);
-        if (num1 > num2) {
-          return new Array(num1, num2);
-        } else {
-          return new Array(num2, num1);
-        }
-      }
-      case difficulty === 5: {
-        let num1 = randomNumber(500, 1500);
-        let num2 = randomNumber(500, 1500);
-        if (num1 > num2) {
-          return new Array(num1, num2);
-        } else {
-          return new Array(num2, num1);
-        }
-      }
-    }
+    return generateSortedNumbersArr(difficulty);
   }
 
   if (operationType === "devide") {
-    switch (true) {
-      case difficulty === 1: {
-        let num1 = randomNumber();
-        let num2 = randomNumber();
-
-        return new Array(num1 * num2, num1, num2);
-      }
-      case difficulty === 2: {
-        let num1 = randomNumber(2, 10);
-        let num2 = randomNumber(2, 10);
-        return new Array(num1 * num2, num1, num2);
-      }
-      case difficulty === 3: {
-        let num1 = randomNumber(5, 10);
-        let num2 = randomNumber(5, 10);
-        return new Array(num1 * num2, num1, num2);
-      }
-      case difficulty === 4: {
-        let num1 = randomNumber(2, 12);
-        let num2 = randomNumber(2, 12);
-        return new Array(num1 * num2, num1, num2);
-      }
-      case difficulty === 5: {
-        let num1 = randomNumber(5, 15);
-        let num2 = randomNumber(5, 15);
-        return new Array(num1 * num2, num1, num2);
-      }
-    }
+    return generateDevisibleNumbersArr(difficulty);
   }
 };
 
@@ -308,19 +239,19 @@ export const calculateNumberHelperMax = (
       appState.lastResult = appState.gameMode === "from 100" ? 100 : 1000;
     }
 
-    numbers = calculateNumberHelper(
+    numbers = createArrayWithTwoRandomNumbers(
       appState.arytmeticOperation,
-      appState.difficulty
+      appState.difficulty,
+      appState.lastResult
     );
-    numbers[0] = appState.lastResult || 0;
     appState.lastResult = numbers[0] - numbers[1];
     return numbers;
   } else {
-    numbers = calculateNumberHelper(
+    return createArrayWithTwoRandomNumbers(
       appState.arytmeticOperation,
-      appState.difficulty
+      appState.difficulty,
+      null
     );
-    return numbers;
   }
 };
 

@@ -83,7 +83,7 @@ export interface APP_STATE {
   state: STATE_TYPE;
   arytmeticOperation: OPERATION_TYPE;
   scoreNumber: number;
-  difficulty: number;
+  difficulty: 1 | 2 | 3 | 4 | 5;
   gameMode: MODE_ALL;
   statisticsTableMode: OPERATION_TYPE;
   lastResult: number | null;

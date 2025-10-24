@@ -231,6 +231,7 @@ optionButtonClose.addEventListener("click", (ev) => {
   timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
   clearInterval(counterIntervalIndex);
   gameFinished = true;
+  appState.lastResult = null;
   buttonMain.innerText = "start";
   navigationContainer.classList.add("closed");
 });
