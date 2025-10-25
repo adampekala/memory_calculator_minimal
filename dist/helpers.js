@@ -1,8 +1,24 @@
 export const randomNumber = (min = 1, max = 10) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
-export const generateDevisibleNumbersArr = (difficulty = 1) => {
-    return [1, 2];
+export const generateTwoNumbersArr = (difficulty) => {
+    switch (difficulty) {
+        case 1: {
+            return [randomNumber(), randomNumber()];
+        }
+        case 2: {
+            return [randomNumber(2, 10), randomNumber(2, 10)];
+        }
+        case 3: {
+            return [randomNumber(5, 10), randomNumber(5, 10)];
+        }
+        case 4: {
+            return [randomNumber(2, 12), randomNumber(2, 12)];
+        }
+        case 5: {
+            return [randomNumber(5, 15), randomNumber(5, 15)];
+        }
+    }
 };
 export const generateSortedNumbersArr = (difficulty = 1) => {
     let arr;
@@ -57,24 +73,28 @@ export const generateNumbersWithFixedFirstValue = (difficulty = 1, firstDefineNu
         secondNumber > firstDefineNumber ? firstDefineNumber : secondNumber;
     return [firstDefineNumber, secondNumber];
 };
-export const generateNumbers = (difficulty) => {
-    switch (difficulty) {
-        case 1: {
-            return [randomNumber(), randomNumber()];
-        }
-        case 2: {
-            return [randomNumber(2, 10), randomNumber(2, 10)];
-        }
-        case 3: {
-            return [randomNumber(5, 10), randomNumber(5, 10)];
-        }
-        case 4: {
-            return [randomNumber(2, 12), randomNumber(2, 12)];
-        }
-        case 5: {
-            return [randomNumber(5, 15), randomNumber(5, 15)];
-        }
-    }
+export const generateDevisibleNumbersArr = (difficulty = 1) => {
+    //TODO!!!!
+    return [1, 2];
+};
+export const generateTwoNumbersArrFromFakeArr = () => {
+    let fakeNumbersArr = [
+        [7, 6],
+        [8, 7],
+        [7, 7],
+        [5, 8],
+        [6, 4],
+    ];
+    return fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+};
+export const generateTwoNumbersDivisibleArrFromFakeDivisableArr = () => {
+    const fakeNumbersArrDivisable = [
+        [81, 9],
+        [64, 8],
+        [42, 6],
+        [42, 7],
+    ];
+    return fakeNumbersArrDivisable[randomNumber(0, fakeNumbersArrDivisable.length - 1)];
 };
 export const createArrayWithTwoRandomNumbers = (typeOfMathematicalOperation = "add", difficulty = 1, firstDefineNumber = null) => {
     if (firstDefineNumber !== null) {
@@ -87,7 +107,7 @@ export const createArrayWithTwoRandomNumbers = (typeOfMathematicalOperation = "a
             case "devide":
                 return generateDevisibleNumbersArr(difficulty);
             default:
-                return generateNumbers(difficulty);
+                return generateTwoNumbersArr(difficulty);
         }
     }
 };
@@ -105,7 +125,7 @@ randomNumbers
 */
 export const calculateNumberHelper = (operationType = "devide", difficulty = 1) => {
     if (operationType === "multiply" || operationType === "add") {
-        return generateNumbers(difficulty);
+        return generateTwoNumbersArr(difficulty);
     }
     if (operationType === "substract") {
         return generateSortedNumbersArr(difficulty);
@@ -115,19 +135,6 @@ export const calculateNumberHelper = (operationType = "devide", difficulty = 1) 
     }
 };
 export const calculateNumberHelperMax = (appState, storage) => {
-    let fakeNumbersArr = [
-        [7, 6],
-        [8, 7],
-        [7, 7],
-        [5, 8],
-        [6, 4],
-    ];
-    let fakeNumbersArrDevide = [
-        [81, 9],
-        [64, 8],
-        [42, 6],
-        [42, 7],
-    ];
     let numbers;
     if (appState.gameMode === "repretition") {
         switch (appState.arytmeticOperation) {
@@ -137,7 +144,7 @@ export const calculateNumberHelperMax = (appState, storage) => {
                         ? storage.mistakesAdd[randomNumber(0, storage.mistakesAdd.length - 1)]
                             .split("--")
                             .map((el) => +el)
-                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                        : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
             case "substract": {
@@ -146,7 +153,7 @@ export const calculateNumberHelperMax = (appState, storage) => {
                         ? storage.mistakesSubstract[randomNumber(0, storage.mistakesSubstract.length - 1)]
                             .split("--")
                             .map((el) => +el)
-                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                        : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
             case "devide": {
@@ -155,7 +162,7 @@ export const calculateNumberHelperMax = (appState, storage) => {
                         ? storage.mistakesDevide[randomNumber(0, storage.mistakesDevide.length - 1)]
                             .split("--")
                             .map((el) => +el)
-                        : fakeNumbersArrDevide[randomNumber(0, fakeNumbersArr.length - 1)];
+                        : generateTwoNumbersDivisibleArrFromFakeDivisableArr();
                 return numbers;
             }
             case "multiply": {
@@ -164,7 +171,7 @@ export const calculateNumberHelperMax = (appState, storage) => {
                         ? storage.mistakesMultiply[randomNumber(0, storage.mistakesMultiply.length - 1)]
                             .split("--")
                             .map((el) => +el)
-                        : fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
+                        : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
         }
