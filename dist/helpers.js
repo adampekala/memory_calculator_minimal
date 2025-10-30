@@ -122,6 +122,19 @@ randomNumbers
 [previus, num2<=previous] -- from
 
 
+switch  add -> switch mode1
+                      mode2
+                      mode3
+        substract -> switch mode1
+                            mode2
+                            mode3
+        multiply -> switch  mode1
+                            mode2
+                            mode3
+        devide  -> switch mode1
+                          mode2
+                          mode3
+
 */
 export const calculateNumberHelper = (operationType = "devide", difficulty = 1) => {
     if (operationType === "multiply" || operationType === "add") {
@@ -246,10 +259,6 @@ export const setConvertedStorage = (arr, storage) => {
                 break;
         }
     });
-    // let mistakesAdd: string[] | null = null;
-    // let mistakesSubstract: string[] | null = null;
-    // let mistakesMultiply: string[] | null = null;
-    // let mistakesDevide: string[] | null = null;
     localStorage.setItem("mcm_add", JSON.stringify(storage.mistakesAdd));
     localStorage.setItem("mcm_substract", JSON.stringify(storage.mistakesSubstract));
     localStorage.setItem("mcm_multiply", JSON.stringify(storage.mistakesMultiply));
@@ -300,7 +309,6 @@ export const updateConvertedStorage = (removedValuesArr, storage, statisticTable
             break;
     }
 };
-// console.log(getAndConvertStorage());
 export const statisticsTableRenderedOperations = (storage, operations, statisticTableContainer) => {
     statisticTableContainer.children[1].children[1].innerHTML = "";
     storage[operations].forEach((values, index) => {

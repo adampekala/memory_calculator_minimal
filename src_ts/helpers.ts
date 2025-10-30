@@ -110,7 +110,6 @@ export const generateTwoNumbersArrFromFakeArr: () => [number, number] = () => {
     [5, 8],
     [6, 4],
   ];
-
   return fakeNumbersArr[randomNumber(0, fakeNumbersArr.length - 1)];
 };
 
@@ -163,6 +162,19 @@ randomNumbers
 [previus, num2<=previous] -- from
 
 
+switch  add -> switch mode1
+                      mode2
+                      mode3
+        substract -> switch mode1
+                            mode2
+                            mode3
+        multiply -> switch  mode1
+                            mode2
+                            mode3
+        devide  -> switch mode1
+                          mode2
+                          mode3
+
 */
 
 export const calculateNumberHelper = (
@@ -181,10 +193,10 @@ export const calculateNumberHelper = (
   }
 };
 
-export const calculateNumberHelperMax = (
+export const calculateNumberHelperMax: (
   appState: APP_STATE,
   storage: MISTAKES_OBJ
-) => {
+) => number[] = (appState: APP_STATE, storage: MISTAKES_OBJ) => {
   let numbers: number[];
   if (appState.gameMode === "repretition") {
     switch (appState.arytmeticOperation) {
@@ -346,11 +358,6 @@ export const setConvertedStorage = (
     }
   });
 
-  // let mistakesAdd: string[] | null = null;
-  // let mistakesSubstract: string[] | null = null;
-  // let mistakesMultiply: string[] | null = null;
-  // let mistakesDevide: string[] | null = null;
-
   localStorage.setItem("mcm_add", JSON.stringify(storage.mistakesAdd));
   localStorage.setItem(
     "mcm_substract",
@@ -445,8 +452,6 @@ export const updateConvertedStorage = (
       break;
   }
 };
-
-// console.log(getAndConvertStorage());
 
 export const statisticsTableRenderedOperations = (
   storage: MISTAKES_OBJ,
