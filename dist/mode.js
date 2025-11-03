@@ -1,4 +1,4 @@
-import { countStopGameLimit } from "./helpers.js";
+import { countStopGameLimit } from "./helpers/operationsNumbersGenerator.js";
 export const STATE_TYPE = {
     initial: "start",
     check: "check",

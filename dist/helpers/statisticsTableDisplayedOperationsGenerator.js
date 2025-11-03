@@ -1,0 +1,54 @@
+import { getAndConvertLocalStorage, removeOperationsFromAppStorageAndLocalStorage, } from "./storageInteractions.js";
+export const statisticsTableRenderedOperations = (applicationStorage, operations, statisticTableContainer) => {
+    console.log("statisticsTableRenderedOperations");
+    console.log(statisticTableContainer.children[1].children[1]);
+    statisticTableContainer.children[1].children[1].innerHTML = "";
+    applicationStorage[operations].forEach((values, index) => {
+        let newElement = document.createElement("tr");
+        newElement.innerHTML = `<tr><td>${values[0]}</td><td>${values[1]}</td><td><i class="fa fa-trash-o" id="removeRowInStatisticTable-${index}"></i></td></tr> `;
+        statisticTableContainer.children[1].children[1].appendChild(newElement);
+    });
+    let removeRowInStatisticTableArr = document.querySelectorAll("[id^=removeRowInStatisticTable-]");
+    removeRowInStatisticTableArr.forEach((el) => {
+        el.addEventListener("click", (e) => {
+            let row = el.parentElement.parentElement;
+            let firstNumber = +row.children[0].innerHTML;
+            let secondNumber = +row.children[1].innerHTML;
+            let operation;
+            let storageKey;
+            switch (operations) {
+                case "mistakesAdd": {
+                    storageKey = "mistakesAdd";
+                    operation = "add";
+                    break;
+                }
+                case "mistakesSubstract": {
+                    storageKey = "mistakesSubstract";
+                    operation = "substract";
+                    break;
+                }
+                case "mistakesMultiply": {
+                    storageKey = "mistakesMultiply";
+                    operation = "multiply";
+                    break;
+                }
+                case "mistakesDevide": {
+                    storageKey = "mistakesDevide";
+                    operation = "devide";
+                    break;
+                }
+            }
+            console.log(storageKey);
+            console.log(operation);
+            let removedValues = [
+                firstNumber,
+                secondNumber,
+                operation,
+            ];
+            console.log(removedValues);
+            removeOperationsFromAppStorageAndLocalStorage(removedValues, applicationStorage);
+            statisticsTableRenderedOperations(getAndConvertLocalStorage(), storageKey, statisticTableContainer);
+        });
+    });
+};
+//# sourceMappingURL=statisticsTableDisplayedOperationsGenerator.js.map

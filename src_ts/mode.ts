@@ -1,4 +1,4 @@
-import { countStopGameLimit } from "./helpers.js";
+import { countStopGameLimit } from "./helpers/operationsNumbersGenerator.js";
 
 export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 

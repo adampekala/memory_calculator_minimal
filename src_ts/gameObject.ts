@@ -8,11 +8,18 @@ export interface STATE_TYPE_OBJ {
   asses: "asses";
 }
 
+// export type MISTAKES_OBJ = {
+//   mistakesAdd: string[];
+//   mistakesSubstract: string[];
+//   mistakesMultiply: string[];
+//   mistakesDevide: string[];
+// };
+
 export type MISTAKES_OBJ = {
-  mistakesAdd: string[];
-  mistakesSubstract: string[];
-  mistakesMultiply: string[];
-  mistakesDevide: string[];
+  mistakesAdd: [number, number][];
+  mistakesSubstract: [number, number][];
+  mistakesMultiply: [number, number][];
+  mistakesDevide: [number, number][];
 };
 
 export type MODE_TYPE_COMMON =

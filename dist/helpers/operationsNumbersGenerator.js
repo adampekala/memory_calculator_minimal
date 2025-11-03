@@ -154,36 +154,28 @@ export const calculateNumberHelperMax = (appState, storage) => {
             case "add": {
                 numbers =
                     storage.mistakesAdd.length !== 0
-                        ? storage.mistakesAdd[randomNumber(0, storage.mistakesAdd.length - 1)]
-                            .split("--")
-                            .map((el) => +el)
+                        ? storage.mistakesAdd[randomNumber(0, storage.mistakesAdd.length - 1)].map((el) => +el)
                         : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
             case "substract": {
                 numbers =
                     storage.mistakesSubstract.length !== 0
-                        ? storage.mistakesSubstract[randomNumber(0, storage.mistakesSubstract.length - 1)]
-                            .split("--")
-                            .map((el) => +el)
+                        ? storage.mistakesSubstract[randomNumber(0, storage.mistakesSubstract.length - 1)].map((el) => +el)
                         : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
             case "devide": {
                 numbers =
                     storage.mistakesDevide.length !== 0
-                        ? storage.mistakesDevide[randomNumber(0, storage.mistakesDevide.length - 1)]
-                            .split("--")
-                            .map((el) => +el)
+                        ? storage.mistakesDevide[randomNumber(0, storage.mistakesDevide.length - 1)].map((el) => +el)
                         : generateTwoNumbersDivisibleArrFromFakeDivisableArr();
                 return numbers;
             }
             case "multiply": {
                 numbers =
                     storage.mistakesMultiply.length !== 0
-                        ? storage.mistakesMultiply[randomNumber(0, storage.mistakesMultiply.length - 1)]
-                            .split("--")
-                            .map((el) => +el)
+                        ? storage.mistakesMultiply[randomNumber(0, storage.mistakesMultiply.length - 1)].map((el) => +el)
                         : generateTwoNumbersArrFromFakeArr();
                 return numbers;
             }
@@ -223,4 +215,4 @@ export const countStopGameLimit = (modeType = "get 20") => {
         }
     }
 };
-//# sourceMappingURL=helpers.js.map
+//# sourceMappingURL=operationsNumbersGenerator.js.map

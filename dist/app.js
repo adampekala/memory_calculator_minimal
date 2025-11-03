@@ -1,6 +1,7 @@
-import { calculateNumberHelperMax, getAndConvertStorage, setConvertedStorage, } from "./helpers.js";
+import { calculateNumberHelperMax, } from "./helpers/operationsNumbersGenerator.js";
 import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit, } from "./mode.js";
-import { createStatisticTable } from "./createStatisticsTableHelper.js";
+import { createStatisticTable } from "./helpers/statisticsTableGenerator.js";
+import { getAndConvertLocalStorage, addWrongOperationToApplicationStorageAndLocalStorage, } from "./helpers/storageInteractions.js";
 let scoreNumber = 0;
 let leftNumberValue = 0;
 let rightNumberValue = 0;
@@ -10,7 +11,7 @@ let counterIntervalIndex;
 let counterProgress = 1;
 let gameFinished = false;
 let numbers;
-let storage = getAndConvertStorage();
+let storage = getAndConvertLocalStorage();
 let wrongAnswers = [];
 const body = document.querySelector("body");
 const score = document.getElementById("score");
@@ -178,7 +179,7 @@ buttonMenu.addEventListener("click", (ev) => {
         }, 50);
     }
     else {
-        setConvertedStorage(wrongAnswers, storage);
+        addWrongOperationToApplicationStorageAndLocalStorage(wrongAnswers, storage);
         wrongAnswers = [];
         navigationContainer.classList.remove("closed");
     }
@@ -229,10 +230,10 @@ sqrMultiply.addEventListener("click", (ev) => {
 });
 const statisticsBtn = document.getElementById("statistics");
 const statisticsList = document.getElementById("statisticsList");
-const refreshStorageFn = () => {
-    storage = getAndConvertStorage();
+export const refreshStorageFn = () => {
+    storage = getAndConvertLocalStorage();
 };
 statisticsBtn.addEventListener("click", () => {
-    createStatisticTable(body, getAndConvertStorage, refreshStorageFn);
+    createStatisticTable(body, getAndConvertLocalStorage, refreshStorageFn);
 });
 //# sourceMappingURL=app.js.map

@@ -61,4 +61,4 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
         statisticTableContainer.children[1].children[1].innerHTML = "";
     });
 };
-//# sourceMappingURL=createStatisticsTableHelper.js.map
+//# sourceMappingURL=statisticsTableGenerator.js.map

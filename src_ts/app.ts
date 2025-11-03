@@ -1,11 +1,8 @@
 import {
   calculateNumberHelper,
   calculateNumberHelperMax,
-  getAndConvertStorage,
-  MISTAKES_OBJ,
   randomNumber,
-  setConvertedStorage,
-} from "./helpers.js";
+} from "./helpers/operationsNumbersGenerator.js";
 import {
   STATE_TYPE,
   appState,
@@ -13,7 +10,12 @@ import {
   stopGameLimit,
   APP_STATE,
 } from "./mode.js";
-import { createStatisticTable } from "./createStatisticsTableHelper.js";
+import { createStatisticTable } from "./helpers/statisticsTableGenerator.js";
+import {
+  getAndConvertLocalStorage,
+  MISTAKES_OBJ,
+  addWrongOperationToApplicationStorageAndLocalStorage,
+} from "./helpers/storageInteractions.js";
 
 type WRONG_ANSWER = [number, number, OPERATION_TYPE];
 let scoreNumber = 0;
@@ -25,7 +27,7 @@ let counterIntervalIndex: number;
 let counterProgress: number = 1;
 let gameFinished = false;
 let numbers: number[];
-let storage: MISTAKES_OBJ = getAndConvertStorage();
+let storage: MISTAKES_OBJ = getAndConvertLocalStorage();
 
 let wrongAnswers: [number, number, OPERATION_TYPE][] = [];
 
@@ -207,7 +209,7 @@ buttonMenu.addEventListener("click", (ev) => {
       }
     }, 50);
   } else {
-    setConvertedStorage(wrongAnswers, storage);
+    addWrongOperationToApplicationStorageAndLocalStorage(wrongAnswers, storage);
     wrongAnswers = [];
     navigationContainer.classList.remove("closed");
   }
@@ -276,10 +278,10 @@ const statisticsBtn = document.getElementById(
 ) as HTMLButtonElement;
 const statisticsList = document.getElementById("statisticsList");
 
-const refreshStorageFn = () => {
-  storage = getAndConvertStorage();
+export const refreshStorageFn = () => {
+  storage = getAndConvertLocalStorage();
 };
 
 statisticsBtn.addEventListener("click", () => {
-  createStatisticTable(body, getAndConvertStorage, refreshStorageFn);
+  createStatisticTable(body, getAndConvertLocalStorage, refreshStorageFn);
 });
