@@ -6,7 +6,7 @@ import {
   MODE_TYPE_MULTIPLICATION,
   MODE_TYPE_SUBSTRACTION,
   APP_STATE,
-} from "../mode.js";
+} from "../optionsPanel.js";
 
 import { MISTAKES_OBJ } from "../gameObject.js";
 

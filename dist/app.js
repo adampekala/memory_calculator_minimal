@@ -1,32 +1,49 @@
-import { calculateNumberHelperMax, } from "./helpers/operationsNumbersGenerator.js";
-import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit, } from "./mode.js";
-import { createStatisticTable } from "./helpers/statisticsTableGenerator.js";
+import { calculateNumberHelperMax } from "./helpers/operationsNumbersGenerator.js";
+import { STATE_TYPE, appState, OPERATION_TYPE, stopGameLimit, optionsContainer, } from "./optionsPanel.js";
 import { getAndConvertLocalStorage, addWrongOperationToApplicationStorageAndLocalStorage, } from "./helpers/storageInteractions.js";
-let scoreNumber = 0;
-let leftNumberValue = 0;
-let rightNumberValue = 0;
-let operationSignValue = "x";
-let operationResult = 0;
-let counterIntervalIndex;
-let counterProgress = 1;
-let gameFinished = false;
-let numbers;
-let storage = getAndConvertLocalStorage();
-let wrongAnswers = [];
-const body = document.querySelector("body");
-const score = document.getElementById("score");
-const result = document.getElementById("result");
-const leftNumber = document.getElementById("left_number");
-const operationSign = document.getElementById("operation_sign");
-const rightNumber = document.getElementById("right_number");
-const timeCounter = document.getElementById("time_counter");
-const buttonMain = document.getElementById("main_button");
-const buttonMenu = document.getElementById("button_menu");
+export let scoreNumber = 0;
+export let leftNumberValue = 0;
+export let rightNumberValue = 0;
+export let operationSignValue = "x";
+export let operationResult = 0;
+export let counterIntervalIndex;
+export let counterProgress = 1;
+export let gameFinished = false;
+export let numbers;
+export let storage = getAndConvertLocalStorage();
+export let wrongAnswers = [];
+export const setLeftNumberValue = (number) => {
+    leftNumberValue = number;
+};
+export const setRightNumberValue = (number) => {
+    rightNumberValue = number;
+};
+export const setOperationSignValue = (sign) => {
+    operationSignValue = sign;
+};
+export const refreshStorageFn = () => {
+    storage = getAndConvertLocalStorage();
+};
+export const setGameFinished = (value) => {
+    gameFinished = value;
+};
+export const setCounterProgress = (value) => {
+    counterProgress = value;
+};
+export const body = document.querySelector("body");
+export const score = document.getElementById("score");
+export const result = document.getElementById("result");
+export const leftNumber = document.getElementById("left_number");
+export const operationSign = document.getElementById("operation_sign");
+export const rightNumber = document.getElementById("right_number");
+export const timeCounter = document.getElementById("time_counter");
+export const btnStartCheckGood = document.getElementById("main_button");
+export const buttonMenu = document.getElementById("button_menu");
 leftNumber.innerText = leftNumberValue.toString();
 rightNumber.innerText = rightNumberValue.toString();
 operationSign.innerText = operationSignValue;
 score.innerText = "---";
-buttonMain.addEventListener("click", (ev) => {
+btnStartCheckGood.addEventListener("click", (ev) => {
     switch (true) {
         case appState.state === STATE_TYPE.initial: {
             if (gameFinished) {
@@ -41,12 +58,11 @@ buttonMain.addEventListener("click", (ev) => {
             leftNumber.innerText = leftNumberValue.toString();
             rightNumber.innerText = rightNumberValue.toString();
             appState.state = STATE_TYPE.check;
-            buttonMain.classList.remove("controlButton-green");
+            btnStartCheckGood.classList.remove("controlButton-green");
             buttonMenu.classList.remove("controlButton-red");
             buttonMenu.classList.add("controlButton-menu");
-            buttonMain.innerText = appState.state;
+            btnStartCheckGood.innerText = appState.state;
             counterIntervalIndex = setInterval(() => {
-                // console.log(counterProgress);
                 if (!(counterProgress > 99)) {
                     timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                     counterProgress++;
@@ -62,8 +78,8 @@ buttonMain.addEventListener("click", (ev) => {
             counterProgress = 1;
             clearInterval(counterIntervalIndex);
             appState.state = STATE_TYPE.asses;
-            buttonMain.classList.add("controlButton-green");
-            buttonMain.innerText = "good";
+            btnStartCheckGood.classList.add("controlButton-green");
+            btnStartCheckGood.innerText = "good";
             buttonMenu.classList.add("controlButton-red");
             buttonMenu.classList.remove("controlButton-menu");
             buttonMenu.innerText = "wrong";
@@ -95,10 +111,10 @@ buttonMain.addEventListener("click", (ev) => {
                 gameFinished = true;
                 appState.state = STATE_TYPE.initial;
                 score.innerText = scoreNumber.toString();
-                buttonMain.classList.remove("controlButton-green");
+                btnStartCheckGood.classList.remove("controlButton-green");
                 buttonMenu.classList.remove("controlButton-red");
                 buttonMenu.classList.add("controlButton-menu");
-                buttonMain.innerText = "again";
+                btnStartCheckGood.innerText = "again";
                 buttonMenu.innerText = "menu";
                 timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) 1%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                 timeCounter.style.textAlign = "center";
@@ -109,16 +125,12 @@ buttonMain.addEventListener("click", (ev) => {
             else {
                 appState.state = STATE_TYPE.check;
                 buttonMenu.classList.remove("active");
-                buttonMain.classList.remove("controlButton-green");
+                btnStartCheckGood.classList.remove("controlButton-green");
                 buttonMenu.classList.remove("controlButton-red");
                 buttonMenu.classList.add("controlButton-menu");
-                buttonMain.innerText = appState.state;
+                btnStartCheckGood.innerText = appState.state;
                 buttonMenu.innerText = "menu";
                 numbers = calculateNumberHelperMax(appState, storage);
-                // numbers = calculateNumberHelper(
-                //   appState.arytmeticOperation,
-                //   appState.difficulty
-                // );
                 leftNumberValue = numbers[0];
                 rightNumberValue = numbers[1];
                 leftNumber.innerText = leftNumberValue.toString();
@@ -126,7 +138,6 @@ buttonMain.addEventListener("click", (ev) => {
                 score.innerText = scoreNumber.toString();
                 result.innerText = "---";
                 counterIntervalIndex = setInterval(() => {
-                    // console.log(counterProgress);
                     if (!(counterProgress > 99)) {
                         timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                         counterProgress++;
@@ -156,10 +167,10 @@ buttonMenu.addEventListener("click", (ev) => {
         console.log(wrongAnswers);
         console.warn("MY INFO wrongAnswers" + "line: 152");
         appState.state = STATE_TYPE.check;
-        buttonMain.classList.remove("controlButton-green");
+        btnStartCheckGood.classList.remove("controlButton-green");
         buttonMenu.classList.remove("controlButton-red");
         buttonMenu.classList.add("controlButton-menu");
-        buttonMain.innerText = appState.state;
+        btnStartCheckGood.innerText = appState.state;
         buttonMenu.innerText = "menu";
         numbers = calculateNumberHelperMax(appState, storage);
         leftNumberValue = numbers[0];
@@ -181,59 +192,7 @@ buttonMenu.addEventListener("click", (ev) => {
     else {
         addWrongOperationToApplicationStorageAndLocalStorage(wrongAnswers, storage);
         wrongAnswers = [];
-        navigationContainer.classList.remove("closed");
+        optionsContainer.classList.remove("closed");
     }
-});
-const optionButtonClose = document.getElementById("backToCalculator_button");
-const navigationContainer = document.getElementById("navigation");
-optionButtonClose.addEventListener("click", (ev) => {
-    score.innerText = "---";
-    appState.state = "start";
-    leftNumberValue = 0;
-    rightNumberValue = 0;
-    leftNumber.innerText = leftNumberValue.toString();
-    rightNumber.innerText = leftNumberValue.toString();
-    counterProgress = 1;
-    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
-    clearInterval(counterIntervalIndex);
-    gameFinished = true;
-    appState.lastResult = null;
-    buttonMain.innerText = "start";
-    navigationContainer.classList.add("closed");
-});
-const sqrPlus = document.getElementById("operation_toggler-add");
-const sqrMinus = document.getElementById("operation_toggler-substract");
-const sqrMultiply = document.getElementById("operation_toggler-multiply");
-sqrPlus.addEventListener("click", (ev) => {
-    operationSignValue = "+";
-    operationSign.innerText = "+";
-    appState.arytmeticOperation = OPERATION_TYPE.addition;
-    sqrPlus.classList.add("pressed");
-    sqrMinus.classList.remove("pressed");
-    sqrMultiply.classList.remove("pressed");
-});
-sqrMinus.addEventListener("click", (ev) => {
-    operationSignValue = "-";
-    operationSign.innerText = "-";
-    sqrPlus.classList.remove("pressed");
-    sqrMinus.classList.add("pressed");
-    sqrMultiply.classList.remove("pressed");
-    appState.arytmeticOperation = OPERATION_TYPE.substraction;
-});
-sqrMultiply.addEventListener("click", (ev) => {
-    operationSignValue = "x";
-    operationSign.innerText = "x";
-    sqrPlus.classList.remove("pressed");
-    sqrMinus.classList.remove("pressed");
-    sqrMultiply.classList.add("pressed");
-    appState.arytmeticOperation = OPERATION_TYPE.multiplication;
-});
-const statisticsBtn = document.getElementById("statistics");
-const statisticsList = document.getElementById("statisticsList");
-export const refreshStorageFn = () => {
-    storage = getAndConvertLocalStorage();
-};
-statisticsBtn.addEventListener("click", () => {
-    createStatisticTable(body, getAndConvertLocalStorage, refreshStorageFn);
 });
 //# sourceMappingURL=app.js.map

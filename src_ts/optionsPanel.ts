@@ -1,4 +1,28 @@
 import { countStopGameLimit } from "./helpers/operationsNumbersGenerator.js";
+import {
+  score,
+  leftNumber,
+  rightNumber,
+  leftNumberValue,
+  rightNumberValue,
+  operationSignValue,
+  operationSign,
+  body,
+  refreshStorageFn,
+  btnStartCheckGood,
+  counterProgress,
+  timeCounter,
+  gameFinished,
+  counterIntervalIndex,
+  setLeftNumberValue,
+  setRightNumberValue,
+  setOperationSignValue,
+  setGameFinished,
+  setCounterProgress,
+} from "./app.js";
+
+import { createStatisticTable } from "./helpers/statisticsTableGenerator.js";
+import { getAndConvertLocalStorage } from "./helpers/storageInteractions.js";
 
 export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 
@@ -101,6 +125,10 @@ export const appState: APP_STATE = {
 
 export let stopGameLimit = countStopGameLimit(appState.gameMode);
 
+export const optionsContainer = document.getElementById(
+  "navigation"
+) as HTMLDivElement;
+
 const modeToggler = document.getElementById(
   "mode_toggler"
 ) as HTMLButtonElement;
@@ -186,4 +214,70 @@ difficultyIncreaseToggler.addEventListener("click", () => {
     scaleInnettext.fill("\u2606");
     difficultyScale.innerText = scaleInnettext.join("");
   }
+});
+
+const btnOptionsOperationTogglerPlus = document.getElementById(
+  "operation_toggler-add"
+) as HTMLDivElement;
+const btnOptionsOperationTogglerMinus = document.getElementById(
+  "operation_toggler-substract"
+) as HTMLDivElement;
+const btnOptionsOperationTogglerMultiply = document.getElementById(
+  "operation_toggler-multiply"
+) as HTMLDivElement;
+
+const btnShowStatistics = document.getElementById(
+  "statistics"
+) as HTMLButtonElement;
+const btnOptionBackToGame = document.getElementById(
+  "backToCalculator_button"
+) as HTMLDivElement;
+
+////////////
+
+btnOptionBackToGame.addEventListener("click", (ev) => {
+  score.innerText = "---";
+  appState.state = "start";
+  setLeftNumberValue(0);
+  setRightNumberValue(0);
+  leftNumber.innerText = leftNumberValue.toString();
+  rightNumber.innerText = leftNumberValue.toString();
+  setCounterProgress(1);
+  timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+  clearInterval(counterIntervalIndex);
+  setGameFinished(true);
+  appState.lastResult = null;
+  btnStartCheckGood.innerText = "start";
+  optionsContainer.classList.add("closed");
+});
+
+btnOptionsOperationTogglerPlus.addEventListener("click", (ev) => {
+  setOperationSignValue("+");
+  operationSign.innerText = "+";
+  appState.arytmeticOperation = OPERATION_TYPE.addition;
+  btnOptionsOperationTogglerPlus.classList.add("pressed");
+  btnOptionsOperationTogglerMinus.classList.remove("pressed");
+  btnOptionsOperationTogglerMultiply.classList.remove("pressed");
+});
+
+btnOptionsOperationTogglerMinus.addEventListener("click", (ev) => {
+  setOperationSignValue("-");
+  operationSign.innerText = "-";
+  btnOptionsOperationTogglerPlus.classList.remove("pressed");
+  btnOptionsOperationTogglerMinus.classList.add("pressed");
+  btnOptionsOperationTogglerMultiply.classList.remove("pressed");
+  appState.arytmeticOperation = OPERATION_TYPE.substraction;
+});
+
+btnOptionsOperationTogglerMultiply.addEventListener("click", (ev) => {
+  setOperationSignValue("x");
+  operationSign.innerText = "x";
+  btnOptionsOperationTogglerPlus.classList.remove("pressed");
+  btnOptionsOperationTogglerMinus.classList.remove("pressed");
+  btnOptionsOperationTogglerMultiply.classList.add("pressed");
+  appState.arytmeticOperation = OPERATION_TYPE.multiplication;
+});
+
+btnShowStatistics.addEventListener("click", () => {
+  createStatisticTable(body, getAndConvertLocalStorage, refreshStorageFn);
 });

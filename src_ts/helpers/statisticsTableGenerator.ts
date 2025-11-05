@@ -1,4 +1,4 @@
-import { APP_STATE } from "../mode.js";
+import { APP_STATE } from "../optionsPanel.js";
 import {
   getAndConvertLocalStorage,
   MISTAKES_OBJ,
