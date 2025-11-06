@@ -8,13 +8,6 @@ export interface STATE_TYPE_OBJ {
   asses: "asses";
 }
 
-// export type MISTAKES_OBJ = {
-//   mistakesAdd: string[];
-//   mistakesSubstract: string[];
-//   mistakesMultiply: string[];
-//   mistakesDevide: string[];
-// };
-
 export type MISTAKES_OBJ = {
   mistakesAdd: [number, number][];
   mistakesSubstract: [number, number][];
@@ -56,33 +49,33 @@ export type WRONG_ANSWER = [number, number, OPERATION_TYPE];
 //Old APP_STATE
 
 export interface APPLICATION_OBJECT {
-  application: { state: APPLICATION_STATE };
-  game: {
-    state: STATE_TYPE;
-    isFinished: boolean; //gameFinished
-    mistakesFromStorage: MISTAKES_OBJ; //storage
-    options: {
-      mode: MODE_ALL; //gameMode
-      difficulty: number; //difficulty
-      typeOfArithmenticOperation: OPERATION_TYPE;
-    };
-    score: number; //scoreNumber
-    leftNumber: number;
-    rightNumber: number;
-    currentCorrectAnswer: number; //operationResult
-    previousCorrectAnswer: number | null; //lastResult
-    wrongAnswer: WRONG_ANSWER;
-    wrongAnswersArray: [number, number, OPERATION_TYPE][]; // wrongAnswers
-  };
-  gameCounter: {
-    counterIntervalId: number; //counterIntervalIndex
-    counterProgress: number; //counterProgress
-  };
-  statisticsTable: {
-    mode: OPERATION_TYPE; //statisticsTableMode
-  };
+  applicationGlobalState: APPLICATION_STATE;
+  gameState: STATE_TYPE;
+  isGameFinished: boolean; //gameFinished
+  mistakesFromStorage: MISTAKES_OBJ | null; //storage
+  gameMode: MODE_ALL; //gameMode
+  gameDifficulty: 1 | 2 | 3 | 4 | 5; //difficulty
+  gameTypeOfArithmenticOperation: OPERATION_TYPE;
+  gameOperationSignValue: OPERATION_SIGNS;
+  gameScore: number; //scoreNumber
+  gameLeftNumber: number;
+  gameRightNumber: number;
+  gameCurrentCorrectAnswer: number;
+  gamePreviousCorrectAnswer: number | null; //lastResult
+  wrongAnswer: WRONG_ANSWER | null;
+  wrongAnswersArray: WRONG_ANSWER[]; // wrongAnswers
+  gameCounterIntervalId: number | null; //APPLICATION.gameCounterIntervalId
+  gameCounterProgress: number | null;
+  statisticsTableDisplayedOperation: OPERATION_TYPE; //statisticsTableMode
+  setLeftNumberValue: (number: number) => void;
+  setRightNumberValue: (number: number) => void;
+  setOperationSignValue: (sign: "x" | "-" | "+" | "/") => void;
+  refreshStorage: () => void;
+  setGameFinished: (value: boolean) => void;
+  setCounterProgress: (value) => void;
 }
 
+export type OPERATION_SIGNS = "x" | "-" | "+" | "/";
 export type OPERATION_OBJ = {
   addition: "add";
   substraction: "substract";

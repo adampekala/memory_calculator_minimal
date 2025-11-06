@@ -1,24 +1,14 @@
 import { countStopGameLimit } from "./helpers/operationsNumbersGenerator.js";
 import {
+  APPLICATION,
   score,
   leftNumber,
   rightNumber,
-  leftNumberValue,
-  rightNumberValue,
-  operationSignValue,
   operationSign,
   body,
-  refreshStorageFn,
   btnStartCheckGood,
-  counterProgress,
   timeCounter,
-  gameFinished,
-  counterIntervalIndex,
-  setLeftNumberValue,
-  setRightNumberValue,
-  setOperationSignValue,
   setGameFinished,
-  setCounterProgress,
 } from "./app.js";
 
 import { createStatisticTable } from "./helpers/statisticsTableGenerator.js";
@@ -238,13 +228,14 @@ const btnOptionBackToGame = document.getElementById(
 btnOptionBackToGame.addEventListener("click", (ev) => {
   score.innerText = "---";
   appState.state = "start";
-  setLeftNumberValue(0);
-  setRightNumberValue(0);
-  leftNumber.innerText = leftNumberValue.toString();
-  rightNumber.innerText = leftNumberValue.toString();
-  setCounterProgress(1);
-  timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${counterProgress}%, transparent ${counterProgress}% 99%, rgb(22, 40, 159) 99%)`;
-  clearInterval(counterIntervalIndex);
+  APPLICATION.setLeftNumberValue(0);
+  APPLICATION.setRightNumberValue(0);
+
+  leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
+  rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+  APPLICATION.setCounterProgress(1);
+  timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+  clearInterval(APPLICATION.gameCounterIntervalId);
   setGameFinished(true);
   appState.lastResult = null;
   btnStartCheckGood.innerText = "start";
@@ -252,7 +243,7 @@ btnOptionBackToGame.addEventListener("click", (ev) => {
 });
 
 btnOptionsOperationTogglerPlus.addEventListener("click", (ev) => {
-  setOperationSignValue("+");
+  APPLICATION.setOperationSignValue("+");
   operationSign.innerText = "+";
   appState.arytmeticOperation = OPERATION_TYPE.addition;
   btnOptionsOperationTogglerPlus.classList.add("pressed");
@@ -261,7 +252,7 @@ btnOptionsOperationTogglerPlus.addEventListener("click", (ev) => {
 });
 
 btnOptionsOperationTogglerMinus.addEventListener("click", (ev) => {
-  setOperationSignValue("-");
+  APPLICATION.setOperationSignValue("-");
   operationSign.innerText = "-";
   btnOptionsOperationTogglerPlus.classList.remove("pressed");
   btnOptionsOperationTogglerMinus.classList.add("pressed");
@@ -270,7 +261,7 @@ btnOptionsOperationTogglerMinus.addEventListener("click", (ev) => {
 });
 
 btnOptionsOperationTogglerMultiply.addEventListener("click", (ev) => {
-  setOperationSignValue("x");
+  APPLICATION.setOperationSignValue("x");
   operationSign.innerText = "x";
   btnOptionsOperationTogglerPlus.classList.remove("pressed");
   btnOptionsOperationTogglerMinus.classList.remove("pressed");
@@ -279,5 +270,9 @@ btnOptionsOperationTogglerMultiply.addEventListener("click", (ev) => {
 });
 
 btnShowStatistics.addEventListener("click", () => {
-  createStatisticTable(body, getAndConvertLocalStorage, refreshStorageFn);
+  createStatisticTable(
+    body,
+    getAndConvertLocalStorage,
+    APPLICATION.refreshStorage
+  );
 });

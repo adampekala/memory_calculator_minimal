@@ -1,4 +1,4 @@
-import { APP_STATE } from "../optionsPanel.js";
+import { APPLICATION } from "../app.js";
 import {
   getAndConvertLocalStorage,
   MISTAKES_OBJ,
@@ -106,7 +106,7 @@ export const createStatisticTable = (
 
   deleteStorageBtn.addEventListener("click", () => {
     localStorage.setItem(storageActiveKey, JSON.stringify([]));
-    refreshStorageFn();
+    APPLICATION.refreshStorage();
     storage = storageFn();
     statisticTableContainer.children[1].children[1].innerHTML = "";
   });

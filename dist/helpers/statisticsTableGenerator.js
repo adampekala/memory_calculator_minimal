@@ -1,3 +1,4 @@
+import { APPLICATION } from "../app.js";
 import { getAndConvertLocalStorage, } from "./storageInteractions.js";
 import { statisticsTableRenderedOperations } from "./statisticsTableDisplayedOperationsGenerator.js";
 export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
@@ -56,7 +57,7 @@ export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
     });
     deleteStorageBtn.addEventListener("click", () => {
         localStorage.setItem(storageActiveKey, JSON.stringify([]));
-        refreshStorageFn();
+        APPLICATION.refreshStorage();
         storage = storageFn();
         statisticTableContainer.children[1].children[1].innerHTML = "";
     });
