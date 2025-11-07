@@ -223,8 +223,6 @@ const btnOptionBackToGame = document.getElementById(
   "backToCalculator_button"
 ) as HTMLDivElement;
 
-////////////
-
 btnOptionBackToGame.addEventListener("click", (ev) => {
   score.innerText = "---";
   appState.state = "start";

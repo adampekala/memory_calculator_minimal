@@ -1,4 +1,3 @@
-//statistic Table
 import { MISTAKES_OBJ } from "../gameObject.js";
 import { OPERATION_TYPE } from "../gameObject.js";
 import {

@@ -46,8 +46,6 @@ export type OPERATION_TYPE = "add" | "substract" | "devide" | "multiply";
 
 export type WRONG_ANSWER = [number, number, OPERATION_TYPE];
 
-//Old APP_STATE
-
 export interface APPLICATION_OBJECT {
   applicationGlobalState: APPLICATION_STATE;
   gameState: STATE_TYPE;

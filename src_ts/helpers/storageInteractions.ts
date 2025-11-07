@@ -1,4 +1,3 @@
-// storage
 import { OPERATION_TYPE } from "../gameObject.js";
 
 export type MISTAKES_OBJ = {

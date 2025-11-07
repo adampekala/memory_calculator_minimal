@@ -133,7 +133,6 @@ const btnOptionsOperationTogglerMinus = document.getElementById("operation_toggl
 const btnOptionsOperationTogglerMultiply = document.getElementById("operation_toggler-multiply");
 const btnShowStatistics = document.getElementById("statistics");
 const btnOptionBackToGame = document.getElementById("backToCalculator_button");
-////////////
 btnOptionBackToGame.addEventListener("click", (ev) => {
     score.innerText = "---";
     appState.state = "start";
