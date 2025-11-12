@@ -1,4 +1,4 @@
-import { OPERATION_TYPE } from "../gameObject.js";
+import { OPERATION_TYPES } from "../../TypesAndInterfaces/gameObject.js";
 
 export type MISTAKES_OBJ = {
   mistakesAdd: [number, number][];
@@ -21,7 +21,7 @@ export const getAndConvertLocalStorage: () => MISTAKES_OBJ = () => {
 };
 
 export const addWrongOperationToApplicationStorageAndLocalStorage = (
-  wrongOperations: [number, number, OPERATION_TYPE][],
+  wrongOperations: [number, number, OPERATION_TYPES][],
   storage: MISTAKES_OBJ
 ) => {
   wrongOperations.forEach((subarr) => {
@@ -54,7 +54,7 @@ export const addWrongOperationToApplicationStorageAndLocalStorage = (
 };
 
 export const removeOperationsFromAppStorageAndLocalStorage = (
-  removedValuesArr: [number, number, OPERATION_TYPE],
+  removedValuesArr: [number, number, OPERATION_TYPES],
   applicationStorage: MISTAKES_OBJ
 ) => {
   switch (removedValuesArr[2]) {

@@ -1,67 +1,76 @@
-import { calculateNumberHelperMax } from "./helpers/operationsNumbersGenerator.js";
+import { calculateNumberHelperMax } from "./helpers/NumbersGenerator/operationsNumbersGenerator.js";
+import { optionsContainer, MODE_ALL } from "./Panels/optionsPanel.js";
 import {
-  STATE_TYPE,
-  appState,
-  OPERATION_TYPE,
-  stopGameLimit,
-  optionsContainer,
-} from "./optionsPanel.js";
-import { APPLICATION_OBJECT } from "./gameObject.js";
+  APPLICATION_OBJECT,
+  WRONG_ANSWER,
+  GAME_STATES,
+} from "./TypesAndInterfaces/gameObject.js";
 import {
   getAndConvertLocalStorage,
-  MISTAKES_OBJ,
   addWrongOperationToApplicationStorageAndLocalStorage,
-} from "./helpers/storageInteractions.js";
-
-type WRONG_ANSWER = [number, number, OPERATION_TYPE];
+} from "./helpers/LocalStorage/storageInteractions.js";
 
 export const APPLICATION: APPLICATION_OBJECT = {
   applicationGlobalState: "game",
-  gameState: STATE_TYPE.initial,
+  gameState: "start",
   isGameFinished: false, //gameFinished
   mistakesFromStorage: null, //storage
   gameMode: "get 20", //gameMode
   gameDifficulty: 1, //difficulty
-  gameTypeOfArithmenticOperation: "add",
+  gameTypeOfArithmenticOperation: "multiply",
   gameOperationSignValue: "x",
   gameScore: 0, //scoreNumber
+  gameNumbers: null,
   gameLeftNumber: 0,
   gameRightNumber: 0,
   gameCurrentCorrectAnswer: 0,
   gamePreviousCorrectAnswer: null, //lastResult
+  gameStopLimit: null,
   wrongAnswer: null,
   wrongAnswersArray: [],
   gameCounterIntervalId: null,
   gameCounterProgress: 1,
   statisticsTableDisplayedOperation: "multiply", //statisticsTableMode
-  setLeftNumberValue: (number) => {
-    APPLICATION.gameLeftNumber = number;
-  },
-  setRightNumberValue: (number) => {
-    APPLICATION.gameRightNumber = number;
+
+  setGameState: (state: GAME_STATES) => {
+    APPLICATION.gameState = state;
   },
   setOperationSignValue: (sign) => {
     APPLICATION.gameOperationSignValue = sign;
   },
   refreshStorage: () => {
-    storage = getAndConvertLocalStorage();
+    APPLICATION.mistakesFromStorage = getAndConvertLocalStorage();
   },
   setGameFinished: (value) => {
-    gameFinished = value;
+    APPLICATION.isGameFinished = value;
   },
   setCounterProgress: (value) => {
     APPLICATION.gameCounterProgress = value;
   },
+  setStopGameLimit: (modeType: MODE_ALL = "get 20") => {
+    switch (modeType) {
+      case "get 20": {
+        APPLICATION.gameStopLimit = 20;
+        break;
+      }
+      case "get 50": {
+        APPLICATION.gameStopLimit = 50;
+        break;
+      }
+      default: {
+        APPLICATION.gameStopLimit = Infinity;
+        break;
+      }
+    }
+  },
 };
+
+APPLICATION.refreshStorage();
+APPLICATION.setStopGameLimit(APPLICATION.gameMode);
 
 ////////TODO
-export let gameFinished: boolean = false;
-export let numbers: number[];
-export let storage: MISTAKES_OBJ = getAndConvertLocalStorage();
 
-export const setGameFinished = (value) => {
-  gameFinished = value;
-};
+export let numbers: number[];
 
 ////////TODO
 
@@ -94,25 +103,26 @@ score.innerText = "---";
 
 btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
   switch (true) {
-    case appState.state === STATE_TYPE.initial: {
-      if (gameFinished) {
+    case APPLICATION.gameState === "start": {
+      if (APPLICATION.isGameFinished) {
         APPLICATION.gameScore = 0;
         score.innerText = "---";
         timeCounter.innerText = null;
       }
-      gameFinished = false;
 
-      numbers = calculateNumberHelperMax(appState, storage);
-      APPLICATION.setLeftNumberValue(numbers[0]);
-      APPLICATION.setRightNumberValue(numbers[1]);
+      APPLICATION.setGameFinished(false);
+      APPLICATION.gameNumbers = calculateNumberHelperMax(
+        APPLICATION,
+        APPLICATION.mistakesFromStorage
+      );
 
-      leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-      rightNumber.innerText = APPLICATION.gameRightNumber.toString();
-      appState.state = STATE_TYPE.check;
+      leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+      rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
+      APPLICATION.setGameState("check");
       btnStartCheckGood.classList.remove("controlButton-green");
       buttonMenu.classList.remove("controlButton-red");
       buttonMenu.classList.add("controlButton-menu");
-      btnStartCheckGood.innerText = appState.state;
+      btnStartCheckGood.innerText = APPLICATION.gameState;
 
       APPLICATION.gameCounterIntervalId = setInterval(() => {
         if (!(APPLICATION.gameCounterProgress > 99)) {
@@ -125,12 +135,12 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
 
       break;
     }
-    case appState.state === STATE_TYPE.check: {
+    case APPLICATION.gameState === "check": {
       buttonMenu.classList.add("active");
       APPLICATION.gameCounterProgress = 1;
       clearInterval(APPLICATION.gameCounterIntervalId);
 
-      appState.state = STATE_TYPE.asses;
+      APPLICATION.setGameState("asses");
       btnStartCheckGood.classList.add("controlButton-green");
       btnStartCheckGood.innerText = "good";
       buttonMenu.classList.add("controlButton-red");
@@ -138,19 +148,19 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
       buttonMenu.innerText = "wrong";
 
       switch (true) {
-        case appState.arytmeticOperation === OPERATION_TYPE.addition: {
+        case APPLICATION.gameTypeOfArithmenticOperation === "add": {
           APPLICATION.gameCurrentCorrectAnswer =
             APPLICATION.gameLeftNumber + APPLICATION.gameRightNumber;
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
           break;
         }
-        case appState.arytmeticOperation === OPERATION_TYPE.substraction: {
+        case APPLICATION.gameTypeOfArithmenticOperation === "substract": {
           APPLICATION.gameCurrentCorrectAnswer =
             APPLICATION.gameLeftNumber - APPLICATION.gameRightNumber;
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
           break;
         }
-        case appState.arytmeticOperation === OPERATION_TYPE.multiplication: {
+        case APPLICATION.gameTypeOfArithmenticOperation === "multiply": {
           APPLICATION.gameCurrentCorrectAnswer =
             APPLICATION.gameLeftNumber * APPLICATION.gameRightNumber;
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
@@ -161,12 +171,12 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
       }
       break;
     }
-    case appState.state === STATE_TYPE.asses: {
+    case APPLICATION.gameState === "asses": {
       APPLICATION.gameScore++;
-      if (APPLICATION.gameScore >= stopGameLimit) {
+      if (APPLICATION.gameScore >= APPLICATION.gameStopLimit) {
         clearInterval(APPLICATION.gameCounterIntervalId);
-        gameFinished = true;
-        appState.state = STATE_TYPE.initial;
+        APPLICATION.setGameFinished(true);
+        APPLICATION.setGameState("start");
         score.innerText = APPLICATION.gameScore.toString();
         btnStartCheckGood.classList.remove("controlButton-green");
         buttonMenu.classList.remove("controlButton-red");
@@ -180,20 +190,22 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
 
         break;
       } else {
-        appState.state = STATE_TYPE.check;
+        APPLICATION.setGameState("check");
         buttonMenu.classList.remove("active");
         btnStartCheckGood.classList.remove("controlButton-green");
         buttonMenu.classList.remove("controlButton-red");
         buttonMenu.classList.add("controlButton-menu");
-        btnStartCheckGood.innerText = appState.state;
+        btnStartCheckGood.innerText = APPLICATION.gameState;
         buttonMenu.innerText = "menu";
 
-        numbers = calculateNumberHelperMax(appState, storage);
-        APPLICATION.setLeftNumberValue(numbers[0]);
-        APPLICATION.setRightNumberValue(numbers[1]);
+        APPLICATION.gameNumbers = calculateNumberHelperMax(
+          APPLICATION,
+          APPLICATION.mistakesFromStorage
+        );
 
-        leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-        rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+        leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+        rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
+
         score.innerText = APPLICATION.gameScore.toString();
         result.innerText = "---";
         APPLICATION.gameCounterIntervalId = setInterval(() => {
@@ -213,31 +225,32 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
 });
 
 buttonMenu.addEventListener("click", (ev) => {
-  if (appState.state === STATE_TYPE.asses) {
+  if (APPLICATION.gameState === "asses") {
     APPLICATION.gameScore--;
     let wrongAnswer: WRONG_ANSWER = [
       numbers[0],
       numbers[1],
-      appState.arytmeticOperation,
+      APPLICATION.gameTypeOfArithmenticOperation,
     ];
-    if (appState.gameMode !== "repretition") {
+    if (APPLICATION.gameMode !== "repretition") {
       APPLICATION.wrongAnswersArray.push(wrongAnswer);
     }
 
-    appState.state = STATE_TYPE.check;
+    APPLICATION.setGameState("check");
     btnStartCheckGood.classList.remove("controlButton-green");
     buttonMenu.classList.remove("controlButton-red");
     buttonMenu.classList.add("controlButton-menu");
-    btnStartCheckGood.innerText = appState.state;
+    btnStartCheckGood.innerText = APPLICATION.gameState;
     buttonMenu.innerText = "menu";
 
-    numbers = calculateNumberHelperMax(appState, storage);
+    APPLICATION.gameNumbers = calculateNumberHelperMax(
+      APPLICATION,
+      APPLICATION.mistakesFromStorage
+    );
 
-    APPLICATION.setLeftNumberValue(numbers[0]);
-    APPLICATION.setRightNumberValue(numbers[1]);
+    leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+    rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
 
-    leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-    rightNumber.innerText = APPLICATION.gameRightNumber.toString();
     score.innerText = APPLICATION.gameScore.toString();
     result.innerText = "---";
     APPLICATION.gameCounterIntervalId = setInterval(() => {
@@ -251,7 +264,7 @@ buttonMenu.addEventListener("click", (ev) => {
   } else {
     addWrongOperationToApplicationStorageAndLocalStorage(
       APPLICATION.wrongAnswersArray,
-      storage
+      APPLICATION.mistakesFromStorage
     );
     APPLICATION.wrongAnswersArray = [];
     optionsContainer.classList.remove("closed");

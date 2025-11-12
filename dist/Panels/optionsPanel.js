@@ -1,6 +1,6 @@
-import { APPLICATION, score, leftNumber, rightNumber, operationSign, body, btnStartCheckGood, timeCounter, } from "./app.js";
-import { createStatisticTable } from "./helpers/StatisticTable/statisticsTableGenerator.js";
-import { getAndConvertLocalStorage } from "./helpers/storageInteractions.js";
+import { APPLICATION, score, leftNumber, rightNumber, operationSign, body, btnStartCheckGood, timeCounter, } from "../app.js";
+import { createStatisticTable } from "../helpers/StatisticTable/statisticsTableGenerator.js";
+import { getAndConvertLocalStorage } from "../helpers/LocalStorage/storageInteractions.js";
 export const MODE_TYPE = {
     addition: [
         "get 20",

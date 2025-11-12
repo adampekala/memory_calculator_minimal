@@ -1,8 +1,8 @@
-import { APPLICATION } from "../app.js";
+import { APPLICATION } from "../../app.js";
 import {
   getAndConvertLocalStorage,
   MISTAKES_OBJ,
-} from "./storageInteractions.js";
+} from "../LocalStorage/storageInteractions.js";
 import { statisticsTableRenderedOperations } from "./statisticsTableDisplayedOperationsGenerator.js";
 
 export type STORAGE_KEYS =

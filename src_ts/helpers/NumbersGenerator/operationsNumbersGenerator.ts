@@ -1,14 +1,9 @@
-import {
-  OPERATION_TYPE,
-  MODE_TYPE_COMMON,
-  MODE_TYPE_ADDITION,
-  MODE_TYPE_DIVISION,
-  MODE_TYPE_MULTIPLICATION,
-  MODE_TYPE_SUBSTRACTION,
-  APP_STATE,
-} from "../optionsPanel.js";
+import { OPERATION_TYPES } from "../../TypesAndInterfaces/gameObject.js";
 
-import { MISTAKES_OBJ } from "../gameObject.js";
+import {
+  APPLICATION_OBJECT,
+  MISTAKES_OBJ,
+} from "../../TypesAndInterfaces/gameObject.js";
 
 export const randomNumber = (min: number = 1, max: number = 10) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -131,7 +126,7 @@ export const generateTwoNumbersDivisibleArrFromFakeDivisableArr: () => [
 };
 
 export const createArrayWithTwoRandomNumbers: (
-  typeOfMathematicalOperation: OPERATION_TYPE,
+  typeOfMathematicalOperation: OPERATION_TYPES,
   difficulty: 1 | 2 | 3 | 4 | 5,
   firstDefineNumber: null | number
 ) => [number, number] = (
@@ -180,9 +175,9 @@ switch  add -> switch mode1
 */
 
 export const calculateNumberHelper = (
-  operationType: OPERATION_TYPE = "devide",
+  operationType: OPERATION_TYPES = "devide",
   difficulty: 1 | 2 | 3 | 4 | 5 = 1
-): number[] => {
+): [number, number] => {
   if (operationType === "multiply" || operationType === "add") {
     return generateTwoNumbersArr(difficulty);
   }
@@ -196,36 +191,39 @@ export const calculateNumberHelper = (
 };
 
 export const calculateNumberHelperMax: (
-  appState: APP_STATE,
+  APPLICATION: APPLICATION_OBJECT,
   storage: MISTAKES_OBJ
-) => number[] = (appState: APP_STATE, storage: MISTAKES_OBJ) => {
-  let numbers: number[];
-  if (appState.gameMode === "repretition") {
-    switch (appState.arytmeticOperation) {
+) => [number, number] = (
+  APPLICATION: APPLICATION_OBJECT,
+  storage: MISTAKES_OBJ
+) => {
+  let numbers: [number, number];
+  if (APPLICATION.gameMode === "repretition") {
+    switch (APPLICATION.gameTypeOfArithmenticOperation) {
       case "add": {
         numbers =
           storage.mistakesAdd.length !== 0
-            ? storage.mistakesAdd[
+            ? (storage.mistakesAdd[
                 randomNumber(0, storage.mistakesAdd.length - 1)
-              ].map((el) => +el)
+              ].map((el) => +el) as [number, number])
             : generateTwoNumbersArrFromFakeArr();
         return numbers;
       }
       case "substract": {
         numbers =
           storage.mistakesSubstract.length !== 0
-            ? storage.mistakesSubstract[
+            ? (storage.mistakesSubstract[
                 randomNumber(0, storage.mistakesSubstract.length - 1)
-              ].map((el) => +el)
+              ].map((el) => +el) as [number, number])
             : generateTwoNumbersArrFromFakeArr();
         return numbers;
       }
       case "devide": {
         numbers =
           storage.mistakesDevide.length !== 0
-            ? storage.mistakesDevide[
+            ? (storage.mistakesDevide[
                 randomNumber(0, storage.mistakesDevide.length - 1)
-              ].map((el) => +el)
+              ].map((el) => +el) as [number, number])
             : generateTwoNumbersDivisibleArrFromFakeDivisableArr();
         return numbers;
       }
@@ -233,66 +231,46 @@ export const calculateNumberHelperMax: (
       case "multiply": {
         numbers =
           storage.mistakesMultiply.length !== 0
-            ? storage.mistakesMultiply[
+            ? (storage.mistakesMultiply[
                 randomNumber(0, storage.mistakesMultiply.length - 1)
-              ].map((el) => +el)
+              ].map((el) => +el) as [number, number])
             : generateTwoNumbersArrFromFakeArr();
         return numbers;
       }
     }
   } else if (
-    appState.gameMode === "up to 100" ||
-    appState.gameMode === "up to 1000"
+    APPLICATION.gameMode === "up to 100" ||
+    APPLICATION.gameMode === "up to 1000"
   ) {
     numbers = calculateNumberHelper(
-      appState.arytmeticOperation,
-      appState.difficulty
+      APPLICATION.gameTypeOfArithmenticOperation,
+      APPLICATION.gameDifficulty
     );
-    numbers[0] = appState.lastResult || 0;
-    appState.lastResult = numbers[0] + numbers[1];
+    numbers[0] = APPLICATION.gamePreviousCorrectAnswer || 0;
+    APPLICATION.gamePreviousCorrectAnswer = numbers[0] + numbers[1];
     return numbers;
   } else if (
-    appState.gameMode === "from 100" ||
-    appState.gameMode === "from 1000"
+    APPLICATION.gameMode === "from 100" ||
+    APPLICATION.gameMode === "from 1000"
   ) {
-    if (appState.lastResult === null) {
+    if (APPLICATION.gamePreviousCorrectAnswer === null) {
       //TODO reset of caclulator settings
-      appState.lastResult = appState.gameMode === "from 100" ? 100 : 1000;
+      APPLICATION.gamePreviousCorrectAnswer =
+        APPLICATION.gameMode === "from 100" ? 100 : 1000;
     }
 
     numbers = createArrayWithTwoRandomNumbers(
-      appState.arytmeticOperation,
-      appState.difficulty,
-      appState.lastResult
+      APPLICATION.gameTypeOfArithmenticOperation,
+      APPLICATION.gameDifficulty,
+      APPLICATION.gamePreviousCorrectAnswer
     );
-    appState.lastResult = numbers[0] - numbers[1];
+    APPLICATION.gamePreviousCorrectAnswer = numbers[0] - numbers[1];
     return numbers;
   } else {
     return createArrayWithTwoRandomNumbers(
-      appState.arytmeticOperation,
-      appState.difficulty,
+      APPLICATION.gameTypeOfArithmenticOperation,
+      APPLICATION.gameDifficulty,
       null
     );
-  }
-};
-
-export const countStopGameLimit = (
-  modeType:
-    | MODE_TYPE_COMMON
-    | MODE_TYPE_ADDITION
-    | MODE_TYPE_DIVISION
-    | MODE_TYPE_MULTIPLICATION
-    | MODE_TYPE_SUBSTRACTION = "get 20"
-) => {
-  switch (modeType) {
-    case "get 20": {
-      return 20;
-    }
-    case "get 50": {
-      return 50;
-    }
-    default: {
-      return Infinity;
-    }
   }
 };

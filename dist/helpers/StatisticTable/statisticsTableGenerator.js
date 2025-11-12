@@ -1,6 +1,6 @@
-import { APPLICATION } from "../app.js";
-import { getAndConvertLocalStorage, } from "./storageInteractions.js";
-import { statisticsTableRenderedOperations } from "./StatisticTable/statisticsTableDisplayedOperationsGenerator.js";
+import { APPLICATION } from "../../app.js";
+import { getAndConvertLocalStorage, } from "../LocalStorage/storageInteractions.js";
+import { statisticsTableRenderedOperations } from "./statisticsTableDisplayedOperationsGenerator.js";
 export const createStatisticTable = (body, storageFn, refreshStorageFn) => {
     let storageActiveKey = "mcm_multiply";
     let storage = storageFn();

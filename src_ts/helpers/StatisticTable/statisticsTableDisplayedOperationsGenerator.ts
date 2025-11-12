@@ -1,9 +1,9 @@
-import { MISTAKES_OBJ } from "../gameObject.js";
-import { OPERATION_TYPE } from "../gameObject.js";
+import { MISTAKES_OBJ } from "../../TypesAndInterfaces/gameObject.js";
+import { OPERATION_TYPES } from "../../TypesAndInterfaces/gameObject.js";
 import {
   getAndConvertLocalStorage,
   removeOperationsFromAppStorageAndLocalStorage,
-} from "./storageInteractions.js";
+} from "../LocalStorage/storageInteractions.js";
 
 export const statisticsTableRenderedOperations = (
   applicationStorage: MISTAKES_OBJ,
@@ -37,7 +37,7 @@ export const statisticsTableRenderedOperations = (
 
       let secondNumber = +row.children[1].innerHTML;
 
-      let operation: OPERATION_TYPE;
+      let operation: OPERATION_TYPES;
       let storageKey:
         | "mistakesAdd"
         | "mistakesSubstract"
@@ -71,7 +71,7 @@ export const statisticsTableRenderedOperations = (
       console.log(storageKey);
       console.log(operation);
 
-      let removedValues: [number, number, OPERATION_TYPE] = [
+      let removedValues: [number, number, OPERATION_TYPES] = [
         firstNumber,
         secondNumber,
         operation,
