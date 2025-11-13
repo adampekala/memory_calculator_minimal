@@ -38,7 +38,7 @@ export type MODE_ALL =
   | MODE_TYPE_MULTIPLICATION
   | MODE_TYPE_SUBSTRACTION;
 
-export interface MODE_TYPE {
+export interface MODE_TYPES_OBJ {
   addition: MODE_TYPE_ADDITION[];
   substraction: MODE_TYPE_SUBSTRACTION[];
   multiplication: MODE_TYPE_MULTIPLICATION[];
@@ -57,9 +57,7 @@ export interface APPLICATION_OBJECT {
   gameTypeOfArithmenticOperation: OPERATION_TYPES;
   gameOperationSignValue: OPERATION_SIGNS;
   gameScore: number;
-  gameNumbers: [number, number] | null;
-  gameLeftNumber: number;
-  gameRightNumber: number;
+  gameNumbers: [number, number];
   gameCurrentCorrectAnswer: number;
   gamePreviousCorrectAnswer: number | null;
   gameStopLimit: number | null;

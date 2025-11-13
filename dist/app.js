@@ -4,24 +4,22 @@ import { getAndConvertLocalStorage, addWrongOperationToApplicationStorageAndLoca
 export const APPLICATION = {
     applicationGlobalState: "game",
     gameState: "start",
-    isGameFinished: false, //gameFinished
-    mistakesFromStorage: null, //storage
-    gameMode: "get 20", //gameMode
-    gameDifficulty: 1, //difficulty
+    isGameFinished: false,
+    mistakesFromStorage: null,
+    gameMode: "get 20",
+    gameDifficulty: 1,
     gameTypeOfArithmenticOperation: "multiply",
     gameOperationSignValue: "x",
-    gameScore: 0, //scoreNumber
-    gameNumbers: null,
-    gameLeftNumber: 0,
-    gameRightNumber: 0,
+    gameScore: 0,
+    gameNumbers: [0, 0],
     gameCurrentCorrectAnswer: 0,
-    gamePreviousCorrectAnswer: null, //lastResult
+    gamePreviousCorrectAnswer: null,
     gameStopLimit: null,
     wrongAnswer: null,
     wrongAnswersArray: [],
     gameCounterIntervalId: null,
     gameCounterProgress: 1,
-    statisticsTableDisplayedOperation: "multiply", //statisticsTableMode
+    statisticsTableDisplayedOperation: "multiply",
     setGameState: (state) => {
         APPLICATION.gameState = state;
     },
@@ -56,9 +54,21 @@ export const APPLICATION = {
 };
 APPLICATION.refreshStorage();
 APPLICATION.setStopGameLimit(APPLICATION.gameMode);
-////////TODO
-export let numbers;
-////////TODO
+///////TODO
+export const gamePanelHTMLElements = {
+    body: document.querySelector("body"),
+    score: document.getElementById("score"),
+    result: document.getElementById("result"),
+    leftNumber: document.getElementById("left_number"),
+    operationSign: document.getElementById("operation_sign"),
+    rightNumber: document.getElementById("right_number"),
+    timeCounter: document.getElementById("time_counter"),
+    btnStartCheckGood: document.getElementById("main_button"),
+    buttonMenu: document.getElementById("button_menu"),
+};
+console.log("game PANEL");
+console.log(gamePanelHTMLElements.score);
+///////TODO
 export const body = document.querySelector("body");
 export const score = document.getElementById("score");
 export const result = document.getElementById("result");
@@ -68,8 +78,8 @@ export const rightNumber = document.getElementById("right_number");
 export const timeCounter = document.getElementById("time_counter");
 export const btnStartCheckGood = document.getElementById("main_button");
 export const buttonMenu = document.getElementById("button_menu");
-leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
 operationSign.innerText = APPLICATION.gameOperationSignValue;
 score.innerText = "---";
 btnStartCheckGood.addEventListener("click", (ev) => {
@@ -113,19 +123,19 @@ btnStartCheckGood.addEventListener("click", (ev) => {
             switch (true) {
                 case APPLICATION.gameTypeOfArithmenticOperation === "add": {
                     APPLICATION.gameCurrentCorrectAnswer =
-                        APPLICATION.gameLeftNumber + APPLICATION.gameRightNumber;
+                        APPLICATION.gameNumbers[0] + APPLICATION.gameNumbers[1];
                     result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
                 case APPLICATION.gameTypeOfArithmenticOperation === "substract": {
                     APPLICATION.gameCurrentCorrectAnswer =
-                        APPLICATION.gameLeftNumber - APPLICATION.gameRightNumber;
+                        APPLICATION.gameNumbers[0] - APPLICATION.gameNumbers[1];
                     result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
                 case APPLICATION.gameTypeOfArithmenticOperation === "multiply": {
                     APPLICATION.gameCurrentCorrectAnswer =
-                        APPLICATION.gameLeftNumber * APPLICATION.gameRightNumber;
+                        APPLICATION.gameNumbers[0] * APPLICATION.gameNumbers[1];
                     result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
@@ -185,8 +195,8 @@ buttonMenu.addEventListener("click", (ev) => {
     if (APPLICATION.gameState === "asses") {
         APPLICATION.gameScore--;
         let wrongAnswer = [
-            numbers[0],
-            numbers[1],
+            APPLICATION.gameNumbers[0],
+            APPLICATION.gameNumbers[1],
             APPLICATION.gameTypeOfArithmenticOperation,
         ];
         if (APPLICATION.gameMode !== "repretition") {

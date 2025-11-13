@@ -1,9 +1,10 @@
 import { calculateNumberHelperMax } from "./helpers/NumbersGenerator/operationsNumbersGenerator.js";
-import { optionsContainer, MODE_ALL } from "./Panels/optionsPanel.js";
+import { optionsContainer } from "./Panels/optionsPanel.js";
 import {
   APPLICATION_OBJECT,
   WRONG_ANSWER,
   GAME_STATES,
+  MODE_ALL,
 } from "./TypesAndInterfaces/gameObject.js";
 import {
   getAndConvertLocalStorage,
@@ -13,24 +14,22 @@ import {
 export const APPLICATION: APPLICATION_OBJECT = {
   applicationGlobalState: "game",
   gameState: "start",
-  isGameFinished: false, //gameFinished
-  mistakesFromStorage: null, //storage
-  gameMode: "get 20", //gameMode
-  gameDifficulty: 1, //difficulty
+  isGameFinished: false,
+  mistakesFromStorage: null,
+  gameMode: "get 20",
+  gameDifficulty: 1,
   gameTypeOfArithmenticOperation: "multiply",
   gameOperationSignValue: "x",
-  gameScore: 0, //scoreNumber
-  gameNumbers: null,
-  gameLeftNumber: 0,
-  gameRightNumber: 0,
+  gameScore: 0,
+  gameNumbers: [0, 0],
   gameCurrentCorrectAnswer: 0,
-  gamePreviousCorrectAnswer: null, //lastResult
+  gamePreviousCorrectAnswer: null,
   gameStopLimit: null,
   wrongAnswer: null,
   wrongAnswersArray: [],
   gameCounterIntervalId: null,
   gameCounterProgress: 1,
-  statisticsTableDisplayedOperation: "multiply", //statisticsTableMode
+  statisticsTableDisplayedOperation: "multiply",
 
   setGameState: (state: GAME_STATES) => {
     APPLICATION.gameState = state;
@@ -68,13 +67,25 @@ export const APPLICATION: APPLICATION_OBJECT = {
 APPLICATION.refreshStorage();
 APPLICATION.setStopGameLimit(APPLICATION.gameMode);
 
-////////TODO
+///////TODO
+export const gamePanelHTMLElements = {
+  body: document.querySelector("body") as HTMLBodyElement,
+  score: document.getElementById("score") as HTMLDivElement,
+  result: document.getElementById("result") as HTMLDivElement,
+  leftNumber: document.getElementById("left_number") as HTMLSpanElement,
+  operationSign: document.getElementById("operation_sign") as HTMLSpanElement,
+  rightNumber: document.getElementById("right_number") as HTMLSpanElement,
+  timeCounter: document.getElementById("time_counter") as HTMLDivElement,
+  btnStartCheckGood: document.getElementById("main_button") as HTMLDivElement,
+  buttonMenu: document.getElementById("button_menu") as HTMLDivElement,
+};
 
-export let numbers: number[];
+console.log("game PANEL");
+console.log(gamePanelHTMLElements.score);
 
-////////TODO
+///////TODO
 
-export const body = document.querySelector("body");
+export const body = document.querySelector("body") as HTMLBodyElement;
 export const score = document.getElementById("score") as HTMLDivElement;
 export const result = document.getElementById("result") as HTMLDivElement;
 export const leftNumber = document.getElementById(
@@ -96,8 +107,8 @@ export const buttonMenu = document.getElementById(
   "button_menu"
 ) as HTMLDivElement;
 
-leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
 operationSign.innerText = APPLICATION.gameOperationSignValue;
 score.innerText = "---";
 
@@ -150,19 +161,19 @@ btnStartCheckGood.addEventListener("click", (ev: MouseEvent) => {
       switch (true) {
         case APPLICATION.gameTypeOfArithmenticOperation === "add": {
           APPLICATION.gameCurrentCorrectAnswer =
-            APPLICATION.gameLeftNumber + APPLICATION.gameRightNumber;
+            APPLICATION.gameNumbers[0] + APPLICATION.gameNumbers[1];
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
           break;
         }
         case APPLICATION.gameTypeOfArithmenticOperation === "substract": {
           APPLICATION.gameCurrentCorrectAnswer =
-            APPLICATION.gameLeftNumber - APPLICATION.gameRightNumber;
+            APPLICATION.gameNumbers[0] - APPLICATION.gameNumbers[1];
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
           break;
         }
         case APPLICATION.gameTypeOfArithmenticOperation === "multiply": {
           APPLICATION.gameCurrentCorrectAnswer =
-            APPLICATION.gameLeftNumber * APPLICATION.gameRightNumber;
+            APPLICATION.gameNumbers[0] * APPLICATION.gameNumbers[1];
           result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
           break;
         }
@@ -228,8 +239,8 @@ buttonMenu.addEventListener("click", (ev) => {
   if (APPLICATION.gameState === "asses") {
     APPLICATION.gameScore--;
     let wrongAnswer: WRONG_ANSWER = [
-      numbers[0],
-      numbers[1],
+      APPLICATION.gameNumbers[0],
+      APPLICATION.gameNumbers[1],
       APPLICATION.gameTypeOfArithmenticOperation,
     ];
     if (APPLICATION.gameMode !== "repretition") {

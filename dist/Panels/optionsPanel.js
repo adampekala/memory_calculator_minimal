@@ -115,8 +115,8 @@ btnOptionBackToGame.addEventListener("click", (ev) => {
     score.innerText = "---";
     APPLICATION.setGameState("start");
     APPLICATION.gameNumbers = [0, 0];
-    leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-    rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+    leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+    rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
     APPLICATION.setCounterProgress(1);
     timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
     clearInterval(APPLICATION.gameCounterIntervalId);

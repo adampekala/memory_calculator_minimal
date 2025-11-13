@@ -11,41 +11,9 @@ import {
 
 import { createStatisticTable } from "../helpers/StatisticTable/statisticsTableGenerator.js";
 import { getAndConvertLocalStorage } from "../helpers/LocalStorage/storageInteractions.js";
+import { MODE_TYPES_OBJ } from "../TypesAndInterfaces/gameObject.js";
 
-export type MODE_TYPE_COMMON =
-  | "repretition"
-  | "train"
-  | "get 20"
-  | "get 50"
-  | "count down";
-export type MODE_TYPE_ADDITION = MODE_TYPE_COMMON | "up to 100" | "up to 1000";
-export type MODE_TYPE_SUBSTRACTION =
-  | MODE_TYPE_COMMON
-  | "from 100"
-  | "from 1000";
-export type MODE_TYPE_MULTIPLICATION = MODE_TYPE_COMMON;
-export type MODE_TYPE_DIVISION = MODE_TYPE_COMMON;
-export type MODE_ALL =
-  | MODE_TYPE_COMMON
-  | MODE_TYPE_ADDITION
-  | MODE_TYPE_DIVISION
-  | MODE_TYPE_MULTIPLICATION
-  | MODE_TYPE_SUBSTRACTION;
-
-export interface MODE_TYPE {
-  addition: MODE_TYPE_ADDITION[];
-  substraction: MODE_TYPE_SUBSTRACTION[];
-  multiplication: MODE_TYPE_MULTIPLICATION[];
-  division: MODE_TYPE_DIVISION[];
-}
-
-export interface STATE_TYPE_OBJ {
-  initial: "start";
-  check: "check";
-  asses: "asses";
-}
-
-export const MODE_TYPE: MODE_TYPE = {
+export const MODE_TYPE: MODE_TYPES_OBJ = {
   addition: [
     "get 20",
     "get 50",
@@ -181,8 +149,8 @@ btnOptionBackToGame.addEventListener("click", (ev) => {
   APPLICATION.setGameState("start");
   APPLICATION.gameNumbers = [0, 0];
 
-  leftNumber.innerText = APPLICATION.gameLeftNumber.toString();
-  rightNumber.innerText = APPLICATION.gameRightNumber.toString();
+  leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
+  rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
   APPLICATION.setCounterProgress(1);
   timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
   clearInterval(APPLICATION.gameCounterIntervalId);

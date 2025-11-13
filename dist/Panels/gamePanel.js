@@ -1,2 +1,2 @@
-//Game Panel
+export {};
 //# sourceMappingURL=gamePanel.js.map
