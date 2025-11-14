@@ -1,6 +1,7 @@
-import { APPLICATION, score, leftNumber, rightNumber, operationSign, body, btnStartCheckGood, timeCounter, } from "../app.js";
+import { APPLICATION, gamePanelHTMLElements } from "../app.js";
 import { createStatisticTable } from "../helpers/StatisticTable/statisticsTableGenerator.js";
 import { getAndConvertLocalStorage } from "../helpers/LocalStorage/storageInteractions.js";
+// import { gamePanelHTMLElements } from "./gamePanel.js";
 export const MODE_TYPE = {
     addition: [
         "get 20",
@@ -111,23 +112,27 @@ const btnOptionsOperationTogglerMinus = document.getElementById("operation_toggl
 const btnOptionsOperationTogglerMultiply = document.getElementById("operation_toggler-multiply");
 const btnShowStatistics = document.getElementById("statistics");
 const btnOptionBackToGame = document.getElementById("backToCalculator_button");
+console.log(btnOptionBackToGame);
 btnOptionBackToGame.addEventListener("click", (ev) => {
-    score.innerText = "---";
+    console.log("back");
+    gamePanelHTMLElements.score.innerText = "---";
     APPLICATION.setGameState("start");
     APPLICATION.gameNumbers = [0, 0];
-    leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
-    rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
+    gamePanelHTMLElements.leftNumber.innerText =
+        APPLICATION.gameNumbers[0].toString();
+    gamePanelHTMLElements.rightNumber.innerText =
+        APPLICATION.gameNumbers[1].toString();
     APPLICATION.setCounterProgress(1);
-    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+    gamePanelHTMLElements.timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
     clearInterval(APPLICATION.gameCounterIntervalId);
     APPLICATION.setGameFinished(true);
     APPLICATION.gamePreviousCorrectAnswer = null;
-    btnStartCheckGood.innerText = "start";
+    gamePanelHTMLElements.btnStartCheckGood.innerText = "start";
     optionsContainer.classList.add("closed");
 });
 btnOptionsOperationTogglerPlus.addEventListener("click", (ev) => {
     APPLICATION.setOperationSignValue("+");
-    operationSign.innerText = "+";
+    gamePanelHTMLElements.operationSign.innerText = "+";
     APPLICATION.gameTypeOfArithmenticOperation = "add";
     btnOptionsOperationTogglerPlus.classList.add("pressed");
     btnOptionsOperationTogglerMinus.classList.remove("pressed");
@@ -135,7 +140,7 @@ btnOptionsOperationTogglerPlus.addEventListener("click", (ev) => {
 });
 btnOptionsOperationTogglerMinus.addEventListener("click", (ev) => {
     APPLICATION.setOperationSignValue("-");
-    operationSign.innerText = "-";
+    gamePanelHTMLElements.operationSign.innerText = "-";
     btnOptionsOperationTogglerPlus.classList.remove("pressed");
     btnOptionsOperationTogglerMinus.classList.add("pressed");
     btnOptionsOperationTogglerMultiply.classList.remove("pressed");
@@ -143,13 +148,13 @@ btnOptionsOperationTogglerMinus.addEventListener("click", (ev) => {
 });
 btnOptionsOperationTogglerMultiply.addEventListener("click", (ev) => {
     APPLICATION.setOperationSignValue("x");
-    operationSign.innerText = "x";
+    gamePanelHTMLElements.operationSign.innerText = "x";
     btnOptionsOperationTogglerPlus.classList.remove("pressed");
     btnOptionsOperationTogglerMinus.classList.remove("pressed");
     btnOptionsOperationTogglerMultiply.classList.add("pressed");
     APPLICATION.gameTypeOfArithmenticOperation = "multiply";
 });
 btnShowStatistics.addEventListener("click", () => {
-    createStatisticTable(body, getAndConvertLocalStorage, APPLICATION.refreshStorage);
+    createStatisticTable(gamePanelHTMLElements.body, getAndConvertLocalStorage, APPLICATION.refreshStorage);
 });
 //# sourceMappingURL=optionsPanel.js.map

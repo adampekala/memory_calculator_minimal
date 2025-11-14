@@ -66,42 +66,51 @@ export const gamePanelHTMLElements = {
     btnStartCheckGood: document.getElementById("main_button"),
     buttonMenu: document.getElementById("button_menu"),
 };
-console.log("game PANEL");
-console.log(gamePanelHTMLElements.score);
 ///////TODO
-export const body = document.querySelector("body");
-export const score = document.getElementById("score");
-export const result = document.getElementById("result");
-export const leftNumber = document.getElementById("left_number");
-export const operationSign = document.getElementById("operation_sign");
-export const rightNumber = document.getElementById("right_number");
-export const timeCounter = document.getElementById("time_counter");
-export const btnStartCheckGood = document.getElementById("main_button");
-export const buttonMenu = document.getElementById("button_menu");
-leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
-rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
-operationSign.innerText = APPLICATION.gameOperationSignValue;
-score.innerText = "---";
-btnStartCheckGood.addEventListener("click", (ev) => {
+// export const body = document.querySelector("body") as HTMLBodyElement;
+// export const score = document.getElementById("score") as HTMLDivElement;
+// export const result = document.getElementById("result") as HTMLDivElement;
+// export const leftNumber = document.getElementById(
+//   "left_number"
+// // ) as HTMLSpanElement;
+// export const operationSign = document.getElementById(
+//   "operation_sign"
+// ) as HTMLSpanElement;
+// export const rightNumber = document.getElementById(
+//   "right_number"
+// ) as HTMLSpanElement;
+// export const timeCounter = document.getElementById(
+//   "time_counter"
+// ) as HTMLDivElement;
+// export const btnStartCheckGood = document.getElementById(
+//   "main_button"
+// ) as HTMLDivElement;
+// export const buttonMenu = document.getElementById(
+//   "button_menu"
+// ) as HTMLDivElement;
+gamePanelHTMLElements.btnStartCheckGood.addEventListener("click", (ev) => {
     switch (true) {
         case APPLICATION.gameState === "start": {
             if (APPLICATION.isGameFinished) {
                 APPLICATION.gameScore = 0;
-                score.innerText = "---";
-                timeCounter.innerText = null;
+                gamePanelHTMLElements.score.innerText = "---";
+                gamePanelHTMLElements.timeCounter.innerText = null;
             }
             APPLICATION.setGameFinished(false);
             APPLICATION.gameNumbers = calculateNumberHelperMax(APPLICATION, APPLICATION.mistakesFromStorage);
-            leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
-            rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
+            gamePanelHTMLElements.leftNumber.innerText =
+                APPLICATION.gameNumbers[0].toString();
+            gamePanelHTMLElements.rightNumber.innerText =
+                APPLICATION.gameNumbers[1].toString();
             APPLICATION.setGameState("check");
-            btnStartCheckGood.classList.remove("controlButton-green");
-            buttonMenu.classList.remove("controlButton-red");
-            buttonMenu.classList.add("controlButton-menu");
-            btnStartCheckGood.innerText = APPLICATION.gameState;
+            gamePanelHTMLElements.btnStartCheckGood.classList.remove("controlButton-green");
+            gamePanelHTMLElements.buttonMenu.classList.remove("controlButton-red");
+            gamePanelHTMLElements.buttonMenu.classList.add("controlButton-menu");
+            gamePanelHTMLElements.btnStartCheckGood.innerText =
+                APPLICATION.gameState;
             APPLICATION.gameCounterIntervalId = setInterval(() => {
                 if (!(APPLICATION.gameCounterProgress > 99)) {
-                    timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                    gamePanelHTMLElements.timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                     APPLICATION.gameCounterProgress++;
                 }
                 else {
@@ -111,32 +120,35 @@ btnStartCheckGood.addEventListener("click", (ev) => {
             break;
         }
         case APPLICATION.gameState === "check": {
-            buttonMenu.classList.add("active");
+            gamePanelHTMLElements.buttonMenu.classList.add("active");
             APPLICATION.gameCounterProgress = 1;
             clearInterval(APPLICATION.gameCounterIntervalId);
             APPLICATION.setGameState("asses");
-            btnStartCheckGood.classList.add("controlButton-green");
-            btnStartCheckGood.innerText = "good";
-            buttonMenu.classList.add("controlButton-red");
-            buttonMenu.classList.remove("controlButton-menu");
-            buttonMenu.innerText = "wrong";
+            gamePanelHTMLElements.btnStartCheckGood.classList.add("controlButton-green");
+            gamePanelHTMLElements.btnStartCheckGood.innerText = "good";
+            gamePanelHTMLElements.buttonMenu.classList.add("controlButton-red");
+            gamePanelHTMLElements.buttonMenu.classList.remove("controlButton-menu");
+            gamePanelHTMLElements.buttonMenu.innerText = "wrong";
             switch (true) {
                 case APPLICATION.gameTypeOfArithmenticOperation === "add": {
                     APPLICATION.gameCurrentCorrectAnswer =
                         APPLICATION.gameNumbers[0] + APPLICATION.gameNumbers[1];
-                    result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
+                    gamePanelHTMLElements.result.innerText =
+                        APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
                 case APPLICATION.gameTypeOfArithmenticOperation === "substract": {
                     APPLICATION.gameCurrentCorrectAnswer =
                         APPLICATION.gameNumbers[0] - APPLICATION.gameNumbers[1];
-                    result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
+                    gamePanelHTMLElements.result.innerText =
+                        APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
                 case APPLICATION.gameTypeOfArithmenticOperation === "multiply": {
                     APPLICATION.gameCurrentCorrectAnswer =
                         APPLICATION.gameNumbers[0] * APPLICATION.gameNumbers[1];
-                    result.innerText = APPLICATION.gameCurrentCorrectAnswer.toString();
+                    gamePanelHTMLElements.result.innerText =
+                        APPLICATION.gameCurrentCorrectAnswer.toString();
                     break;
                 }
                 default:
@@ -150,34 +162,39 @@ btnStartCheckGood.addEventListener("click", (ev) => {
                 clearInterval(APPLICATION.gameCounterIntervalId);
                 APPLICATION.setGameFinished(true);
                 APPLICATION.setGameState("start");
-                score.innerText = APPLICATION.gameScore.toString();
-                btnStartCheckGood.classList.remove("controlButton-green");
-                buttonMenu.classList.remove("controlButton-red");
-                buttonMenu.classList.add("controlButton-menu");
-                btnStartCheckGood.innerText = "again";
-                buttonMenu.innerText = "menu";
-                timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) 1%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
-                timeCounter.style.textAlign = "center";
-                timeCounter.style.color = "red";
-                timeCounter.innerText = "You win!!!";
+                gamePanelHTMLElements.score.innerText =
+                    APPLICATION.gameScore.toString();
+                gamePanelHTMLElements.btnStartCheckGood.classList.remove("controlButton-green");
+                gamePanelHTMLElements.buttonMenu.classList.remove("controlButton-red");
+                gamePanelHTMLElements.buttonMenu.classList.add("controlButton-menu");
+                gamePanelHTMLElements.btnStartCheckGood.innerText = "again";
+                gamePanelHTMLElements.buttonMenu.innerText = "menu";
+                gamePanelHTMLElements.timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) 1%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                gamePanelHTMLElements.timeCounter.style.textAlign = "center";
+                gamePanelHTMLElements.timeCounter.style.color = "red";
+                gamePanelHTMLElements.timeCounter.innerText = "You win!!!";
                 break;
             }
             else {
                 APPLICATION.setGameState("check");
-                buttonMenu.classList.remove("active");
-                btnStartCheckGood.classList.remove("controlButton-green");
-                buttonMenu.classList.remove("controlButton-red");
-                buttonMenu.classList.add("controlButton-menu");
-                btnStartCheckGood.innerText = APPLICATION.gameState;
-                buttonMenu.innerText = "menu";
+                gamePanelHTMLElements.buttonMenu.classList.remove("active");
+                gamePanelHTMLElements.btnStartCheckGood.classList.remove("controlButton-green");
+                gamePanelHTMLElements.buttonMenu.classList.remove("controlButton-red");
+                gamePanelHTMLElements.buttonMenu.classList.add("controlButton-menu");
+                gamePanelHTMLElements.btnStartCheckGood.innerText =
+                    APPLICATION.gameState;
+                gamePanelHTMLElements.buttonMenu.innerText = "menu";
                 APPLICATION.gameNumbers = calculateNumberHelperMax(APPLICATION, APPLICATION.mistakesFromStorage);
-                leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
-                rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
-                score.innerText = APPLICATION.gameScore.toString();
-                result.innerText = "---";
+                gamePanelHTMLElements.leftNumber.innerText =
+                    APPLICATION.gameNumbers[0].toString();
+                gamePanelHTMLElements.rightNumber.innerText =
+                    APPLICATION.gameNumbers[1].toString();
+                gamePanelHTMLElements.score.innerText =
+                    APPLICATION.gameScore.toString();
+                gamePanelHTMLElements.result.innerText = "---";
                 APPLICATION.gameCounterIntervalId = setInterval(() => {
                     if (!(APPLICATION.gameCounterProgress > 99)) {
-                        timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                        gamePanelHTMLElements.timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                         APPLICATION.gameCounterProgress++;
                     }
                     else {
@@ -191,7 +208,7 @@ btnStartCheckGood.addEventListener("click", (ev) => {
             break;
     }
 });
-buttonMenu.addEventListener("click", (ev) => {
+gamePanelHTMLElements.buttonMenu.addEventListener("click", (ev) => {
     if (APPLICATION.gameState === "asses") {
         APPLICATION.gameScore--;
         let wrongAnswer = [
@@ -203,19 +220,21 @@ buttonMenu.addEventListener("click", (ev) => {
             APPLICATION.wrongAnswersArray.push(wrongAnswer);
         }
         APPLICATION.setGameState("check");
-        btnStartCheckGood.classList.remove("controlButton-green");
-        buttonMenu.classList.remove("controlButton-red");
-        buttonMenu.classList.add("controlButton-menu");
-        btnStartCheckGood.innerText = APPLICATION.gameState;
-        buttonMenu.innerText = "menu";
+        gamePanelHTMLElements.btnStartCheckGood.classList.remove("controlButton-green");
+        gamePanelHTMLElements.buttonMenu.classList.remove("controlButton-red");
+        gamePanelHTMLElements.buttonMenu.classList.add("controlButton-menu");
+        gamePanelHTMLElements.btnStartCheckGood.innerText = APPLICATION.gameState;
+        gamePanelHTMLElements.buttonMenu.innerText = "menu";
         APPLICATION.gameNumbers = calculateNumberHelperMax(APPLICATION, APPLICATION.mistakesFromStorage);
-        leftNumber.innerText = APPLICATION.gameNumbers[0].toString();
-        rightNumber.innerText = APPLICATION.gameNumbers[1].toString();
-        score.innerText = APPLICATION.gameScore.toString();
-        result.innerText = "---";
+        gamePanelHTMLElements.leftNumber.innerText =
+            APPLICATION.gameNumbers[0].toString();
+        gamePanelHTMLElements.rightNumber.innerText =
+            APPLICATION.gameNumbers[1].toString();
+        gamePanelHTMLElements.score.innerText = APPLICATION.gameScore.toString();
+        gamePanelHTMLElements.result.innerText = "---";
         APPLICATION.gameCounterIntervalId = setInterval(() => {
             if (!(APPLICATION.gameCounterProgress > 99)) {
-                timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
+                gamePanelHTMLElements.timeCounter.style.backgroundImage = `linear-gradient( to right, rgb(22, 40, 159) ${APPLICATION.gameCounterProgress}%, transparent ${APPLICATION.gameCounterProgress}% 99%, rgb(22, 40, 159) 99%)`;
                 APPLICATION.gameCounterProgress++;
             }
             else {
