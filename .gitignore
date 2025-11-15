@@ -37,4 +37,11 @@ next-env.d.ts
 /dist/*.js.map
 
 
+/dist/helpers/LocalStorage/*.js.map
+/dist/helpers/NumbersGenerator/*.js.map
+/dist/helpers/StatisticTable/*.js.map
+/dist/helpers/*.js.map
+/dist/Panels/*.js.map
+/dist/TypesAndInterfaces/*.js.map
+
 
